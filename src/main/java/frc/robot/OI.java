@@ -7,12 +7,13 @@
 
 package frc.robot;
 
+import frc.robot.utilities.SharedButton;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
 import edu.wpi.first.wpilibj.buttons.POVButton;
-import frc.robot.utilities.SharedButton;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -170,9 +171,8 @@ public class OI {
 		} catch (Exception e) {
 			Robot.m_logger.console("OI: Unable to setup operator joystick: " + e.toString());
     }
-    
-    ControllerMap.setControllers(driverXbox, operatorXbox);
-    
+		ControllerMap.setControllers(driverXbox,operatorXbox);
+
 		setupOperatorButtons();
 		setupDriverXboxButtons();
 
