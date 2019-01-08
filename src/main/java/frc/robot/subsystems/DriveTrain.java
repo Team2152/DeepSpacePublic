@@ -34,17 +34,24 @@ public class DriveTrain extends Subsystem {
   public DriveTrain(){
     right1 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_RIGHT1);
       right1.setNeutralMode(NeutralMode.Brake);
+      right1.setInverted(true);
 
     right2 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_RIGHT2);
       right2.setNeutralMode(NeutralMode.Brake);
       right2.set(ControlMode.Follower, RobotMap.DRIVETRAIN_CANID_RIGHT1);
+      right2.setInverted(true);
+
 
     left1 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_LEFT1);
       left1.setNeutralMode(NeutralMode.Brake);
+      left1.setInverted(true);
+
 
     left2 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_LEFT2);
       left2.setNeutralMode(NeutralMode.Brake);
       left2.set(ControlMode.Follower, RobotMap.DRIVETRAIN_CANID_LEFT1);
+      left2.setInverted(true);
+
 
     drive = new DifferentialDrive(left1, right1);
   }

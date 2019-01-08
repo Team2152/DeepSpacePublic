@@ -26,6 +26,7 @@ public class LimeDrive extends Command {
 	protected void execute() {
 		double outputThrottle = 0;
 		double outputTurn = 0;
+
 		outputThrottle = Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID));
 		outputTurn = -Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID));
 

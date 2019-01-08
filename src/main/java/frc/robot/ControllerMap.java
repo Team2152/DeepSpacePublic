@@ -12,7 +12,7 @@ public class ControllerMap {
 		//-----DriveTrain-----
 	public static Joystick DriveTrain_Drive_Joystick;
 	public static final int DRIVETRAIN_THROTTLE_ID = 1;
-	public static final int DRIVETRAIN_TURN_ID     = 0;
+	public static final int DRIVETRAIN_TURN_ID     = 4;
 
 
 

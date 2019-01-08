@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Log m_logger;
 
-  public static DriveTrain driveTrainSubsystem;
+  public static DriveTrain driveTrainSubsystem = new DriveTrain();
   public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_75, Gain.DEFAULT_DEADBAND);
 
   Command m_autonomousCommand;
