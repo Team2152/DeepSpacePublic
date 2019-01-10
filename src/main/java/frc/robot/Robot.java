@@ -7,13 +7,17 @@
 
 package frc.robot;
 
+import frc.robot.utilities.Log;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.utilities.Gain;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.utilities.Log;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -24,6 +28,9 @@ import frc.robot.utilities.Log;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Log m_logger;
+
+  public static DriveTrain driveTrainSubsystem = new DriveTrain();
+  public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_75, Gain.DEFAULT_DEADBAND);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
