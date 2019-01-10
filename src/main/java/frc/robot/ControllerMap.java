@@ -2,18 +2,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+/**
+ * Holds all button ID and command joystick information
+ */
 public class ControllerMap {
 
 	//-----Commands-----
-	//public static int exampleButton;
+	
+		//-----DriveTrain-----
+	public static Joystick DriveTrain_Drive_Joystick;
+	public static final int DRIVETRAIN_THROTTLE_ID = 1;
+	public static final int DRIVETRAIN_TURN_ID     = 4;
+
 
 
 	public static void setControllers(Joystick driver, Joystick operator) {
-		
-		//-----Subsystem1-----
-		//exampleButton = OI.buttonBid
-
-		//-----Subsystem2-----
+		DriveTrain_Drive_Joystick = driver;
 	}
 
 }
