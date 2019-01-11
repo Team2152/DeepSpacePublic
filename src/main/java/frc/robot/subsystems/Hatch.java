@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import static org.junit.Assume.assumeNoException;
+
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -53,6 +53,6 @@ public void hatchSolenoidToggle(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new HatchMove(.5));
+    setDefaultCommand(new HatchMove(.25));
   }
 }

@@ -29,10 +29,10 @@ public class HatchMove extends Command {
 
   @Override
   protected void execute() {
-    if(driverJoystick.getRawAxis(ControllerMap.HATCH_AXIS_LT) > 0.1){
+    if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
       Robot.hatchSubsystem.hatchMover(-hatchSpeed);
     }
-    else  if(driverJoystick.getRawAxis(ControllerMap.HATCH_AXIS_LT) > 0.1){
+    else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
       Robot.hatchSubsystem.hatchMover(hatchSpeed);
     }else {
       Robot.hatchSubsystem.hatchMover(0);
