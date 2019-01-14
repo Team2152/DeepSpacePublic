@@ -13,9 +13,8 @@ import frc.robot.commands.LimeDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 
 /**
  * Add your docs here.
@@ -24,32 +23,32 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private WPI_TalonSRX right1;
-	private WPI_TalonSRX right2;
-	private WPI_TalonSRX left1;
-  private WPI_TalonSRX left2;
+  private CANSparkMax right1;
+	private CANSparkMax right2;
+	private CANSparkMax left1;
+  private CANSparkMax left2;
 
   private DifferentialDrive drive;
 
   public DriveTrain(){
-    right1 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_RIGHT1);
-      right1.setNeutralMode(NeutralMode.Brake);
+    right1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
+      right1.setIdleMode(CANSparkMax.IdleMode.kBrake);
       right1.setInverted(true);
 
-    right2 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_RIGHT2);
-      right2.setNeutralMode(NeutralMode.Brake);
-      right2.set(ControlMode.Follower, RobotMap.DRIVETRAIN_CANID_RIGHT1);
+    right2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
+      right2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+      right2.follow(right1);
       right2.setInverted(true);
 
 
-    left1 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_LEFT1);
-      left1.setNeutralMode(NeutralMode.Brake);
+    left1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
+      left1.setIdleMode(CANSparkMax.IdleMode.kBrake);
       left1.setInverted(true);
 
 
-    left2 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_CANID_LEFT2);
-      left2.setNeutralMode(NeutralMode.Brake);
-      left2.set(ControlMode.Follower, RobotMap.DRIVETRAIN_CANID_LEFT1);
+    left2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
+      left2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+      left2.follow(left1);
       left2.setInverted(true);
 
 
