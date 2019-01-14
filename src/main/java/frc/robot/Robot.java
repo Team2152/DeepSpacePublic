@@ -9,6 +9,7 @@ package frc.robot;
 
 import frc.robot.utilities.Log;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Hatch;
 import frc.robot.utilities.Gain;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -30,8 +31,8 @@ public class Robot extends TimedRobot {
   public static Log m_logger;
 
   public static DriveTrain driveTrainSubsystem = new DriveTrain();
-  public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_75, Gain.DEFAULT_DEADBAND);
-
+  public static Hatch hatchSubsystem = new Hatch();
+  public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_50, Gain.DEFAULT_DEADBAND);
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
