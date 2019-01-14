@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
-
+import frc.robot.commands.HatchSolenoidToggle;;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,6 +26,7 @@ public class OI {
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
+  // public final static int SPEED_STICK = 999999; // Deoderant...always wear it
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
 
@@ -190,6 +191,7 @@ public class OI {
 	}
 
 	public void setupDriverXboxButtons() {
+		dButtonStart.whenReleased(new HatchSolenoidToggle());
   }
 
   public void setupSharedCommands() {
