@@ -31,13 +31,7 @@ public class Robot extends TimedRobot {
   public static Log m_logger;
 
   public static DriveTrain driveTrainSubsystem = new DriveTrain();
-<<<<<<< HEAD
   public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_50, Gain.DEFAULT_DEADBAND);
-
-=======
-  public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_75, Gain.DEFAULT_DEADBAND);
-  public static Hatch hatchSubsystem = new Hatch();
->>>>>>> b6c0c6eb4994dd1941ed51fb56f86d107da3c434
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
