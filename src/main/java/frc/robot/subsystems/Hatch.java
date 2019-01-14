@@ -53,6 +53,6 @@ public void hatchSolenoidToggle(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new HatchMove(.25));
+    setDefaultCommand(new HatchMove(.5));
   }
 }
