@@ -8,12 +8,14 @@
 package frc.robot;
 
 import frc.robot.utilities.Log;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Dashboard;
+// import frc.robot.subsystems.DriveTrain;
 import frc.robot.utilities.Gain;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -29,7 +31,8 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Log m_logger;
 
-  public static DriveTrain driveTrainSubsystem = new DriveTrain();
+  // public static DriveTrain driveTrainSubsystem = new DriveTrain();
+  public static Dashboard spaceDash = new Dashboard();
   public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_75, Gain.DEFAULT_DEADBAND);
 
   Command m_autonomousCommand;
@@ -44,6 +47,9 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    Shuffleboard.stopRecording(); // Please stop the recordings.
+    spaceDash.createShuffleboard();
+    // SPEEDSTICK = 1147; Deodorant... always wear it.
   }
 
   /**
