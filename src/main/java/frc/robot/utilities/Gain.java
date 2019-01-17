@@ -51,7 +51,7 @@ public class Gain {
 		if (absVal < deadBand)
 			return 0;
 		else {
-			gain = SmartDashboard.getNumber("Motor Gains", 1.0);
+			gain = Gain.PCT_25;
 			return (value * gain);
 		}
 	}

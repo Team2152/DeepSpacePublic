@@ -36,21 +36,21 @@ public class DriveTrain extends Subsystem {
       right1.setIdleMode(CANSparkMax.IdleMode.kBrake);
       right1.setInverted(true);
 
-    right2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
-      right2.setIdleMode(CANSparkMax.IdleMode.kBrake);
-      right2.follow(right1);
+    right2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT2, CANSparkMaxLowLevel.MotorType.kBrushless);
+      right2.setIdleMode(CANSparkMax.IdleMode.kBrake); 
       right2.setInverted(true);
-
-
-    left1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
+			right2.follow(right1);
+			
+    left1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT1, CANSparkMaxLowLevel.MotorType.kBrushless);
       left1.setIdleMode(CANSparkMax.IdleMode.kBrake);
-      left1.setInverted(true);
+      left1.setInverted(false);
+			
 
-
-    left2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
+    left2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       left2.setIdleMode(CANSparkMax.IdleMode.kBrake);
-      left2.follow(left1);
-      left2.setInverted(true);
+    left2.setInverted(false);
+			left2.follow(left1);
+		
 
 
     drive = new DifferentialDrive(left1, right1);
@@ -79,7 +79,9 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void arcadeDrive(double forward, double turn) {
 		drive.arcadeDrive(forward, turn, false);
-
+		
+		
+		
 	}
 
 	/**
@@ -90,6 +92,8 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void setRightSpeed(double speed) {
 		right1.set(speed);
+		
+	
 	}
 
 	/**
@@ -100,6 +104,7 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void setLeftSpeed(double speed) {
 		left1.set(speed);
+		
   }
 
   

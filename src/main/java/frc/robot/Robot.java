@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   public static Log m_logger;
 
   public static DriveTrain driveTrainSubsystem = new DriveTrain();
-  public static final Gain driveTrainJoystickGain = new Gain(Gain.PCT_25, Gain.DEFAULT_DEADBAND);
+  public static final Gain driveTrainJoystickGain = new Gain((Gain.PCT_25), Gain.DEFAULT_DEADBAND);
 
 
   public static Dashboard spaceDash = new Dashboard();
@@ -54,7 +54,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     Shuffleboard.stopRecording(); // Please stop the recordings.
     spaceDash.createShuffleboard();
-    // SPEEDSTICK = 1147; Deodorant... always wear it.
   }
 
   /**

@@ -30,8 +30,9 @@ package frc.robot.commands;
  		outputThrottle = Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID));
  		outputTurn = -Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID));
 
- 		if (Math.abs(outputThrottle) <= 0.25) {
- 			Robot.driveTrainSubsystem.arcadeDrive(0.0, (outputTurn * 0.66));
+ 		if (Math.abs(outputThrottle) <= 0.125) {
+			 Robot.driveTrainSubsystem.arcadeDrive(0.0, (outputTurn * 0.75));
+			 
  		} else {
  			Robot.driveTrainSubsystem.arcadeDrive((outputThrottle), -(outputThrottle * outputTurn));
  		}
