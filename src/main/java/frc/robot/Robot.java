@@ -11,6 +11,7 @@ import frc.robot.utilities.Log;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
+import frc.robot.subsystems.StageOneArm;
 import frc.robot.utilities.Gain;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -39,6 +40,8 @@ public class Robot extends TimedRobot {
   public static Dashboard spaceDash = new Dashboard();
 
   public static Hatch hatchSubsystem = new Hatch();
+
+  public static StageOneArm stageOneArmSubsystem = new StageOneArm();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
