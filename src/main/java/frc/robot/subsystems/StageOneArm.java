@@ -55,7 +55,7 @@ public class StageOneArm extends Subsystem {
     sparkMaxPIDSource = new SparkMaxPIDSource(topRight);
     
     zeroSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
-    armEncoder = new Encoder(RobotMap.STAGE_ONE_ENCODER_SOURCE_A, RobotMap.STAGE_ONE_ENCODER_SOURCE_B);
+  //  armEncoder = new Encoder(RobotMap.STAGE_ONE_ENCODER_SOURCE_A, RobotMap.STAGE_ONE_ENCODER_SOURCE_B);
   }
  
 
@@ -73,7 +73,7 @@ public double getEncoderValue(){
 
 public double getNeoEncoderValue(){
 averageNeoEncoderValue = (topRightEncoder.getPosition() + topLeftEncoder.getPosition() + bottemEncoder.getPosition());
-return averageNeoEncoderValue/3;
+return (averageNeoEncoderValue/3)*11/3;
 }
 
 public boolean isArmStowed(){

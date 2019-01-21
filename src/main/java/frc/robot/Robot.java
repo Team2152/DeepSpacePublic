@@ -8,6 +8,7 @@
 package frc.robot;
 
 import frc.robot.utilities.Log;
+import frc.robot.subsystems.ArmTest;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
@@ -41,6 +42,8 @@ public class Robot extends TimedRobot {
 
   public static Hatch hatchSubsystem = new Hatch();
 
+  public static ArmTest armTest = new ArmTest();
+  
   public static StageOneArm stageOneArmSubsystem = new StageOneArm();
 
   Command m_autonomousCommand;
