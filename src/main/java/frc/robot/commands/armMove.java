@@ -6,19 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import edu.wpi.first.hal.sim.mockdata.RoboRioDataJNI;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.ControllerMap;
 import frc.robot.Robot;
+import frc.robot.subsystems.ArmTest;
 
-public class HatchMove extends Command {
- private double hatchSpeed = 0;
+public class armMove extends Command {
+ private double armSpeed = 0;
  Joystick driverJoystick;
  
-  public HatchMove(Double hatchSpeed) {
-    requires(Robot.hatchSubsystem);
-    this.hatchSpeed = hatchSpeed;
+public armMove(Double armSpeed) {
+    requires(Robot.armTest);
+    this.armSpeed = armSpeed;
 
   }
 
@@ -29,14 +29,14 @@ public class HatchMove extends Command {
 
   @Override
   protected void execute() {
-    // if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
-    //   Robot.hatchSubsystem.hatchMover(-hatchSpeed);
-    // }
-    // else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
-    //   Robot.hatchSubsystem.hatchMover(hatchSpeed);
-    // }else {
-    //   Robot.hatchSubsystem.hatchMover(0);
-    // }
+    if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
+      Robot.armTest.armMover(-armSpeed*Robot.m_oi.driverXbox.getRawAxis(2));
+    }
+    else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
+      Robot.armTest.armMover(armSpeed*Robot.m_oi.driverXbox.getRawAxis(3));
+    }else {
+      Robot.armTest.armMover(0);
+    }
   }
 
   @Override
