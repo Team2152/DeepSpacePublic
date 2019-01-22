@@ -8,9 +8,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControllerMap;
 import frc.robot.Robot;
-import frc.robot.subsystems.ArmTest;
 
 public class armMove extends Command {
  private double armSpeed = 0;

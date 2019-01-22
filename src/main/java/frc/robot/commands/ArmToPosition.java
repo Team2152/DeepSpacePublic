@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.utilities.PIDConstants;
-import edu.wpi.first.wpilibj.Timer;
 
 
 public class ArmToPosition extends Command implements PIDOutput{

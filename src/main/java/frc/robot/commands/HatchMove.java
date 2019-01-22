@@ -6,14 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import edu.wpi.first.hal.sim.mockdata.RoboRioDataJNI;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class HatchMove extends Command {
- private double hatchSpeed = 0;
+ double hatchSpeed = 0;
  Joystick driverJoystick;
  
   public HatchMove(Double hatchSpeed) {
