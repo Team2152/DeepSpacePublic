@@ -12,49 +12,47 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.utilities.PIDConstants;
-import edu.wpi.first.wpilibj.Timer;
+
+public class ShooterToPosition extends Command implements PIDOutput{
+
+PIDController shooterPosition;
+double distanceOutput;
+double setPoint;
 
 
-public class ArmToPosition extends Command implements PIDOutput{
-
-  PIDController armPosition;
-  double distanceOutput;
-  double setPoint;
-
-  public ArmToPosition(double setPoint) {
+  public ShooterToPosition(double setPoint) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.stageOneArmSubsystem);
+    requires(Robot.stageTwoArmSubsystem);
     this.setPoint = setPoint;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.stageOneArmSubsystem.setRampRate();
-    armPosition = new PIDController(PIDConstants.SO_ENCODER_ARM_kP, PIDConstants.SO_ENCODER_ARM_kI, PIDConstants.SO_ENCODER_ARM_kD, Robot.stageOneArmSubsystem.getSparkMAxPIDSource(), this);
-    armPosition.disable();
-    armPosition.setAbsoluteTolerance(PIDConstants.SO_DISTANCE_TOLARANCE);
-    armPosition.setContinuous(false);
-    armPosition.setOutputRange(PIDConstants.SO_MAX_RETURN_SPEED, PIDConstants.SO_MAX_RETURN_SPEED);
-    armPosition.setInputRange(PIDConstants.SO_MININUM_INPUT_RANGE, PIDConstants.SO_MAXIMUM_INPUT_RANGE);
-    armPosition.enable(); 
+    Robot.stageTwoArmSubsystem.setRampRate();
+    shooterPosition = new PIDController(PIDConstants.ST_IMU_kP, PIDConstants.ST_IMU_kI, PIDConstants.ST_IMU_kD, Robot.stageTwoArmSubsystem.getIMUPIDSource(), this);
+    shooterPosition.disable();
+    shooterPosition.setAbsoluteTolerance(PIDConstants.ST_DISTANCE_TOLARANCE);
+    shooterPosition.setContinuous(false);
+    shooterPosition.setOutputRange(PIDConstants.ST_MAX_RETURN_SPEED, PIDConstants.ST_MAX_FORWARD_SPEED);
+    shooterPosition.setInputRange(PIDConstants.SO_MININUM_INPUT_RANGE, PIDConstants.ST_MAXIMUM_INPUT_RANGE);
+    shooterPosition.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.stageOneArmSubsystem.isArmStowed()){
-      Robot.stageOneArmSubsystem.resetEncoder();
+    if(Robot.stageTwoArmSubsystem.isArmStowed()){
+      Robot.stageTwoArmSubsystem.resetiMU();
     }
-    
-    Robot.stageOneArmSubsystem.stageOneSpeed(armPosition.get());
+    Robot.stageTwoArmSubsystem.stageTwoSpeed(shooterPosition.get());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(armPosition.onTarget()){
+    if(shooterPosition.onTarget()){
       return true;
     }else{
       return false;
@@ -64,22 +62,22 @@ public class ArmToPosition extends Command implements PIDOutput{
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    armPosition.disable();
-    Robot.stageOneArmSubsystem.stageOneSpeed(0);
+    shooterPosition.disable();
+    Robot.stageTwoArmSubsystem.stageTwoSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    armPosition.disable();
-    Robot.stageOneArmSubsystem.stageOneSpeed(0);
+    shooterPosition.disable();
+    Robot.stageTwoArmSubsystem.stageTwoSpeed(0);
   }
+
 
   @Override
   public void pidWrite(double output){
 
   }
-
 
 }

@@ -11,13 +11,25 @@ public class PIDConstants{
 
 
 //-----StageOneArm-----
-public static final double MAX_FORWARD_SPEED   = 1;
-public static final double MAX_RETURN_SPEED    = -1;
-public static final double SECOUNDS_TO_FULL    = 0;
-public static final double ENCODER_ARM_kP      = 0;
-public static final double ENCODER_ARM_kI      = 0;
-public static final double ENCODER_ARM_kD      = 0;
-public static final double DISTANCE_TOLARANCE  = 0;
-public static final double MININUM_INPUT_RANGE = 0;
-public static final double MAXIMUM_INPUT_RANGE = 0;
+public static final double SO_MAX_FORWARD_SPEED   = 1;
+public static final double SO_MAX_RETURN_SPEED    = -1;
+public static final double SO_SECOUNDS_TO_FULL    = 0;
+public static final double SO_ENCODER_ARM_kP      = 0;
+public static final double SO_ENCODER_ARM_kI      = 0;
+public static final double SO_ENCODER_ARM_kD      = 0;
+public static final double SO_DISTANCE_TOLARANCE  = 0;
+public static final double SO_MININUM_INPUT_RANGE = 0;
+public static final double SO_MAXIMUM_INPUT_RANGE = 0;
+
+
+//-----StageTwoArm-----
+public static final double ST_MAX_FORWARD_SPEED   =  1;
+public static final double ST_MAX_RETURN_SPEED    = -1;
+public static final double ST_SECOUNDS_TO_FULL    =  0;
+public static final double ST_IMU_kP              =  0;
+public static final double ST_IMU_kI              =  0;
+public static final double ST_IMU_kD              =  0;
+public static final double ST_DISTANCE_TOLARANCE  =  0;
+public static final double ST_MININUM_INPUT_RANGE =  0;
+public static final double ST_MAXIMUM_INPUT_RANGE =  0;
 }
