@@ -9,8 +9,8 @@ package frc.robot.subsystems;
 
 import java.util.Map;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -19,12 +19,19 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
  * Add your docs here.
  */
 public class Dashboard extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  public void createShuffleboard() {
-    ShuffleboardTab testTab = Shuffleboard.getTab("Test Tab");
-    testTab.add("Test Slider", 1).withSize(2, 1).withPosition(0, 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
-    testTab.add("Test Dial", 1).withSize(1,1).withPosition(2,0).withWidget(BuiltInWidgets.kDial).getEntry();
+  
+  private ShuffleboardTab mainTab = Shuffleboard.getTab("squishCat"); //Trevor named it.
+
+  private NetworkTableEntry motorGains = mainTab.add("Motor Gains", 1).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1, "block increment", 0.05)).getEntry();
+  // Used to test getMotorGains()
+  public NetworkTableEntry motorGainsOutput = mainTab.add("Motor Gains Output", 0).withWidget(BuiltInWidgets.kNumberBar).getEntry();
+  
+  /**
+   * returns the motor gains value stored on Shuffleboard
+   */
+  public double getMotorGains() {
+    double d = motorGains.getDouble(1);
+    return d;
   }
 
   @Override
