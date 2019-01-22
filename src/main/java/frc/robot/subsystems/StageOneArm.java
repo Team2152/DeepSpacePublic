@@ -64,7 +64,7 @@ public void stageOneSpeed(double speed){
   }
 
 public void setRampRate(){
-  topRight.setRampRate(PIDConstants.SECOUNDS_TO_FULL);
+  topRight.setRampRate(PIDConstants.SO_SECOUNDS_TO_FULL);
 }
 
 public double getEncoderValue(){  
