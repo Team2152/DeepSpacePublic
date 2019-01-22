@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -24,11 +26,21 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  public static final int DRIVETRAIN_CANID_RIGHT1 = 1;
-  public static final int DRIVETRAIN_CANID_RIGHT2 = 2;
+  //-----DriveTrain-----
+  public static final int DRIVETRAIN_CANID_RIGHT1    = 1;
+  public static final int DRIVETRAIN_CANID_RIGHT2    = 2;
 
-  public static final int DRIVETRAIN_CANID_LEFT1 = 3;
-  public static final int DRIVETRAIN_CANID_LEFT2 = 4;
+  public static final int DRIVETRAIN_CANID_LEFT1     = 3;
+  public static final int DRIVETRAIN_CANID_LEFT2     = 4;
 
-  public static final int HATCH_CANID            = 5;
+  //-----Hatch-----
+  public static final int HATCH_CANID                = 5;
+
+  //-----StageOneArm-----
+  public static final int STAGE_ONE_CANID_TR         = 6;
+  public static final int STAGE_ONE_CANID_TL         = 7;
+  public static final int STAGE_ONE_CANID_B          = 8;
+  public static final int STAGE_ONE_ENCODER_SOURCE_A = 0; 
+  public static final int STAGE_ONE_ENCODER_SOURCE_B = 1; 
+  public static final int STAGE_ONE_SWTICH           = 0; 
 }
