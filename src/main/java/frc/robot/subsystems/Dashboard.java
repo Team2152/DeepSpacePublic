@@ -9,8 +9,6 @@ package frc.robot.subsystems;
 
 import frc.robot.utilities.PIDConstants;
 
-import java.util.Map;
-
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -26,10 +24,10 @@ public class Dashboard extends Subsystem {
 
   private double[] armPID = new double[3];
   
-  private NetworkTableEntry motorGains = mainTab.add("Motor Gains", 1).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "block increment", 0.05)).getEntry();
-  private NetworkTableEntry armP = mainTab.add("Arm P", PIDConstants.SO_ENCODER_ARM_kP).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0)).getEntry();
-  private NetworkTableEntry armI = mainTab.add("Arm I", PIDConstants.SO_ENCODER_ARM_kI).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0)).getEntry();
-  private NetworkTableEntry armD = mainTab.add("Arm D", PIDConstants.SO_ENCODER_ARM_kD).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0)).getEntry();
+  private NetworkTableEntry motorGains = mainTab.add("Motor Gains", 1).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry armP = mainTab.add("Arm P", PIDConstants.SO_ENCODER_ARM_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry armI = mainTab.add("Arm I", PIDConstants.SO_ENCODER_ARM_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry armD = mainTab.add("Arm D", PIDConstants.SO_ENCODER_ARM_kD).withWidget(BuiltInWidgets.kTextView).getEntry();
   
 
   /**
