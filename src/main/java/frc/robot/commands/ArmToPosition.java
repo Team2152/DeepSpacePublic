@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,7 +32,19 @@ public class ArmToPosition extends Command implements PIDOutput{
   @Override
   protected void initialize() {
     Robot.stageOneArmSubsystem.setRampRate();
-    armPosition = new PIDController(PIDConstants.SO_ENCODER_ARM_kP, PIDConstants.SO_ENCODER_ARM_kI, PIDConstants.SO_ENCODER_ARM_kD, Robot.stageOneArmSubsystem.getSparkMAxPIDSource(), this);
+    
+    if(DriverStation.getInstance().isTest() == true){
+      armPosition = new PIDController(Robot.spaceDash.getPIDValue(0), 
+      Robot.spaceDash.getPIDValue(1), Robot.spaceDash.getPIDValue(2), 
+      Robot.stageOneArmSubsystem.getSparkMAxPIDSource(), this);
+    } else {
+      armPosition = new PIDController(PIDConstants.SO_ENCODER_ARM_kP, 
+      PIDConstants.SO_ENCODER_ARM_kI, PIDConstants.SO_ENCODER_ARM_kD, 
+      Robot.stageOneArmSubsystem.getSparkMAxPIDSource(), this);
+    }
+    
+    
+   
     armPosition.disable();
     armPosition.setAbsoluteTolerance(PIDConstants.SO_DISTANCE_TOLARANCE);
     armPosition.setContinuous(false);
