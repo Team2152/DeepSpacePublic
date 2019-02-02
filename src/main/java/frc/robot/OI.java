@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
 import frc.robot.commands.HatchSolenoidToggle;
 import frc.robot.commands.ArmToPosition;
+import frc.robot.commands.CompressorToggle;
 
 
 
@@ -189,7 +190,7 @@ public class OI {
 	}
 
 	public void setupOperatorButtons() {
-
+		oButtonBack.whenReleased(new CompressorToggle());
 	}
 
 	public void setupDriverXboxButtons() {
