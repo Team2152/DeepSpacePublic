@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 /**
- * Add your docs here.
+ * Creates the widgets displayed on Shuffleboard for Testing and Competitive Use
  */
 public class Dashboard extends Subsystem {
   
@@ -34,8 +34,7 @@ public class Dashboard extends Subsystem {
    * returns the motor gains value stored on Shuffleboard
    */
   public double getMotorGains() {
-    double d = motorGains.getDouble(1);
-    return d;
+    return motorGains.getDouble(1);
   }
 
   /**
@@ -45,8 +44,7 @@ public class Dashboard extends Subsystem {
     armPID[0] = armP.getDouble(0);
     armPID[1] = armI.getDouble(0);
     armPID[2] = armD.getDouble(0);
-    double d = armPID[value];
-    return d;
+    return armPID[value];
   }
 
   @Override
