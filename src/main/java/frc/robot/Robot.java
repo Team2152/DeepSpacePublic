@@ -143,7 +143,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    spaceDash.motorGainsOutput.setDouble(spaceDash.getMotorGains());
   }
 
   /**
