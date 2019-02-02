@@ -18,6 +18,7 @@ import frc.robot.commands.HatchSolenoidToggle;
 import frc.robot.commands.ArmToPosition;
 
 
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -126,7 +127,6 @@ public class OI {
     private POVButton dPOV315;
 
 
-
   public OI() {
 		// Setup driver joystick
 		try {
@@ -181,7 +181,7 @@ public class OI {
 		setupDriverXboxButtons();
 
 		try {
-      // Shared commands here
+	  // Shared commands here
 			setupSharedCommands();
 		} catch (Exception e) {
 			Robot.m_logger.console("OI: Unable to setup shared commands: " + e.toString());
