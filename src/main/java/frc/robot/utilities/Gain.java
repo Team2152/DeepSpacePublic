@@ -1,7 +1,7 @@
 package frc.robot.utilities;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/**
+ * This class is used to hold gain and deadzone values to be applied to inputs.
+ */
 public class Gain {
 	public final static String DRIVE_TRAIN_GAIN = "Drive Train Gain";
 	public final static String DRIVE_TRAIN_GAIN_CRAB = "Drive Train Gain Crab";
@@ -30,48 +30,52 @@ public class Gain {
 		deadBand = d;
 	}
 
+	/**
+	 * Getter method for gain
+	 * @return gain
+	 */
 	public double getGain() {
 		return gain;
 	}
 
+	/**
+	 * Setter method for gain
+	 * @param g value to replace gain
+	 * 
+	 */
 	public void setGain(double g) {
 		gain = g;
 	}
 
+	/**
+	 * Getter method for deadband
+	 * @return deadband
+	 */
 	public double getDeadBand() {
 		return deadBand;
 	}
 
-	public void setDeadBand(double g) {
-		deadBand = g;
+	/**
+	 * Setter method for deadband
+	 * @param d value to replace deadband
+	 */
+	public void setDeadBand(double d) {
+		deadBand = d;
 	}
 
+	/**
+	 * Modifies the Provided input value using gain multiplier and deadzone. <br>
+	 * Deadband controls the minumum input value that will be recognized as a nonzero input.
+	 * Gain controls the maximum value of the output.
+	 * @param value 
+	 * value to be modified
+	 * @return modified input
+	 */
 	public double applyGain(double value) {
 		double absVal = Math.abs(value);
 		if (absVal < deadBand)
 			return 0;
 		else {
-			gain = Gain.PCT_25;
-			return (value * gain);
-		}
-	}
-
-	public double applyCrabGain(double value) {
-		double absVal = Math.abs(value);
-		if (absVal < deadBand)
-			return 0;
-		else {
-			gain = SmartDashboard.getNumber("Motor Gains", 1.0);
-			return (value * gain);
-		}
-	}
-
-	public double applyRotationGain(double value) {
-		double absVal = Math.abs(value);
-		if (absVal < deadBand)
-			return 0;
-		else {
-			gain = SmartDashboard.getNumber("Motor Gains", 1.0);
 			return (value * gain);
 		}
 	}
