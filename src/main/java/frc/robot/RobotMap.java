@@ -49,4 +49,8 @@ public class RobotMap {
   public static final int STAGE_TWO_CANID_R          = 10;
   public static final int STAGE_TWO_CANID_L          = 11;
   public static final int STAGE_TWO_SWITCH           = 1;
+
+  //-----Antlers-----
+  public static final int ANTLER_CANID_LEFT          = 12;
+  public static final int ANTLER_CANID_RIGHT         = 13;
 }
