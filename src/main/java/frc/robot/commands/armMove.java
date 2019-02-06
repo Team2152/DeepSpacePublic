@@ -27,11 +27,11 @@ public armMove(Double armSpeed) {
 
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
-      Robot.armTest.armMover(-armSpeed*Robot.m_oi.driverXbox.getRawAxis(2));
+    if(Robot.m_oi.operatorXbox.getRawAxis(2) > 0.1){
+      Robot.armTest.armMover(-armSpeed*Robot.m_oi.operatorXbox.getRawAxis(2));
     }
-    else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
-      Robot.armTest.armMover(armSpeed*Robot.m_oi.driverXbox.getRawAxis(3));
+    else  if(Robot.m_oi.operatorXbox.getRawAxis(3) > 0.1){
+      Robot.armTest.armMover(armSpeed*Robot.m_oi.operatorXbox.getRawAxis(3));
     }else {
       Robot.armTest.armMover(0);
     }

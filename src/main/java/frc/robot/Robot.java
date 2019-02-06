@@ -8,6 +8,7 @@
 package frc.robot;
 
 import frc.robot.utilities.Log;
+import frc.robot.subsystems.AntlerManual;
 import frc.robot.subsystems.ArmTest;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
@@ -50,6 +51,8 @@ public class Robot extends TimedRobot {
 
   public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
 
+  public static AntlerManual antlerManualSubSystem = new AntlerManual();
+  
   public static AirCompressor compressorSubsystem = new AirCompressor();
   
   Command m_autonomousCommand;
