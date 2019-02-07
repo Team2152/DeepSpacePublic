@@ -38,18 +38,16 @@ public class DriveTrain extends Subsystem {
 
     right2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       right2.setIdleMode(CANSparkMax.IdleMode.kBrake); 
-      right2.setInverted(true);
-			right2.follow(right1);
+			right2.follow(right1, false);
 			
     left1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT1, CANSparkMaxLowLevel.MotorType.kBrushless);
       left1.setIdleMode(CANSparkMax.IdleMode.kBrake);
-      left1.setInverted(false);
+      left1.setInverted(true);
 			
 
     left2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       left2.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    left2.setInverted(false);
-			left2.follow(left1);
+			left2.follow(left1, true);
 		
 
 

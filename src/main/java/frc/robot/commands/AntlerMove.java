@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class AntlerMove extends Command {
@@ -18,7 +19,7 @@ double speed;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.antlerManualSubSystem);
-this.speed = speed;
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -29,13 +30,16 @@ this.speed = speed;
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
     if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
-      Robot.antlerManualSubSystem.AntlerManualMove(speed * .5);
-    }else  if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
-      Robot.antlerManualSubSystem.AntlerManualMove(speed* -.5);
+      Robot.antlerManualSubSystem.antlerManMove(speed);
+  
+    }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
+      Robot.antlerManualSubSystem.antlerManMove(-speed);
     }else{
-      Robot.antlerManualSubSystem.AntlerManualMove(0);
+      Robot.antlerManualSubSystem.antlerManMove(0);
     }
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -47,13 +51,13 @@ this.speed = speed;
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.antlerManualSubSystem.AntlerManualMove(0);
+   // Robot.antlerManualSubSystem.AntlerManualMove(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.antlerManualSubSystem.AntlerManualMove(0);
+    //Robot.antlerManualSubSystem.AntlerManualMove(0);
   }
 }
