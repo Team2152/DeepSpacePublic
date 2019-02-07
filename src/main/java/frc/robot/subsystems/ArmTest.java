@@ -9,18 +9,21 @@ package frc.robot.subsystems;
 
 
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.armMove;
 /**
  * Add your docs here.
  */
 public class ArmTest extends Subsystem {
- private VictorSP armMotor;
+ private WPI_TalonSRX armMotor;
 ;
 
 public ArmTest(){
-  armMotor = new VictorSP(0);
+  armMotor = new WPI_TalonSRX(RobotMap.ARM_DELETE_LATER);
   }
 
 public  void armMover(double armSpeed) {
