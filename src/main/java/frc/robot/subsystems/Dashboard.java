@@ -27,9 +27,9 @@ public class Dashboard extends Subsystem {
   
   private NetworkTableEntry motorGains = testTab.add("Motor Gains", 1).withWidget(BuiltInWidgets.kTextView).getEntry();
 
-  private NetworkTableEntry s1_P = testTab.add("S1 P", PIDConstants.SO_ENCODER_ARM_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s1_I = testTab.add("S1 I", PIDConstants.SO_ENCODER_ARM_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s1_D = testTab.add("S1 D", PIDConstants.SO_ENCODER_ARM_kD).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry s1_P = testTab.add("S1 P", PIDConstants.SO_ENCODER_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry s1_I = testTab.add("S1 I", PIDConstants.SO_ENCODER_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry s1_D = testTab.add("S1 D", PIDConstants.SO_ENCODER_kD).withWidget(BuiltInWidgets.kTextView).getEntry();
 
   private NetworkTableEntry s2_P = testTab.add("S2 P", PIDConstants.ST_IMU_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
   private NetworkTableEntry s2_I = testTab.add("S2 I", PIDConstants.ST_IMU_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
