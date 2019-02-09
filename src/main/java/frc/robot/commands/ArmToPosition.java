@@ -34,8 +34,8 @@ public class ArmToPosition extends Command implements PIDOutput{
     Robot.stageOneArmSubsystem.setRampRate();
     
     if(DriverStation.getInstance().isTest() == true){
-      armPosition = new PIDController(Robot.spaceDash.getPIDValue(0), 
-      Robot.spaceDash.getPIDValue(1), Robot.spaceDash.getPIDValue(2), 
+      armPosition = new PIDController(Robot.spaceDash.getStage1PID(0), 
+      Robot.spaceDash.getStage1PID(1), Robot.spaceDash.getStage1PID(2), 
       Robot.stageOneArmSubsystem.getSparkMAxPIDSource(), this);
     } else {
       armPosition = new PIDController(PIDConstants.SO_ENCODER_ARM_kP, 
