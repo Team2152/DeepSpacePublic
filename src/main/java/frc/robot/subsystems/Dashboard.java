@@ -20,18 +20,20 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
  */
 public class Dashboard extends Subsystem {
   
-  private ShuffleboardTab mainTab = Shuffleboard.getTab("squishCat"); //Trevor named it.
+  private ShuffleboardTab testTab = Shuffleboard.getTab("squishCat"); //Trevor named it.
 
   private double[] s1_PID = new double[3];
   private double[] s2_PID = new double[3];
   
-  private NetworkTableEntry motorGains = mainTab.add("Motor Gains", 1).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s1_P = mainTab.add("S1 P", PIDConstants.SO_ENCODER_ARM_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s1_I = mainTab.add("S1 I", PIDConstants.SO_ENCODER_ARM_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s1_D = mainTab.add("S1 D", PIDConstants.SO_ENCODER_ARM_kD).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s2_P = mainTab.add("S2 P", PIDConstants.ST_IMU_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s2_I = mainTab.add("S2 I", PIDConstants.ST_IMU_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private NetworkTableEntry s2_D = mainTab.add("S2 D", PIDConstants.ST_IMU_kD).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry motorGains = testTab.add("Motor Gains", 1).withWidget(BuiltInWidgets.kTextView).getEntry();
+
+  private NetworkTableEntry s1_P = testTab.add("S1 P", PIDConstants.SO_ENCODER_ARM_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry s1_I = testTab.add("S1 I", PIDConstants.SO_ENCODER_ARM_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry s1_D = testTab.add("S1 D", PIDConstants.SO_ENCODER_ARM_kD).withWidget(BuiltInWidgets.kTextView).getEntry();
+
+  private NetworkTableEntry s2_P = testTab.add("S2 P", PIDConstants.ST_IMU_kP).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry s2_I = testTab.add("S2 I", PIDConstants.ST_IMU_kI).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private NetworkTableEntry s2_D = testTab.add("S2 D", PIDConstants.ST_IMU_kD).withWidget(BuiltInWidgets.kTextView).getEntry();
 
   /**
    * returns the motor gains value stored on Shuffleboard
