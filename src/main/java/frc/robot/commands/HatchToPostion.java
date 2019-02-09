@@ -13,44 +13,47 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.utilities.PIDConstants;
 
-public class AntlerToPostion extends Command implements PIDOutput {
- 
-  PIDController antlerPostion;
+public class HatchToPostion extends Command implements PIDOutput {
+
+  PIDController hatchPosition;
   double distanceOutput;
   double setPoint;
- 
-  public AntlerToPostion(double setPoint) {
-    requires(Robot.antlerSubsystem);
-    this.setPoint = setPoint;
+
+  public HatchToPostion(double setPoint) {
+   requires(Robot.hatchSubsystem);
+   this.setPoint = setPoint;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.antlerSubsystem.setRampRate();
-    antlerPostion = new PIDController(PIDConstants.A_ENCODER_kP, PIDConstants.A_ENCODER_kI, PIDConstants.A_ENCODER_kD, Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
-    antlerPostion.disable();
-    antlerPostion.setAbsoluteTolerance(PIDConstants.A_DISTANCE_TOLARANCE);
-    antlerPostion.setContinuous(false);
-    antlerPostion.setOutputRange(PIDConstants.A_MAX_RETURN_SPEED, PIDConstants.A_MAX_FORWARD_SPEED);
-    antlerPostion.setInputRange(PIDConstants.A_MININUM_INPUT_RANGE, PIDConstants.A_MAXIMUM_INPUT_RANGE);
-    antlerPostion.enable();
-
+    Robot.hatchSubsystem.setRampRate();
+    hatchPosition = new PIDController(PIDConstants.H_ENCODER_kP, PIDConstants.H_ENCODER_kI, PIDConstants.H_ENCODER_kD, Robot.hatchSubsystem.getMotorControllerPIDSource(), this);
+    hatchPosition.disable();
+    hatchPosition.setAbsoluteTolerance(PIDConstants.H_DISTANCE_TOLARANCE);
+    hatchPosition.setContinuous(false);
+    hatchPosition.setOutputRange(PIDConstants.A_MININUM_INPUT_RANGE, PIDConstants.A_MAXIMUM_INPUT_RANGE);
+    hatchPosition.setInputRange(PIDConstants.H_MININUM_INPUT_RANGE, PIDConstants.H_MAXIMUM_INPUT_RANGE);
+    hatchPosition.enable();
+    Robot.hatchSubsystem.lockSolenoidClose();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(Robot.hatchSubsystem.isHatchStowed()){
+      Robot.hatchSubsystem.resetEncoder();
+    }
 
-    // add reset logic 
+    Robot.hatchSubsystem.hatchSpeed(hatchPosition.get());
 
-    Robot.antlerSubsystem.AntlerSpeed(antlerPostion.get());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(antlerPostion.onTarget()){
+    if(hatchPosition.onTarget()){
+      Robot.hatchSubsystem.lockSolenoidOpen();
       return true;
     }else{
       return false;
@@ -60,20 +63,23 @@ public class AntlerToPostion extends Command implements PIDOutput {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    antlerPostion.disable();
-    Robot.antlerSubsystem.AntlerSpeed(0);
+    hatchPosition.disable();
+    Robot.hatchSubsystem.hatchSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    antlerPostion.disable();
-    Robot.antlerSubsystem.AntlerSpeed(0);
+    hatchPosition.disable();
+    Robot.hatchSubsystem.hatchSpeed(0);
   }
+
 
   @Override
   public void pidWrite(double output){
-    
+
   }
+
+
 }

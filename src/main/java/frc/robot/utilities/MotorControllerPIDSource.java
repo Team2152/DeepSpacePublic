@@ -7,6 +7,8 @@
 
 package frc.robot.utilities;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
@@ -18,23 +20,30 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 /**
  * Add your docs here.
  */
-public class SparkMaxPIDSource implements PIDSource {
+public class MotorControllerPIDSource implements PIDSource {
 
+     WPI_TalonSRX talon;
      CANSparkMax sparkMax;
      CANEncoder canEncoder;
      Encoder encoder;
-     Boolean isInternalEncoder = true;
+     int isInternalEncoder = 1;
     //External Encoder
-    public SparkMaxPIDSource(CANSparkMax sparkMax, Encoder encoder) {
+    public MotorControllerPIDSource(CANSparkMax sparkMax, Encoder encoder) {
         this.sparkMax = sparkMax;
         this.encoder = encoder;
-        isInternalEncoder = false;
+        isInternalEncoder = 2;
         encoder.reset();
     }
-    //Internal Encoder
-    public SparkMaxPIDSource(CANSparkMax sparkMax, CANEncoder canEncoder){
+    //Internal Encoder NEO
+    public MotorControllerPIDSource(CANSparkMax sparkMax, CANEncoder canEncoder){
         this.sparkMax = sparkMax;
         this.canEncoder = canEncoder;       
+    }
+    // Talon data port
+    public MotorControllerPIDSource(WPI_TalonSRX talon){
+        this.talon = talon;
+        talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+        isInternalEncoder = 3;
     }
 
     private PIDSourceType pidSourceDistance = PIDSourceType.kDisplacement;
@@ -51,11 +60,13 @@ public class SparkMaxPIDSource implements PIDSource {
 
     @Override
     public double pidGet(){
-       if(isInternalEncoder == true){
+       if(isInternalEncoder == 1){
            return canEncoder.getPosition();
 
-       }else{
+       }else if (isInternalEncoder == 2){
            return encoder.get();
+       }else{
+           return talon.getSelectedSensorPosition();
        }
         
     }
