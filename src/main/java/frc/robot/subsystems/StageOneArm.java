@@ -68,7 +68,7 @@ public void setRampRate(){
 public double getEncoderValue(){  
   return armEncoder.get();
 }
-
+// fix in update
 public double getNeoEncoderValue(){
 averageNeoEncoderValue = (topRightEncoder.getPosition() + topLeftEncoder.getPosition() + bottemEncoder.getPosition());
 return (averageNeoEncoderValue/3)*11/3;
@@ -81,6 +81,8 @@ public boolean isArmStowed(){
 public void resetEncoder(){
   armEncoder.reset();
 }
+
+//add reset to spark in update
 
 public SparkMaxPIDSource getSparkMAxPIDSource(){
   return sparkMaxPIDSource;
