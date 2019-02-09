@@ -31,14 +31,14 @@ double speed;
   @Override
   protected void execute() {
 
-    if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
-      Robot.antlerManualSubSystem.antlerManMove(speed);
+    // if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
+    //   Robot.antlerManualSubSystem.antlerManMove(speed);
   
-    }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
-      Robot.antlerManualSubSystem.antlerManMove(-speed);
-    }else{
-      Robot.antlerManualSubSystem.antlerManMove(0);
-    }
+    // }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
+    //   Robot.antlerManualSubSystem.antlerManMove(-speed);
+    // }else{
+    //   Robot.antlerManualSubSystem.antlerManMove(0);
+    // }
     
   }
 

@@ -11,6 +11,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,18 +22,19 @@ import frc.robot.commands.HatchMove;
  * Add your docs here.
  */
 public class Hatch extends Subsystem {
- private VictorSPX hatchMotor;
+ private WPI_TalonSRX hatchMotor;
  private DoubleSolenoid hatchSolenoid;
 
 public Hatch(){
-  hatchMotor = new VictorSPX(RobotMap.HATCH_CANID);
+  // hatchMotor = new VictorSPX(RobotMap.HATCH_CANID);
+  hatchMotor = new WPI_TalonSRX(RobotMap.HATCH_DELETE_LATER);
 
   hatchSolenoid = new DoubleSolenoid(0, 1);
 	hatchSolenoidClose();
 }
 
-public  void hatchMover(double hatchSpeed) {
-  hatchMotor.set(ControlMode.PercentOutput, hatchSpeed);
+public  void hatchMover(double speed) {
+  hatchMotor.set(ControlMode.PercentOutput, speed);
 }
 
 public void hatchSolenoidOpen() {

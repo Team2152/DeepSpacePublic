@@ -26,14 +26,14 @@ public ArmTest(){
   armMotor = new WPI_TalonSRX(RobotMap.ARM_DELETE_LATER);
   }
 
-public  void armMover(double armSpeed) {
-  armMotor.set(armSpeed);
+public  void armMover(double speed) {
+  armMotor.set(speed);
 }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new armMove(.8));
+    setDefaultCommand(new armMove(.50));
   }
 }

@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class HatchMove extends Command {
- double hatchSpeed = 0;
+ double speed = 0;
  Joystick driverJoystick;
  
-  public HatchMove(Double hatchSpeed) {
+  public HatchMove(Double speed) {
     requires(Robot.hatchSubsystem);
-    this.hatchSpeed = hatchSpeed;
+    this.speed = speed;
 
   }
 
@@ -27,14 +27,14 @@ public class HatchMove extends Command {
 
   @Override
   protected void execute() {
-    // if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
-    //   Robot.hatchSubsystem.hatchMover(-hatchSpeed);
-    // }
-    // else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
-    //   Robot.hatchSubsystem.hatchMover(hatchSpeed);
-    // }else {
-    //   Robot.hatchSubsystem.hatchMover(0);
-    // }
+    if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
+      Robot.hatchSubsystem.hatchMover(-speed);
+    }
+    else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
+      Robot.hatchSubsystem.hatchMover(speed);
+    }else {
+      Robot.hatchSubsystem.hatchMover(0);
+    }
   }
 
   @Override
