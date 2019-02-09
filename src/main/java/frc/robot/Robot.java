@@ -8,8 +8,6 @@
 package frc.robot;
 
 import frc.robot.utilities.Log;
-import frc.robot.subsystems.AntlerManual;
-import frc.robot.subsystems.ArmTest;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
@@ -17,7 +15,7 @@ import frc.robot.subsystems.StageOneArm;
 import frc.robot.subsystems.StageTwoArm;
 import frc.robot.utilities.Gain;
 import frc.robot.subsystems.AirCompressor;
-
+import frc.robot.subsystems.Antler;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -45,13 +43,12 @@ public class Robot extends TimedRobot {
 
   public static Hatch hatchSubsystem = new Hatch();
 
-  public static ArmTest armTest = new ArmTest();
+  public static Antler antlerSubsystem = new Antler();
   
   public static StageOneArm stageOneArmSubsystem = new StageOneArm();
 
   public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
 
-  public static AntlerManual antlerManualSubSystem = new AntlerManual();
   
   public static AirCompressor compressorSubsystem = new AirCompressor();
   

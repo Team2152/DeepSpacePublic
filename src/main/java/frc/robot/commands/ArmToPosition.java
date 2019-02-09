@@ -48,7 +48,7 @@ public class ArmToPosition extends Command implements PIDOutput{
     armPosition.disable();
     armPosition.setAbsoluteTolerance(PIDConstants.SO_DISTANCE_TOLARANCE);
     armPosition.setContinuous(false);
-    armPosition.setOutputRange(PIDConstants.SO_MAX_RETURN_SPEED, PIDConstants.SO_MAX_RETURN_SPEED);
+    armPosition.setOutputRange(PIDConstants.SO_MAX_RETURN_SPEED, PIDConstants.SO_MAX_FORWARD_SPEED);
     armPosition.setInputRange(PIDConstants.SO_MININUM_INPUT_RANGE, PIDConstants.SO_MAXIMUM_INPUT_RANGE);
     armPosition.enable(); 
   }
@@ -56,9 +56,8 @@ public class ArmToPosition extends Command implements PIDOutput{
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.stageOneArmSubsystem.isArmStowed()){
-      Robot.stageOneArmSubsystem.resetEncoder();
-    }
+ 
+    // add reset logic 
     
     Robot.stageOneArmSubsystem.stageOneSpeed(armPosition.get());
   }
