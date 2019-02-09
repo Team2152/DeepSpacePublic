@@ -7,21 +7,34 @@
 
 package frc.robot.utilities;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import frc.robot.Robot;
+
 
 /**
  * Add your docs here.
  */
 public class SparkMaxPIDSource implements PIDSource {
 
-    CANSparkMax sparkMax;
-
-    public SparkMaxPIDSource(CANSparkMax sparkMax) {
+     CANSparkMax sparkMax;
+     CANEncoder canEncoder;
+     Encoder encoder;
+     Boolean isInternalEncoder = true;
+    //External Encoder
+    public SparkMaxPIDSource(CANSparkMax sparkMax, Encoder encoder) {
         this.sparkMax = sparkMax;
+        this.encoder = encoder;
+        isInternalEncoder = false;
+        encoder.reset();
+    }
+    //Internal Encoder
+    public SparkMaxPIDSource(CANSparkMax sparkMax, CANEncoder canEncoder){
+        this.sparkMax = sparkMax;
+        this.canEncoder = canEncoder;       
     }
 
     private PIDSourceType pidSourceDistance = PIDSourceType.kDisplacement;
@@ -38,6 +51,12 @@ public class SparkMaxPIDSource implements PIDSource {
 
     @Override
     public double pidGet(){
-        return Robot.stageOneArmSubsystem.getEncoderValue();
+       if(isInternalEncoder == true){
+           return canEncoder.getPosition();
+
+       }else{
+           return encoder.get();
+       }
+        
     }
 }

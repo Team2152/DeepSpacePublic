@@ -50,7 +50,7 @@ public class StageOneArm extends Subsystem {
     bottom.follow(topRight);
     bottemEncoder = bottom.getEncoder();    
     
-    sparkMaxPIDSource = new SparkMaxPIDSource(topRight);
+ //   sparkMaxPIDSource = new SparkMaxPIDSource(topRight);
     
     zeroSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
   //  armEncoder = new Encoder(RobotMap.STAGE_ONE_ENCODER_SOURCE_A, RobotMap.STAGE_ONE_ENCODER_SOURCE_B);

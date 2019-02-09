@@ -32,4 +32,18 @@ public static final double ST_IMU_kD              =  0;
 public static final double ST_DISTANCE_TOLARANCE  =  0;
 public static final double ST_MININUM_INPUT_RANGE =  0;
 public static final double ST_MAXIMUM_INPUT_RANGE =  0;
+
+//-----Antler-----
+public static final double A_MAX_FORWARD_SPEED   =  1;
+public static final double A_MAX_RETURN_SPEED    = -1;
+public static final double A_SECOUNDS_TO_FULL    =  0;
+public static final double A_ENCODER_ARM_kP      =  0;
+public static final double A_ENCODER_ARM_kI      =  0;
+public static final double A_ENCODER_ARM_kD      =  0;
+public static final double A_DISTANCE_TOLARANCE  =  0;
+public static final double A_MININUM_INPUT_RANGE =  0;
+public static final double A_MAXIMUM_INPUT_RANGE =  0;
+
+
+
 }
