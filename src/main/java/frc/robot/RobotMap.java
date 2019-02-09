@@ -42,19 +42,18 @@ public class RobotMap {
   public static final int STAGE_ONE_CANID_TR         = 6;
   public static final int STAGE_ONE_CANID_TL         = 7;
   public static final int STAGE_ONE_CANID_B          = 8;
-  public static final int STAGE_ONE_ENCODER_SOURCE_A = 0; 
-  public static final int STAGE_ONE_ENCODER_SOURCE_B = 1; 
   public static final int STAGE_ONE_SWTICH           = 0;
   
   //-----StageTwoArm-----
   public static final int STAGE_TWO_PIDGEON          = 9;
   public static final int STAGE_TWO_CANID_R          = 10;
   public static final int STAGE_TWO_CANID_L          = 11;
-  public static final int STAGE_TWO_SWITCH           = 1;
+  public static final int STAGE_TWO_SWITCH           = 0;
 
   public static final int ARM_DELETE_LATER           = 17;
 
   //-----Antlers-----
   public static final int ANTLER_CANID_LEFT          = 12;
   public static final int ANTLER_CANID_RIGHT         = 13;
+  public static final int ANTLER_SWITCH              = 1;
 }
