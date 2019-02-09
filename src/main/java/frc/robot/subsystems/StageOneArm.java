@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
@@ -18,7 +19,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.utilities.PIDConstants;
 import frc.robot.utilities.SparkMaxPIDSource;
-
+import frc.robot.commands.LiftMove;;
 /**
  * Add your docs here.
  */
@@ -26,60 +27,56 @@ public class StageOneArm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private CANSparkMax topRight;
-  private CANSparkMax topLeft;
-  private CANSparkMax bottom;
+  private WPI_TalonSRX left;
+  private WPI_TalonSRX right;
+
+
+
+  // private CANSparkMax left;
+  // private CANSparkMax right;
+  //private CANEncoder  leftEncoder;
   private SparkMaxPIDSource sparkMaxPIDSource;  
-  private CANEncoder topRightEncoder;
-  private CANEncoder topLeftEncoder;
-  private CANEncoder bottemEncoder;
-  private Encoder armEncoder;
+ 
   private DigitalInput zeroSwitch;
-  private double averageNeoEncoderValue;
+ 
 
   public StageOneArm(){
 
-    topRight = new CANSparkMax(RobotMap.STAGE_ONE_CANID_TR, CANSparkMaxLowLevel.MotorType.kBrushless);
-    topRightEncoder = topRight.getEncoder();
-    
-    topLeft  = new CANSparkMax(RobotMap.STAGE_ONE_CANID_TL, CANSparkMaxLowLevel.MotorType.kBrushless);
-    topLeft.follow(topRight);
-    topLeftEncoder = topLeft.getEncoder();
 
-    bottom   = new CANSparkMax(RobotMap.STAGE_ONE_CANID_B, CANSparkMaxLowLevel.MotorType.kBrushless);
-    bottom.follow(topRight);
-    bottemEncoder = bottom.getEncoder();    
+    left = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_L);
+    right = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_R);
+      right.follow(left);
+      right.setInverted(true);
+
     
- //   sparkMaxPIDSource = new SparkMaxPIDSource(topRight);
-    
+    // left  = new CANSparkMax(RobotMap.STAGE_ONE_CANID_TL, CANSparkMaxLowLevel.MotorType.kBrushless);
+     
+    // right = new CANSparkMax(RobotMap.STAGE_ONE_CANID_TR, CANSparkMaxLowLevel.MotorType.kBrushless);
+    //  right.follow(left, true);
+
+  //  sparkMaxPIDSource = new SparkMaxPIDSource(left, leftEncoder);
+
     zeroSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
-  //  armEncoder = new Encoder(RobotMap.STAGE_ONE_ENCODER_SOURCE_A, RobotMap.STAGE_ONE_ENCODER_SOURCE_B);
+   
   }
  
 
 public void stageOneSpeed(double speed){
-    topRight.set(speed);
+    left.set(speed);
   }
 
-public void setRampRate(){
-  topRight.setRampRate(PIDConstants.SO_SECOUNDS_TO_FULL);
-}
+// public void setRampRate(){
+//   left.setRampRate(PIDConstants.SO_SECOUNDS_TO_FULL);
+// }
 
-public double getEncoderValue(){  
-  return armEncoder.get();
-}
-// fix in update
-public double getNeoEncoderValue(){
-averageNeoEncoderValue = (topRightEncoder.getPosition() + topLeftEncoder.getPosition() + bottemEncoder.getPosition());
-return (averageNeoEncoderValue/3)*11/3;
-}
+// public double getEncoderValue(){  
+//   return armEncoder.get();
+// }
+
+
 
 public boolean isArmStowed(){
   return zeroSwitch.get();
-}
-
-public void resetEncoder(){
-  armEncoder.reset();
 }
 
 //add reset to spark in update
@@ -95,5 +92,6 @@ public SparkMaxPIDSource getSparkMAxPIDSource(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new LiftMove(.75));
   }
 }

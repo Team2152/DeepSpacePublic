@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
 import frc.robot.commands.HatchSolenoidToggle;
-import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.CompressorToggle;
 
 
@@ -195,8 +194,7 @@ public class OI {
 
 	public void setupDriverXboxButtons() {
 		dButtonStart.whenReleased(new HatchSolenoidToggle());
-		dButtonA.whenReleased(new ArmToPosition(0));
-	    dButtonB.whenReleased(new ArmToPosition(0));
+	
   }
 
   public void setupSharedCommands() {

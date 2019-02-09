@@ -43,12 +43,11 @@ public class Robot extends TimedRobot {
 
   public static Hatch hatchSubsystem = new Hatch();
 
-  public static Antler antlerSubsystem = new Antler();
-  
   public static StageOneArm stageOneArmSubsystem = new StageOneArm();
 
   public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
 
+  public static Antler antlerSubsystem = new Antler();
   
   public static AirCompressor compressorSubsystem = new AirCompressor();
   
