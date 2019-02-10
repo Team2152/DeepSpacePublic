@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,7 +32,13 @@ double setPoint;
   @Override
   protected void initialize() {
     Robot.stageTwoArmSubsystem.setRampRate();
-    shooterPosition = new PIDController(PIDConstants.ST_IMU_kP, PIDConstants.ST_IMU_kI, PIDConstants.ST_IMU_kD, Robot.stageTwoArmSubsystem.getIMUPIDSource(), this);
+
+    if(DriverStation.getInstance().isTest() == true){
+      shooterPosition = new PIDController(Robot.spaceDash.getStage2PID(0), Robot.spaceDash.getStage2PID(1), Robot.spaceDash.getStage2PID(2), Robot.stageTwoArmSubsystem.getIMUPIDSource(), this);
+    } else {
+      shooterPosition = new PIDController(PIDConstants.ST_IMU_kP, PIDConstants.ST_IMU_kI, PIDConstants.ST_IMU_kD, Robot.stageTwoArmSubsystem.getIMUPIDSource(), this);
+    }
+
     shooterPosition.disable();
     shooterPosition.setAbsoluteTolerance(PIDConstants.ST_DISTANCE_TOLARANCE);
     shooterPosition.setContinuous(false);

@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,7 +29,13 @@ public class HatchToPostion extends Command implements PIDOutput {
   @Override
   protected void initialize() {
     Robot.hatchSubsystem.setRampRate();
-    hatchPosition = new PIDController(PIDConstants.H_ENCODER_kP, PIDConstants.H_ENCODER_kI, PIDConstants.H_ENCODER_kD, Robot.hatchSubsystem.getMotorControllerPIDSource(), this);
+
+    if(DriverStation.getInstance().isTest() == true){
+      hatchPosition = new PIDController(Robot.spaceDash.getHatchPID(0), Robot.spaceDash.getHatchPID(1), Robot.spaceDash.getHatchPID(2), Robot.hatchSubsystem.getMotorControllerPIDSource(), this);
+    } else {
+      hatchPosition = new PIDController(PIDConstants.H_ENCODER_kP, PIDConstants.H_ENCODER_kI, PIDConstants.H_ENCODER_kD, Robot.hatchSubsystem.getMotorControllerPIDSource(), this);
+    }
+
     hatchPosition.disable();
     hatchPosition.setAbsoluteTolerance(PIDConstants.H_DISTANCE_TOLARANCE);
     hatchPosition.setContinuous(false);

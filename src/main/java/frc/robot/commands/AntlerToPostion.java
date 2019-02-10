@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,7 +29,13 @@ public class AntlerToPostion extends Command implements PIDOutput {
   @Override
   protected void initialize() {
     Robot.antlerSubsystem.setRampRate();
-    antlerPostion = new PIDController(PIDConstants.A_ENCODER_kP, PIDConstants.A_ENCODER_kI, PIDConstants.A_ENCODER_kD, Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
+
+    if(DriverStation.getInstance().isTest() == true){
+      antlerPostion = new PIDController(Robot.spaceDash.getAntlerPID(0), Robot.spaceDash.getAntlerPID(1), Robot.spaceDash.getAntlerPID(2), Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
+    } else {
+      antlerPostion = new PIDController(PIDConstants.A_ENCODER_kP, PIDConstants.A_ENCODER_kI, PIDConstants.A_ENCODER_kD, Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
+    }
+    
     antlerPostion.disable();
     antlerPostion.setAbsoluteTolerance(PIDConstants.A_DISTANCE_TOLARANCE);
     antlerPostion.setContinuous(false);
