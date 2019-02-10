@@ -12,7 +12,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.utilities.PIDConstants;
-import frc.robot.utilities.SparkMaxPIDSource;
+import frc.robot.utilities.MotorControllerPIDSource;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -28,7 +28,7 @@ public class Antler extends Subsystem {
   private CANSparkMax right;
   private CANEncoder  leftEncoder;
   private DigitalInput zeroSwitch;
-  private SparkMaxPIDSource sparkMaxPIDSource; 
+  private MotorControllerPIDSource MotorControllerPIDSource; 
 
 
   public Antler(){
@@ -40,7 +40,7 @@ public class Antler extends Subsystem {
       right.follow(left, true);
     
     zeroSwitch = new DigitalInput(RobotMap.ANTLER_SWITCH);
-    sparkMaxPIDSource = new SparkMaxPIDSource(left, leftEncoder);
+    MotorControllerPIDSource = new MotorControllerPIDSource(left, leftEncoder);
     
 
 
@@ -65,8 +65,8 @@ public class Antler extends Subsystem {
 
 
 
-  public SparkMaxPIDSource getSparkMaxPIDSource(){
-    return sparkMaxPIDSource;
+  public MotorControllerPIDSource getMotorControllerPIDSource(){
+    return MotorControllerPIDSource;
   }
 
   

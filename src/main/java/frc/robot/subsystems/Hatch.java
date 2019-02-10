@@ -10,48 +10,92 @@ package frc.robot.subsystems;
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.HatchMove;
+import frc.robot.utilities.MotorControllerPIDSource;
+import frc.robot.utilities.PIDConstants;
+
 /**
  * Add your docs here.
  */
 public class Hatch extends Subsystem {
- private WPI_TalonSRX hatchMotor;
- private DoubleSolenoid hatchSolenoid;
+  private WPI_TalonSRX left;  
+  private Encoder leftEncoder;
+  private DoubleSolenoid expelSolenoid;
+  private DoubleSolenoid lockSolenoid;
+  private DigitalInput stowedSwtich;
+  private MotorControllerPIDSource motorControllerPIDSource;
 
 public Hatch(){
-  // hatchMotor = new VictorSPX(RobotMap.HATCH_CANID);
-  hatchMotor = new WPI_TalonSRX(RobotMap.HATCH_DELETE_LATER);
+  
+  left = new WPI_TalonSRX(RobotMap.HATCH_CANID);
+    left.setNeutralMode(NeutralMode.Brake);
+    left.setSafetyEnabled(true);
+    left.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-  hatchSolenoid = new DoubleSolenoid(0, 1);
-	hatchSolenoidClose();
+  lockSolenoid  = new DoubleSolenoid(2, 3);
+  expelSolenoid = new DoubleSolenoid(0, 1);
+  expelSolenoidClose();
+  
+  motorControllerPIDSource = new MotorControllerPIDSource(left);
+
+  stowedSwtich = new DigitalInput(RobotMap.HATCH_SWITCH);
+
+
 }
 
-public  void hatchMover(double speed) {
-  hatchMotor.set(ControlMode.PercentOutput, speed);
+public  void hatchSpeed(double speed) {
+  left.set(ControlMode.PercentOutput, speed);
 }
 
-public void hatchSolenoidOpen() {
-  hatchSolenoid.set(DoubleSolenoid.Value.kReverse);
+public boolean isHatchStowed(){
+  return stowedSwtich.get();
 }
 
-public void hatchSolenoidClose() {
-  hatchSolenoid.set(DoubleSolenoid.Value.kForward);
+public void setRampRate(){
+  left.configClosedloopRamp(PIDConstants.H_SECOUNDS_TO_FULL);
 }
 
-public void hatchSolenoidToggle(){
-  if(hatchSolenoid.get() == DoubleSolenoid.Value.kForward){
-    hatchSolenoidOpen();
+public void resetEncoder(){
+  left.setSelectedSensorPosition(0);
+}
+
+public MotorControllerPIDSource getMotorControllerPIDSource(){
+  return motorControllerPIDSource;
+}
+
+public void lockSolenoidOpen(){
+  lockSolenoid.set(DoubleSolenoid.Value.kReverse);
+}
+
+public void lockSolenoidClose(){
+  lockSolenoid.set(DoubleSolenoid.Value.kForward);
+}
+
+public void expelSolenoidOpen() {
+  expelSolenoid.set(DoubleSolenoid.Value.kReverse);
+}
+
+public void expelSolenoidClose() {
+  expelSolenoid.set(DoubleSolenoid.Value.kForward);
+}
+
+public void expelSolenoidToggle(){
+  if(expelSolenoid.get() == DoubleSolenoid.Value.kForward){
+    expelSolenoidOpen();
   }else{
-    hatchSolenoidClose();
+    expelSolenoidClose();
   }
 }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
