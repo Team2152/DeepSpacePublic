@@ -28,12 +28,12 @@ public class HatchMove extends Command {
   @Override
   protected void execute() {
     if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
-      Robot.hatchSubsystem.hatchMover(-speed);
+      Robot.hatchSubsystem.hatchSpeed(-speed);
     }
     else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
-      Robot.hatchSubsystem.hatchMover(speed);
+      Robot.hatchSubsystem.hatchSpeed(speed);
     }else {
-      Robot.hatchSubsystem.hatchMover(0);
+      Robot.hatchSubsystem.hatchSpeed(0);
     }
   }
 
@@ -49,7 +49,7 @@ public class HatchMove extends Command {
   
   @Override
   protected void interrupted() {
-    Robot.hatchSubsystem.hatchMover(0);
+    Robot.hatchSubsystem.hatchSpeed(0);
 
   }
 }

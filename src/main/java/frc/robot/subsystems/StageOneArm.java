@@ -14,11 +14,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.utilities.PIDConstants;
-import frc.robot.utilities.SparkMaxPIDSource;
+import frc.robot.utilities.MotorControllerPIDSource;
 import frc.robot.commands.LiftMove;;
 /**
  * Add your docs here.
@@ -35,9 +34,9 @@ public class StageOneArm extends Subsystem {
   // private CANSparkMax left;
   // private CANSparkMax right;
   //private CANEncoder  leftEncoder;
-  private SparkMaxPIDSource sparkMaxPIDSource;  
+  private MotorControllerPIDSource motorControllerPIDSource;  
  
-  private DigitalInput zeroSwitch;
+  private DigitalInput stowedSwitch;
  
 
   public StageOneArm(){
@@ -54,9 +53,9 @@ public class StageOneArm extends Subsystem {
     // right = new CANSparkMax(RobotMap.STAGE_ONE_CANID_TR, CANSparkMaxLowLevel.MotorType.kBrushless);
     //  right.follow(left, true);
 
-  //  sparkMaxPIDSource = new SparkMaxPIDSource(left, leftEncoder);
+  //  MotorControllerPIDSource = new MotorControllerPIDSource(left, leftEncoder);
 
-    zeroSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
+    stowedSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
    
   }
  
@@ -75,14 +74,15 @@ public void stageOneSpeed(double speed){
 
 
 
+
 public boolean isArmStowed(){
-  return zeroSwitch.get();
+  return stowedSwitch.get();
 }
 
 //add reset to spark in update
 
-public SparkMaxPIDSource getSparkMAxPIDSource(){
-  return sparkMaxPIDSource;
+public MotorControllerPIDSource getMotorControllerPIDSource(){
+  return motorControllerPIDSource;
 }
 
 
