@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
@@ -34,7 +35,7 @@ public class StageOneArm extends Subsystem {
   // private CANSparkMax left;
   // private CANSparkMax right;
   //private CANEncoder  leftEncoder;
-  private MotorControllerPIDSource motorControllerPIDSource;  
+  //private MotorControllerPIDSource motorControllerPIDSource;  
  
   private DigitalInput stowedSwitch;
  
@@ -43,7 +44,11 @@ public class StageOneArm extends Subsystem {
 
 
     left = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_L);
+    left.setSafetyEnabled(false);
+
+
     right = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_R);
+      right.setSafetyEnabled(false);
       right.follow(left);
       right.setInverted(true);
 
@@ -55,13 +60,13 @@ public class StageOneArm extends Subsystem {
 
   //  MotorControllerPIDSource = new MotorControllerPIDSource(left, leftEncoder);
 
-    stowedSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
+   // stowedSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
    
   }
  
 
 public void stageOneSpeed(double speed){
-    left.set(speed);
+    left.set(ControlMode.PercentOutput, speed);
   }
 
 // public void setRampRate(){
@@ -75,15 +80,15 @@ public void stageOneSpeed(double speed){
 
 
 
-public boolean isArmStowed(){
-  return stowedSwitch.get();
-}
+// public boolean isArmStowed(){
+//   return stowedSwitch.get();
+// }
 
 //add reset to spark in update
 
-public MotorControllerPIDSource getMotorControllerPIDSource(){
-  return motorControllerPIDSource;
-}
+// public MotorControllerPIDSource getMotorControllerPIDSource(){
+//   return motorControllerPIDSource;
+// }
 
 
 
@@ -92,6 +97,6 @@ public MotorControllerPIDSource getMotorControllerPIDSource(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new LiftMove(.75));
+    setDefaultCommand(new LiftMove(.50));
   }
 }

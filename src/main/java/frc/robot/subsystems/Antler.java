@@ -9,12 +9,14 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.utilities.PIDConstants;
 import frc.robot.utilities.MotorControllerPIDSource;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.AntlerMove;
 import frc.robot.RobotMap;
 
 /**
@@ -33,10 +35,10 @@ public class Antler extends Subsystem {
 
   public Antler(){
     
-    left  = new CANSparkMax(RobotMap.ANTLER_CANID_LEFT, MotorType.kBrushless);
+    left  = new CANSparkMax(RobotMap.ANTLER_CANID_LEFT, CANSparkMaxLowLevel.MotorType.kBrushless);
     leftEncoder = left.getEncoder();
     
-    right = new CANSparkMax(RobotMap.ANTLER_CANID_RIGHT, MotorType.kBrushless);
+    right = new CANSparkMax(RobotMap.ANTLER_CANID_RIGHT, CANSparkMaxLowLevel.MotorType.kBrushless);
       right.follow(left, true);
     
     zeroSwitch = new DigitalInput(RobotMap.ANTLER_SWITCH);
@@ -81,5 +83,6 @@ public class Antler extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new AntlerMove(.50));
   }
 }

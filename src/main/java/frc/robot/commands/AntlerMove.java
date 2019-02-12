@@ -29,9 +29,9 @@ public class AntlerMove extends Command {
   @Override
   protected void execute() {
     if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
-        Robot.antlerSubsystem.AntlerSpeed(speed);
+        Robot.antlerSubsystem.AntlerSpeed(-speed);
     }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
-      Robot.antlerSubsystem.AntlerSpeed(-speed);
+      Robot.antlerSubsystem.AntlerSpeed(speed);
   }else{
     Robot.antlerSubsystem.AntlerSpeed(0);
   }

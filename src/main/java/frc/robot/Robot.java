@@ -12,7 +12,7 @@ import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.StageOneArm;
-import frc.robot.subsystems.StageTwoArm;
+//import frc.robot.subsystems.StageTwoArm;
 import frc.robot.utilities.Gain;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
 
   public static StageOneArm stageOneArmSubsystem = new StageOneArm();
 
-  public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
+//  public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
 
   public static Antler antlerSubsystem = new Antler();
   
