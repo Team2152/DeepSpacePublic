@@ -52,14 +52,16 @@ public class Antler extends Subsystem {
   }
 
   public void setRampRate(){
-    left.setRampRate(PIDConstants.A_SECOUNDS_TO_FULL);
+    left.setClosedLoopRampRate(PIDConstants.A_SECOUNDS_TO_FULL);
   }
 
   public double getEncoderValue(){
    return leftEncoder.getPosition();
   }
   
-  //add rest to spark in update
+ public void antlerEncoderReset(){
+   leftEncoder.setPosition(0);
+ }
 
  public boolean isAntlerStowed(){
   return zeroSwitch.get();
