@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
@@ -44,10 +45,12 @@ public class StageOneArm extends Subsystem {
 
 
     left = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_L);
+    left.setNeutralMode(NeutralMode.Brake);
     left.setSafetyEnabled(false);
 
 
     right = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_R);
+    right.setNeutralMode(NeutralMode.Brake);
       right.setSafetyEnabled(false);
       right.follow(left);
       right.setInverted(true);
