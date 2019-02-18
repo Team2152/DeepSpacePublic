@@ -9,7 +9,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.AntlerDumb;
+import frc.robot.commands.AntlerByEncoder;
+import frc.robot.commands.ArmByEncoder;
 
 public class ClimbDumb extends CommandGroup {
   /**
@@ -33,6 +34,7 @@ public class ClimbDumb extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addSequential(new AntlerDumb(.5, 40));
+    addParallel(new AntlerByEncoder(.5, 40));
+    addSequential(new ArmByEncoder(.5, 40));
   }
 }

@@ -94,6 +94,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
     SmartDashboard.putNumber("Hey whats up NEO", Robot.antlerSubsystem.getEncoderValue());
+    SmartDashboard.putNumber("Hey whats up ARM ENCODER", Robot.stageOneArmSubsystem.getEncoderValue());
   }
 
   /**

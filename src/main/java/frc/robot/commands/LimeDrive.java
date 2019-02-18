@@ -28,7 +28,8 @@ package frc.robot.commands;
  		double outputTurn = 0;
 
  		outputThrottle = Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID));
- 		outputTurn = -Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID));
+ 		outputTurn = Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID));
+		// Turn is not negative for Comp bot only
 
  		if (Math.abs(outputThrottle) <= 0.125) {
 			 Robot.driveTrainSubsystem.arcadeDrive(0.0, (outputTurn * 0.75));

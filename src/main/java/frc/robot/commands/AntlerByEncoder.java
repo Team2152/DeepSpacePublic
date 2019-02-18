@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AntlerDumb extends Command {
+public class AntlerByEncoder extends Command {
   double speed;
   double encoderTicks;
   boolean moveBackwards;
-  public AntlerDumb(double speed, double encoderTicks) {
+  public AntlerByEncoder(double speed, double encoderTicks) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.antlerSubsystem);
