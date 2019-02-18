@@ -33,12 +33,13 @@ public class Hatch extends Subsystem {
   private DoubleSolenoid lockSolenoid;
   private DigitalInput stowedSwtich;
   private MotorControllerPIDSource motorControllerPIDSource;
-
+  
 public Hatch(){
   
   left = new WPI_TalonSRX(RobotMap.HATCH_CANID);
     left.setNeutralMode(NeutralMode.Brake);
     left.setSafetyEnabled(true);
+    
     left.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
   lockSolenoid  = new DoubleSolenoid(2, 3);
@@ -49,6 +50,8 @@ public Hatch(){
 
   stowedSwtich = new DigitalInput(RobotMap.HATCH_SWITCH);
 
+  resetEncoder();
+
 
 }
 
@@ -58,6 +61,11 @@ public  void hatchSpeed(double speed) {
 
 public boolean isHatchStowed(){
   return stowedSwtich.get();
+}
+
+
+public int returnEncoderValue(){
+  return left.getSelectedSensorPosition();
 }
 
 public void setRampRate(){

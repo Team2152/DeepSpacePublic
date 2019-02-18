@@ -38,8 +38,8 @@ public class RobotMap {
   public static final int HATCH_CANID                = 5;
   public static final int HATCH_SWITCH               = 0;               
   //-----StageOneArm-----
-  public static final int STAGE_ONE_CANID_R          = 6;//6
-  public static final int STAGE_ONE_CANID_L          = 7;//7
+  public static final int STAGE_ONE_CANID_R          = 6;
+  public static final int STAGE_ONE_CANID_L          = 7;
   public static final int STAGE_ONE_SWTICH           = 1;
   
   //-----StageTwoArm-----
@@ -47,7 +47,7 @@ public class RobotMap {
   public static final int STAGE_TWO_SWITCH           = 2;
 
   //-----Antlers-----
-  public static final int ANTLER_CANID_RIGHT         = 12;//12 on comp
-  public static final int ANTLER_CANID_LEFT          = 13;//13 on comp
+  public static final int ANTLER_CANID_RIGHT         = 12;
+  public static final int ANTLER_CANID_LEFT          = 13;
   public static final int ANTLER_SWITCH              = 3;
 }

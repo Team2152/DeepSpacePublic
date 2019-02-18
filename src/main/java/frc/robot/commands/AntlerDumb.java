@@ -7,53 +7,46 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.utilities.PIDConstants;
 
-public class AntlerToPostion extends Command implements PIDOutput {
- 
-  PIDController antlerPostion;
-  double distanceOutput;
-  double setPoint;
- 
-  public AntlerToPostion(double setPoint) {
+public class AntlerDumb extends Command {
+  double speed;
+  double encoderTicks;
+  boolean moveBackwards;
+  public AntlerDumb(double speed, double encoderTicks) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.antlerSubsystem);
-    this.setPoint = setPoint;
+    this.speed = speed;
+    this.encoderTicks = encoderTicks;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.antlerSubsystem.setRampRate();
-    antlerPostion = new PIDController(PIDConstants.A_ENCODER_kP, PIDConstants.A_ENCODER_kI, PIDConstants.A_ENCODER_kD, Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
-    antlerPostion.disable();
-    antlerPostion.setAbsoluteTolerance(PIDConstants.A_DISTANCE_TOLARANCE);
-    antlerPostion.setContinuous(false);
-    antlerPostion.setOutputRange(PIDConstants.A_MAX_RETURN_SPEED, PIDConstants.A_MAX_FORWARD_SPEED);
-    antlerPostion.setInputRange(PIDConstants.A_MININUM_INPUT_RANGE, PIDConstants.A_MAXIMUM_INPUT_RANGE);
-    antlerPostion.setSetpoint(setPoint);
-    antlerPostion.enable();
-    Robot.antlerSubsystem.antlerEncoderReset();
-
+if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
+  moveBackwards = true;
+}
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
- 
-
-   
+    if(moveBackwards == false){
+    Robot.antlerSubsystem.AntlerSpeed(-speed);
+    }else{
+      Robot.antlerSubsystem.AntlerSpeed(speed);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(antlerPostion.onTarget()){
+    if((moveBackwards == true && Robot.antlerSubsystem.getEncoderValue() <= encoderTicks) || 
+    (moveBackwards == false && Robot.antlerSubsystem.getEncoderValue() >= encoderTicks)){
       return true;
     }else{
       return false;
@@ -63,20 +56,15 @@ public class AntlerToPostion extends Command implements PIDOutput {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    antlerPostion.disable();
     Robot.antlerSubsystem.AntlerSpeed(0);
+   
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    antlerPostion.disable();
     Robot.antlerSubsystem.AntlerSpeed(0);
-  }
-
-  @Override
-  public void pidWrite(double output){
-    Robot.antlerSubsystem.AntlerSpeed(-antlerPostion.get());
+  
   }
 }

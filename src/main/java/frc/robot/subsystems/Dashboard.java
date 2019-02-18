@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
 import frc.robot.utilities.PIDConstants;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -20,13 +21,15 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
  */
 public class Dashboard extends Subsystem {
   
-  private ShuffleboardTab testTab = Shuffleboard.getTab("squishCat"); //Trevor named it.
+  public ShuffleboardTab testTab = Shuffleboard.getTab("squishCat"); //Trevor named it.
 
   //-----PID ARRAYS-----
   private double[] s1_PID   = new double[3];
   private double[] s2_PID   = new double[3];
   private double[] ant_PID  = new double[3];
   private double[] hat_PID  = new double[3];
+  
+  public NetworkTableEntry encoderGraph = testTab.add("Encoder Value",0).withWidget(BuiltInWidgets.kGraph).getEntry();
   
   //-----MotorGains-----
   private NetworkTableEntry motorGains = testTab.add("Motor Gains", 1).withWidget(BuiltInWidgets.kTextView).getEntry();

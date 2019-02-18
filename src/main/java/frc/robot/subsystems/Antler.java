@@ -44,7 +44,7 @@ public class Antler extends Subsystem {
     zeroSwitch = new DigitalInput(RobotMap.ANTLER_SWITCH);
     MotorControllerPIDSource = new MotorControllerPIDSource(left, leftEncoder);
     
-
+    antlerEncoderReset();
 
   }
   public void AntlerSpeed(double speed){
@@ -56,7 +56,7 @@ public class Antler extends Subsystem {
   }
 
   public double getEncoderValue(){
-   return leftEncoder.getPosition();
+   return Math.abs(leftEncoder.getPosition());
   }
   
  public void antlerEncoderReset(){
@@ -67,7 +67,9 @@ public class Antler extends Subsystem {
   return zeroSwitch.get();
  }
 
-
+public boolean getZeroSwitch(){
+  return zeroSwitch.get();
+}
 
   public MotorControllerPIDSource getMotorControllerPIDSource(){
     return MotorControllerPIDSource;
