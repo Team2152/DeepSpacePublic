@@ -49,9 +49,9 @@ public class Antler extends Subsystem {
     left.set(speed);
   }
 
-  public void setRampRate(){
-    left.setRampRate(PIDConstants.A_SECOUNDS_TO_FULL);
-  }
+  // public void setRampRate(){
+  //   left.setRampRate(PIDConstants.A_SECOUNDS_TO_FULL);
+  // }
 
   public double getEncoderValue(){
    return leftEncoder.getPosition();

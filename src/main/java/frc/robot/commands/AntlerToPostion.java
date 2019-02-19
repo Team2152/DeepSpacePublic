@@ -28,7 +28,7 @@ public class AntlerToPostion extends Command implements PIDOutput {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.antlerSubsystem.setRampRate();
+   // Robot.antlerSubsystem.setRampRate();
 
     if(DriverStation.getInstance().isTest() == true){
       antlerPostion = new PIDController(Robot.spaceDash.getAntlerPID(0), Robot.spaceDash.getAntlerPID(1), Robot.spaceDash.getAntlerPID(2), Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
