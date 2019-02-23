@@ -10,49 +10,38 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AntlerMove extends Command {
-  double speed;
-  public AntlerMove(double speed) {
+public class HatchLockSolenoidToggle extends Command {
+  public HatchLockSolenoidToggle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.antlerSubsystem);
-    this.speed = speed;
+    requires(Robot.hatchSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-  
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
-        Robot.antlerSubsystem.AntlerSpeed(-speed);
-    }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
-      Robot.antlerSubsystem.AntlerSpeed(speed);
-  }else{
-    Robot.antlerSubsystem.AntlerSpeed(0);
-  }
+    Robot.hatchSubsystem.lockSolenoidToggle();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.antlerSubsystem.AntlerSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.antlerSubsystem.AntlerSpeed(0);
   }
 }

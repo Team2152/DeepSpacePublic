@@ -29,9 +29,9 @@ public class LiftMove extends Command {
   @Override
   protected void execute() {
     if(Robot.m_oi.operatorXbox.getRawAxis(2) > .1){
-      Robot.stageOneArmSubsystem.stageOneSpeed(-speed*Robot.m_oi.operatorXbox.getRawAxis(2));
+      Robot.stageOneArmSubsystem.stageOneSpeed(speed);
     }else if(Robot.m_oi.operatorXbox.getRawAxis(3) > .1){
-      Robot.stageOneArmSubsystem.stageOneSpeed(speed*Robot.m_oi.operatorXbox.getRawAxis(3));
+      Robot.stageOneArmSubsystem.stageOneSpeed(-speed);
     }else{
       Robot.stageOneArmSubsystem.stageOneSpeed(0);
     }

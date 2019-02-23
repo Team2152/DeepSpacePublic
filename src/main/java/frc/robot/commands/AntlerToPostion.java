@@ -28,20 +28,16 @@ public class AntlerToPostion extends Command implements PIDOutput {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-   // Robot.antlerSubsystem.setRampRate();
-
-    if(DriverStation.getInstance().isTest() == true){
-      antlerPostion = new PIDController(Robot.spaceDash.getAntlerPID(0), Robot.spaceDash.getAntlerPID(1), Robot.spaceDash.getAntlerPID(2), Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
-    } else {
-      antlerPostion = new PIDController(PIDConstants.A_ENCODER_kP, PIDConstants.A_ENCODER_kI, PIDConstants.A_ENCODER_kD, Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
-    }
-    
+    Robot.antlerSubsystem.setRampRate();
+    antlerPostion = new PIDController(PIDConstants.A_ENCODER_kP, PIDConstants.A_ENCODER_kI, PIDConstants.A_ENCODER_kD, Robot.antlerSubsystem.getMotorControllerPIDSource(), this);
     antlerPostion.disable();
     antlerPostion.setAbsoluteTolerance(PIDConstants.A_DISTANCE_TOLARANCE);
     antlerPostion.setContinuous(false);
     antlerPostion.setOutputRange(PIDConstants.A_MAX_RETURN_SPEED, PIDConstants.A_MAX_FORWARD_SPEED);
     antlerPostion.setInputRange(PIDConstants.A_MININUM_INPUT_RANGE, PIDConstants.A_MAXIMUM_INPUT_RANGE);
+    antlerPostion.setSetpoint(setPoint);
     antlerPostion.enable();
+    Robot.antlerSubsystem.antlerEncoderReset();
 
   }
 
@@ -49,9 +45,9 @@ public class AntlerToPostion extends Command implements PIDOutput {
   @Override
   protected void execute() {
 
-    // add reset logic 
+ 
 
-    Robot.antlerSubsystem.AntlerSpeed(antlerPostion.get());
+   
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -81,6 +77,6 @@ public class AntlerToPostion extends Command implements PIDOutput {
 
   @Override
   public void pidWrite(double output){
-    
+    Robot.antlerSubsystem.AntlerSpeed(-antlerPostion.get());
   }
 }

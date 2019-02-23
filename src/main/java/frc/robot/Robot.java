@@ -12,7 +12,7 @@ import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.StageOneArm;
-import frc.robot.subsystems.StageTwoArm;
+//import frc.robot.subsystems.StageTwoArm;
 import frc.robot.utilities.Gain;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
 
   public static StageOneArm stageOneArmSubsystem = new StageOneArm();
 
-  public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
+//  public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
 
   public static Antler antlerSubsystem = new Antler();
   
@@ -92,6 +92,9 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
+    SmartDashboard.putNumber("Antler", Robot.antlerSubsystem.getEncoderValue());
+    SmartDashboard.putNumber("Hey whats up ARM ENCODER", Robot.stageOneArmSubsystem.getEncoderValue());
   }
 
   /**
@@ -147,6 +150,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
+    
+    SmartDashboard.putNumber("ANTLER ENCODER", Robot.antlerSubsystem.getEncoderValue());
   }
 
   /**

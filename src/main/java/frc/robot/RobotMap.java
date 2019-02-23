@@ -26,7 +26,8 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  //-----DriveTrain-----
+
+//-----DriveTrain-----
   public static final int DRIVETRAIN_CANID_RIGHT1    = 1;
   public static final int DRIVETRAIN_CANID_RIGHT2    = 2;
 
@@ -42,13 +43,11 @@ public class RobotMap {
   public static final int STAGE_ONE_SWTICH           = 1;
   
   //-----StageTwoArm-----
-  public static final int STAGE_TWO_PIDGEON          = 9;
-  public static final int STAGE_TWO_CANID_R          = 10;
-  public static final int STAGE_TWO_CANID_L          = 11;
+  public static final int STAGE_TWO_CANID_R          = 8;
   public static final int STAGE_TWO_SWITCH           = 2;
 
   //-----Antlers-----
-  public static final int ANTLER_CANID_LEFT          = 12;
-  public static final int ANTLER_CANID_RIGHT         = 13;
+  public static final int ANTLER_CANID_RIGHT         = 12;
+  public static final int ANTLER_CANID_LEFT          = 13;
   public static final int ANTLER_SWITCH              = 3;
 }

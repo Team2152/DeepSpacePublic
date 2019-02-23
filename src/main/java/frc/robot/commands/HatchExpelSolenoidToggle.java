@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HatchSolenoidToggle extends Command {
-  public HatchSolenoidToggle() {
+public class HatchExpelSolenoidToggle extends Command {
+  public HatchExpelSolenoidToggle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

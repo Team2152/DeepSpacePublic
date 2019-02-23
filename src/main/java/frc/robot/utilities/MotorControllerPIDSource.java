@@ -27,6 +27,7 @@ public class MotorControllerPIDSource implements PIDSource {
      CANEncoder canEncoder;
      Encoder encoder;
      int isInternalEncoder = 1;
+     private PIDSourceType pidSourceDistance = PIDSourceType.kDisplacement;
     //External Encoder
     public MotorControllerPIDSource(CANSparkMax sparkMax, Encoder encoder) {
         this.sparkMax = sparkMax;
@@ -45,8 +46,6 @@ public class MotorControllerPIDSource implements PIDSource {
         talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
         isInternalEncoder = 3;
     }
-
-    private PIDSourceType pidSourceDistance = PIDSourceType.kDisplacement;
 
     @Override
     public void setPIDSourceType(PIDSourceType pidSource) {
@@ -68,6 +67,6 @@ public class MotorControllerPIDSource implements PIDSource {
        }else{
            return talon.getSelectedSensorPosition();
        }
-        
-    }
+    } 
 }
+

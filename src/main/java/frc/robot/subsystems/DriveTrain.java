@@ -47,7 +47,7 @@ public class DriveTrain extends Subsystem {
 
     left2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       left2.setIdleMode(CANSparkMax.IdleMode.kBrake);
-			left2.follow(left1, true);
+			left2.follow(left1, false);
 		
 
 

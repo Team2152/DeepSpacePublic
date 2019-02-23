@@ -7,46 +7,59 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AntlerMove extends Command {
+public class AntlerByEncoder extends Command {
   double speed;
-  public AntlerMove(double speed) {
+  double encoderTicks;
+  boolean moveBackwards;
+  public AntlerByEncoder(double speed, double encoderTicks) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.antlerSubsystem);
-    this.speed = speed;
+    this.speed = Math.abs(speed);
+    this.encoderTicks = encoderTicks;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-  
+if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
+  moveBackwards = true;
+}else {
+  moveBackwards = false;
+}
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
-        Robot.antlerSubsystem.AntlerSpeed(-speed);
-    }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
+    if(moveBackwards == false){
+    Robot.antlerSubsystem.AntlerSpeed(-speed);
+    }else{
       Robot.antlerSubsystem.AntlerSpeed(speed);
-  }else{
-    Robot.antlerSubsystem.AntlerSpeed(0);
-  }
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if((moveBackwards == true && Robot.antlerSubsystem.getEncoderValue() <= encoderTicks) || 
+    (moveBackwards == false && Robot.antlerSubsystem.getEncoderValue() >= encoderTicks)){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.antlerSubsystem.AntlerSpeed(0);
+   
   }
 
   // Called when another command which requires one or more of the same
@@ -54,5 +67,6 @@ public class AntlerMove extends Command {
   @Override
   protected void interrupted() {
     Robot.antlerSubsystem.AntlerSpeed(0);
+  
   }
 }

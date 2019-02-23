@@ -8,6 +8,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class HatchMove extends Command {
@@ -23,14 +24,16 @@ public class HatchMove extends Command {
   
   @Override
   protected void initialize() {
+    
   }
 
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(2) > 0.1){
+    
+    if(Robot.m_oi.driverXbox.getRawButton(5)){
       Robot.hatchSubsystem.hatchSpeed(-speed);
     }
-    else  if(Robot.m_oi.driverXbox.getRawAxis(3) > 0.1){
+    else  if(Robot.m_oi.driverXbox.getRawButton(6)){
       Robot.hatchSubsystem.hatchSpeed(speed);
     }else {
       Robot.hatchSubsystem.hatchSpeed(0);
