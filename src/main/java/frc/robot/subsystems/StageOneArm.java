@@ -86,7 +86,9 @@ public double getEncoderValue(){
   return leftEncoder.getPosition();
 }
 
-
+public void resetEncoder(){
+  leftEncoder.setPosition(0);
+}
 
 
 // public boolean isArmStowed(){

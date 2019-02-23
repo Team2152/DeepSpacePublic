@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
     Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
-    SmartDashboard.putNumber("Hey whats up NEO", Robot.antlerSubsystem.getEncoderValue());
+    SmartDashboard.putNumber("Antler", Robot.antlerSubsystem.getEncoderValue());
     SmartDashboard.putNumber("Hey whats up ARM ENCODER", Robot.stageOneArmSubsystem.getEncoderValue());
   }
 
@@ -151,8 +151,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
-    SmartDashboard.putNumber("Hey whats up guys", Robot.hatchSubsystem.returnEncoderValue());
-    SmartDashboard.putNumber("Hey Neo", Robot.antlerSubsystem.getEncoderValue());
+    
+    SmartDashboard.putNumber("ANTLER ENCODER", Robot.antlerSubsystem.getEncoderValue());
   }
 
   /**

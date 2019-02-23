@@ -104,6 +104,14 @@ public void expelSolenoidToggle(){
   }
 }
 
+public void lockSolenoidToggle(){
+  if(lockSolenoid.get() == DoubleSolenoid.Value.kForward){
+    lockSolenoidOpen();
+  }else{
+    lockSolenoidClose();
+  }
+}
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

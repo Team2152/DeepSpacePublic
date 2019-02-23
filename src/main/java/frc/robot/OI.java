@@ -14,11 +14,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
-import frc.robot.commands.HatchSolenoidToggle;
+import frc.robot.commands.HatchExpelSolenoidToggle;
 import frc.robot.commands.CompressorToggle;
 import frc.robot.commands.HatchToPostion;
 import frc.robot.commands.AntlerToPostion;
 import frc.robot.commands.ClimbDumb;
+import frc.robot.commands.HatchLockSolenoidToggle;
+import frc.robot.commands.HatchTo90;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -194,9 +196,10 @@ public class OI {
 	}
 
 	public void setupDriverXboxButtons() {
-		dButtonStart.whenReleased(new HatchSolenoidToggle());
-	//	dButtonA.whenReleased(new HatchToPostion(2928));
-	dButtonA.whenPressed(new ClimbDumb());
+		dButtonStart.whenReleased(new HatchExpelSolenoidToggle());
+		dButtonB.whenReleased(new HatchTo90());
+		dButtonA.whenPressed(new ClimbDumb());
+		dButtonBack.whenReleased(new HatchLockSolenoidToggle());
 	
   }
 

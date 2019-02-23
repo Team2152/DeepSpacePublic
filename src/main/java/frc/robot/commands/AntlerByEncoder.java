@@ -20,7 +20,7 @@ public class AntlerByEncoder extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.antlerSubsystem);
-    this.speed = speed;
+    this.speed = Math.abs(speed);
     this.encoderTicks = encoderTicks;
   }
 
@@ -29,6 +29,8 @@ public class AntlerByEncoder extends Command {
   protected void initialize() {
 if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
   moveBackwards = true;
+}else {
+  moveBackwards = false;
 }
   }
 
