@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.utilities.PIDConstants;
 import frc.robot.utilities.MotorControllerPIDSource;
-import frc.robot.commands.LiftMove;;
+import frc.robot.commands.ArmMove;;
 /**
  * Add your docs here.
  */
@@ -108,6 +108,6 @@ public void resetEncoder(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new LiftMove(.50));
+    setDefaultCommand(new ArmMove(.50));
   }
 }

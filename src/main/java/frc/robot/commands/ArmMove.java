@@ -10,10 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftMove extends Command {
+public class ArmMove extends Command {
 
   double speed;
-  public LiftMove(double speed) {
+  public ArmMove(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.stageOneArmSubsystem);
