@@ -6,56 +6,42 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.Joystick;
+
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class HatchMove extends Command {
- double speed = 0;
- Joystick driverJoystick;
- 
-  public HatchMove(Double speed) {
+public class resetHatchEncoder extends Command {
+  public resetHatchEncoder() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.hatchSubsystem);
-    this.speed = speed;
-
   }
 
-  
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
   }
 
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.operatorXbox.getRawButton(5)){
-      Robot.hatchSubsystem.hatchSpeed(-speed);
-    }
-    else  if(Robot.m_oi.operatorXbox.getRawButton(6)){
-      if(Robot.hatchSubsystem.returnEncoderValue() <= 2928){
-      Robot.hatchSubsystem.hatchSpeed(.35);
-    }else {
-      Robot.hatchSubsystem.hatchSpeed(speed);
-    }
-  }else {
-      Robot.hatchSubsystem.hatchSpeed(0);
-    }
+    Robot.hatchSubsystem.resetEncoder();
   }
 
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
+  // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
-  
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hatchSubsystem.hatchSpeed(0);
-
   }
 }

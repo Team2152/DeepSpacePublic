@@ -38,7 +38,7 @@ public Hatch(){
   
   left = new WPI_TalonSRX(RobotMap.HATCH_CANID);
     left.setNeutralMode(NeutralMode.Brake);
-    left.setSafetyEnabled(true);
+    left.setSafetyEnabled(false);
     
     left.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
@@ -116,6 +116,6 @@ public void lockSolenoidToggle(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new HatchMove(.25));
+    setDefaultCommand(new HatchMove(.45));
   }
 }

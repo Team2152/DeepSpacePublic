@@ -20,6 +20,7 @@ import frc.robot.commands.HatchToPostion;
 import frc.robot.commands.ClimbDumb;
 import frc.robot.commands.HatchLockSolenoidToggle;
 import frc.robot.commands.HatchTo90;
+import frc.robot.commands.resetHatchEncoder;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -192,6 +193,7 @@ public class OI {
 
 	public void setupOperatorButtons() {
 		oButtonBack.whenReleased(new CompressorToggle());
+		oButtonStart.whenReleased(new HatchExpelSolenoidToggle());
 	}
 
 	public void setupDriverXboxButtons() {
@@ -199,6 +201,7 @@ public class OI {
 		dButtonB.whenReleased(new HatchTo90());
 		dButtonA.whenPressed(new ClimbDumb());
 		dButtonBack.whenReleased(new HatchLockSolenoidToggle());
+		dButtonY.whenReleased(new resetHatchEncoder());
 	
   }
 

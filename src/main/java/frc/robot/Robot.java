@@ -16,6 +16,7 @@ import frc.robot.subsystems.StageOneArm;
 import frc.robot.utilities.Gain;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -151,7 +152,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
-    
+    System.out.println(hatchSubsystem.returnEncoderValue());
     SmartDashboard.putNumber("ANTLER ENCODER", Robot.antlerSubsystem.getEncoderValue());
   }
 

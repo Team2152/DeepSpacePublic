@@ -35,7 +35,8 @@ public class HatchTo90 extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addSequential(new HatchToPostion(2928));
+    addSequential(new HatchToPostion(2926));
     addSequential(new HatchLockSolenoidToggle());
+    //addSequential(new HatchToPostion(2928));
   }
 }

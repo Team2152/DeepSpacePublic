@@ -47,10 +47,10 @@ public static final double A_MAXIMUM_INPUT_RANGE =  0;
 //-----Hatch-----
 public static final double H_MAX_FORWARD_SPEED   = .25;
 public static final double H_MAX_RETURN_SPEED    = -.3;
-public static final double H_SECOUNDS_TO_FULL    = .25;
-public static final double H_ENCODER_kP      =  .8;//.00049;
-public static final double H_ENCODER_kI      = .65;
-public static final double H_ENCODER_kD      = 2.45;
+public static final double H_SECOUNDS_TO_FULL    = .75;
+public static final double H_ENCODER_kP      =  .75;//.00049;
+public static final double H_ENCODER_kI      = .55;
+public static final double H_ENCODER_kD      = 1.8;
 public static final double H_DISTANCE_TOLARANCE  = 10;
 public static final double H_MININUM_INPUT_RANGE = 0;
 public static final double H_MAXIMUM_INPUT_RANGE = 5800;
