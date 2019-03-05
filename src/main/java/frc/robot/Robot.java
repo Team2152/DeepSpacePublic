@@ -13,10 +13,12 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.StageOneArm;
 import frc.robot.subsystems.Cargo;
-//import frc.robot.subsystems.StageTwoArm;
 import frc.robot.utilities.Gain;
+import frc.robot.Auto.AutoStraight;
+import frc.robot.Auto.StraightToCargoShip;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
+import frc.robot.Auto.StraightToCargoShip;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,6 +26,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 
 /**
@@ -46,11 +49,7 @@ public class Robot extends TimedRobot {
   public static Hatch hatchSubsystem = new Hatch();
 
   public static StageOneArm stageOneArmSubsystem = new StageOneArm();
-
   public static Cargo cargoSubsystem = new Cargo();
-
-//  public static StageTwoArm stageTwoArmSubsystem = new StageTwoArm();
-
   public static Antler antlerSubsystem = new Antler();
   
   public static AirCompressor compressorSubsystem = new AirCompressor();
@@ -70,6 +69,11 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData("Auto mode", m_chooser);
     compressorSubsystem.stopCompressor(); // Please stop the compressor.
     Shuffleboard.stopRecording(); // Please stop the recordings.
+    SmartDashboard.putData("Auto Mode", m_chooser);
+    m_chooser.addDefault("No Auto", null);
+    m_chooser.addObject("Drive Straight", new AutoStraight());
+    m_chooser.addObject("StraightToCargoShip", new StraightToCargoShip());
+   
   }
 
   /**
@@ -96,9 +100,6 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-    Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
-    SmartDashboard.putNumber("Antler", Robot.antlerSubsystem.getEncoderValue());
-    SmartDashboard.putNumber("Hey whats up ARM ENCODER", Robot.stageOneArmSubsystem.getEncoderValue());
   }
 
   /**
@@ -116,6 +117,14 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
 
+
+    // m_chooser.addDefault("No Auto", null);
+    // m_chooser.addObject("Drive Straight", new AutoStraight());
+    // m_chooser.addObject("Straight To CargoShip", new StraightToCargoShip());
+
+
+    m_autonomousCommand = m_chooser.getSelected();
+
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -127,6 +136,10 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
+
+
+
+
   }
 
   /**
@@ -135,6 +148,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    
   }
 
   @Override
@@ -154,9 +168,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    Robot.spaceDash.encoderGraph.setNumber(Robot.hatchSubsystem.returnEncoderValue());
-    System.out.println(hatchSubsystem.returnEncoderValue());
-    SmartDashboard.putNumber("ANTLER ENCODER", Robot.antlerSubsystem.getEncoderValue());
   }
 
   /**
