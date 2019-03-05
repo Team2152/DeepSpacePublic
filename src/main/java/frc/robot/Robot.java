@@ -12,6 +12,7 @@ import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.StageOneArm;
+import frc.robot.subsystems.Cargo;
 import frc.robot.utilities.Gain;
 import frc.robot.Auto.AutoStraight;
 import frc.robot.Auto.StraightToCargoShip;
@@ -48,7 +49,7 @@ public class Robot extends TimedRobot {
   public static Hatch hatchSubsystem = new Hatch();
 
   public static StageOneArm stageOneArmSubsystem = new StageOneArm();
-
+  public static Cargo cargoSubsystem = new Cargo();
   public static Antler antlerSubsystem = new Antler();
   
   public static AirCompressor compressorSubsystem = new AirCompressor();
