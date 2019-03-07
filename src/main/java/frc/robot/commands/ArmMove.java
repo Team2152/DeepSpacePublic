@@ -29,9 +29,9 @@ public class ArmMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_TRIGGER_L) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
+    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) <  -.1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
       Robot.stageOneArmSubsystem.stageOneSpeed(speed);
-    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_TRIGGER_R) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
+    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
       Robot.stageOneArmSubsystem.stageOneSpeed(-speed);
     }else{
       Robot.stageOneArmSubsystem.stageOneSpeed(0);

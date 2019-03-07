@@ -15,16 +15,15 @@ public class ControllerMap {
 	public static final int DRIVETRAIN_TURN_ID     = 4;
 
 	//-----Hatch-----
-	public static final int HATCH_BUMP_L = 5;
-	public static final int HATCH_BUMP_R = 6;
+	public static final int HATCH_TRIGGER_L = 5;
+	public static final int HATCH_TRIGGER_R = 6;
 
 	//-----Cargo-----
 	public static final int CARGO_TRIGGER_R = 2;
 	public static final int CARGO_TRIGGER_L = 3;
 
 	//-----ARMS-----
-	public static final int ARM_TRIGGER_R = 2;
-	public static final int ARM_TRIGGER_L = 3;
+	public static final int ARM_JOYSTICK_R = 5;
 	public static final int ARM_BUMP_R    = 5;
 	public static final int ARM_BUMP_L    = 6;
 

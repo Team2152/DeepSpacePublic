@@ -30,14 +30,14 @@ public class CargoMove extends Command {
   @Override
   protected void execute() {
     if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1){
-      Robot.cargoSubsystem.setSpeed(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) * 5);
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kRightRumble, 1);
+      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) * 5);
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
     }else if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1){
-      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R));
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kRightRumble, 1);
+      Robot.cargoSubsystem.setSpeed(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R));
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
     }else{
       Robot.cargoSubsystem.setSpeed(0);
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kRightRumble, 0);
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 0);
     }
   }
 
