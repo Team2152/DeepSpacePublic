@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class AntlerMove extends Command {
@@ -28,9 +29,9 @@ public class AntlerMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
+    if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_Y)){
         Robot.antlerSubsystem.AntlerSpeed(-speed);
-    }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
+    }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_B)){
       Robot.antlerSubsystem.AntlerSpeed(speed);
   }else{
     Robot.antlerSubsystem.AntlerSpeed(0);

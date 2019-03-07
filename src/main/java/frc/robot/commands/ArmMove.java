@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class ArmMove extends Command {
@@ -28,9 +29,9 @@ public class ArmMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.operatorXbox.getRawAxis(2) > .1){
+    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_TRIGGER_L) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
       Robot.stageOneArmSubsystem.stageOneSpeed(speed);
-    }else if(Robot.m_oi.operatorXbox.getRawAxis(3) > .1){
+    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_TRIGGER_R) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
       Robot.stageOneArmSubsystem.stageOneSpeed(-speed);
     }else{
       Robot.stageOneArmSubsystem.stageOneSpeed(0);

@@ -35,10 +35,10 @@ public class StraightToCargoShip extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm
-    addSequential(new AutoStraightByTime(.75, 5));
-    addSequential(new HatchByTime(-.3, .25));
-    addSequential(new AutoExpelSolenoidToggle(true));
-    addSequential(new AutoExpelSolenoidToggle(false));
+    addSequential(new AutoStraightByTime(.5 ,3.2));
+ //   addSequential(new HatchByTime(-.3, .25));
+   // addSequential(new AutoExpelSolenoidToggle(true));
+    //addSequential(new AutoExpelSolenoidToggle(false));
 
   }
 }

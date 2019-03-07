@@ -7,7 +7,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class CargoMove extends Command {
@@ -27,12 +29,15 @@ public class CargoMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(2) > .1){
-      Robot.cargoSubsystem.setSpeed(speed);
-    }else if(Robot.m_oi.driverXbox.getRawAxis(3) > .1){
-      Robot.cargoSubsystem.setSpeed(-speed);
+    if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1){
+      Robot.cargoSubsystem.setSpeed(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) * 5);
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kRightRumble, 1);
+    }else if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1){
+      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R));
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kRightRumble, 1);
     }else{
       Robot.cargoSubsystem.setSpeed(0);
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kRightRumble, 0);
     }
   }
 
@@ -51,6 +56,5 @@ public class CargoMove extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.cargoSubsystem.setSpeed(0);
-  }
+    }
 }

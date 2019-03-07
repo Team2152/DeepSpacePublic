@@ -198,10 +198,9 @@ public class OI {
 
 	public void setupDriverXboxButtons() {
 		dButtonStart.whenReleased(new HatchExpelSolenoidToggle());
-		dButtonB.whenReleased(new HatchTo90());
-		dButtonA.whenPressed(new ClimbDumb());
+		//dButtonA.whenPressed(new ClimbDumb());
 		dButtonBack.whenReleased(new HatchLockSolenoidToggle());
-		dButtonY.whenReleased(new resetHatchEncoder());
+		
 	
   }
 
