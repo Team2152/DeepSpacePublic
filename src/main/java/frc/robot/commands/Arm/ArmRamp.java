@@ -5,53 +5,55 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Arm;
 
-
-
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import frc.robot.ControllerMap;
 
-public class Wait extends Command {
-  
-
-  Timer timer;
-  double time;
-
-  public Wait(double time) {
+public class ArmRamp extends Command {
+  double speed;
+  public ArmRamp(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-  timer = new Timer();
-  this.time = time;
-  
+    requires(Robot.armSubsystem);
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    timer.reset();
-    timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) <  -.1){// || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
+      if(Robot.armSubsystem.getEncoderValue() >= 20){
+        Robot.armSubsystem.setSpeed(speed*.75);
+      }else{
+        Robot.armSubsystem.setSpeed(speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R));
+      }
+    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) > .1){// || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
+      if(Robot.armSubsystem.getEncoderValue() <= 8){
+        Robot.armSubsystem.setSpeed(-speed*.75);
+      }else{
+        Robot.armSubsystem.setSpeed(-speed* Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R));
+      }
+    }else{
+      Robot.armSubsystem.setSpeed(0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(timer.get() >= time){
-      return true;
-    }else{
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    timer.stop();
   }
 
   // Called when another command which requires one or more of the same

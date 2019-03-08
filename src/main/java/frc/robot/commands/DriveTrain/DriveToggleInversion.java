@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
@@ -13,21 +13,21 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class CompressorToggle extends InstantCommand {
+public class DriveToggleInversion extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public CompressorToggle() {
+  public DriveToggleInversion() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.compressorSubsystem);
+    requires(Robot.driveTrainSubsystem);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.compressorSubsystem.toggleCompressor();
+  Robot.driveTrainSubsystem.toggleInversion();
   }
 
 }

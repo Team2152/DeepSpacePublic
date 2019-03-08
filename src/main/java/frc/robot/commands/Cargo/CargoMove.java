@@ -5,15 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Cargo;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
-public class HatchExpelSolenoidToggle extends Command {
-  public HatchExpelSolenoidToggle() {
+public class CargoMove extends Command {
+  private double speed;
+  public CargoMove(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.cargoSubsystem);
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -24,13 +29,22 @@ public class HatchExpelSolenoidToggle extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchSubsystem.expelSolenoidToggle();
+    if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1){
+      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L));
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
+    }else if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1){
+      Robot.cargoSubsystem.setSpeed(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) *.15);
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
+    }else{
+      Robot.cargoSubsystem.setSpeed(0);
+      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -42,5 +56,5 @@ public class HatchExpelSolenoidToggle extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-  }
+    }
 }

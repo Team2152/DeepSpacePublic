@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Antler;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmByEncoder extends Command {
+public class AntlerByEncoder extends Command {
   double speed;
   double encoderTicks;
   boolean moveBackwards;
-  public ArmByEncoder(double speed, double encoderTicks) {
+  public AntlerByEncoder(double speed, double encoderTicks) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.stageOneArmSubsystem);
+    requires(Robot.antlerSubsystem);
     this.speed = Math.abs(speed);
     this.encoderTicks = encoderTicks;
   }
@@ -27,9 +27,9 @@ public class ArmByEncoder extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-if(Robot.stageOneArmSubsystem.getEncoderValue() - encoderTicks >= 0){
+if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
   moveBackwards = true;
-} else {
+}else {
   moveBackwards = false;
 }
   }
@@ -38,17 +38,17 @@ if(Robot.stageOneArmSubsystem.getEncoderValue() - encoderTicks >= 0){
   @Override
   protected void execute() {
     if(moveBackwards == false){
-    Robot.stageOneArmSubsystem.stageOneSpeed(speed);
+    Robot.antlerSubsystem.AntlerSpeed(-speed);
     }else{
-      Robot.stageOneArmSubsystem.stageOneSpeed(-speed);
+      Robot.antlerSubsystem.AntlerSpeed(speed);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if((moveBackwards == true && Robot.stageOneArmSubsystem.getEncoderValue() <= encoderTicks) || 
-    (moveBackwards == false && Robot.stageOneArmSubsystem.getEncoderValue() >= encoderTicks)){
+    if((moveBackwards == true && Robot.antlerSubsystem.getEncoderValue() <= encoderTicks) || 
+    (moveBackwards == false && Robot.antlerSubsystem.getEncoderValue() >= encoderTicks)){
       return true;
     }else{
       return false;
@@ -58,7 +58,7 @@ if(Robot.stageOneArmSubsystem.getEncoderValue() - encoderTicks >= 0){
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.stageOneArmSubsystem.stageOneSpeed(0);
+    Robot.antlerSubsystem.AntlerSpeed(0);
    
   }
 
@@ -66,7 +66,7 @@ if(Robot.stageOneArmSubsystem.getEncoderValue() - encoderTicks >= 0){
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.stageOneArmSubsystem.stageOneSpeed(0);
+    Robot.antlerSubsystem.AntlerSpeed(0);
   
   }
 }

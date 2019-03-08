@@ -5,61 +5,49 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Antler;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
-public class AntlerByEncoder extends Command {
+public class AntlerMove extends Command {
   double speed;
-  double encoderTicks;
-  boolean moveBackwards;
-  public AntlerByEncoder(double speed, double encoderTicks) {
+  public AntlerMove(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.antlerSubsystem);
-    this.speed = Math.abs(speed);
-    this.encoderTicks = encoderTicks;
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
-  moveBackwards = true;
-}else {
-  moveBackwards = false;
-}
+  
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(moveBackwards == false){
-    Robot.antlerSubsystem.AntlerSpeed(-speed);
-    }else{
+    if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_Y)){
+        Robot.antlerSubsystem.AntlerSpeed(-speed);
+    }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_B)){
       Robot.antlerSubsystem.AntlerSpeed(speed);
-    }
+  }else{
+    Robot.antlerSubsystem.AntlerSpeed(0);
+  }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if((moveBackwards == true && Robot.antlerSubsystem.getEncoderValue() <= encoderTicks) || 
-    (moveBackwards == false && Robot.antlerSubsystem.getEncoderValue() >= encoderTicks)){
-      return true;
-    }else{
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.antlerSubsystem.AntlerSpeed(0);
-   
   }
 
   // Called when another command which requires one or more of the same
@@ -67,6 +55,5 @@ if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
   @Override
   protected void interrupted() {
     Robot.antlerSubsystem.AntlerSpeed(0);
-  
   }
 }

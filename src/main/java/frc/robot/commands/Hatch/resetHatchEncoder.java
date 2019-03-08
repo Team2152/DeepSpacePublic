@@ -5,13 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Hatch;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HatchLockSolenoidToggle extends Command {
-  public HatchLockSolenoidToggle() {
+public class resetHatchEncoder extends Command {
+  public resetHatchEncoder() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.hatchSubsystem);
@@ -25,13 +25,13 @@ public class HatchLockSolenoidToggle extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchSubsystem.lockSolenoidToggle();
+    Robot.hatchSubsystem.resetEncoder();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

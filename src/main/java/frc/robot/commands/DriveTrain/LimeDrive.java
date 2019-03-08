@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.DriveTrain;
 
  import frc.robot.ControllerMap;
  import frc.robot.Robot;
@@ -26,10 +26,17 @@ package frc.robot.commands;
  	protected void execute() {
  		double outputThrottle = 0;
  		double outputTurn = 0;
+	
+		 
+		if(Robot.driveTrainSubsystem.isInverted()){
+			outputThrottle = -Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID));
+ 			outputTurn = -Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID));
 
- 		outputThrottle = Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID));
+		}else{
+		outputThrottle = Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID));
  		outputTurn = -Robot.driveTrainJoystickGain.applyGain(ControllerMap.DriveTrain_Drive_Joystick.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID));
-		// Turn is not negative for Comp bot only
+
+		}
 
  		if (Math.abs(outputThrottle) <= 0.25) {
 			 Robot.driveTrainSubsystem.arcadeDrive(0.0, (outputTurn * 0.75));

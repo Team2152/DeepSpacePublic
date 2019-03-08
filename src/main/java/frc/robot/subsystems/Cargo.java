@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.CargoMove;
+import frc.robot.commands.Cargo.CargoMove;
 import frc.robot.RobotMap;
 
 /**
@@ -41,6 +41,8 @@ public class Cargo extends Subsystem {
     topRoller.set(ControlMode.PercentOutput, speed);
   }
 
+
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

@@ -5,52 +5,67 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Hatch;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AutoExpelSolenoidToggle extends Command {
-  boolean isIn;
+public class HatchByTime extends Command {
 
-  public AutoExpelSolenoidToggle(boolean isIn) {
+  Timer timer;
+  double speed;
+  double time;
+
+  /***
+   * 
+   * @param speed
+   * @param time
+   */
+  public HatchByTime(double speed, double time) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.hatchSubsystem);
-    this.isIn = isIn;
+    timer = new Timer();
+    this.speed = speed;
+    this.time = time;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.hatchSubsystem.expelSolenoidClose();
+    timer.reset();
+    timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(isIn){
-      Robot.hatchSubsystem.expelSolenoidOpen();
-    }else{
-      Robot.hatchSubsystem.expelSolenoidClose();
-    }
+    Robot.hatchSubsystem.hatchSpeed(speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(timer.get() >= time){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
+    timer.stop();
+    Robot.hatchSubsystem.hatchSpeed(speed);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    timer.stop();
+    Robot.hatchSubsystem.hatchSpeed(speed);
   }
 }

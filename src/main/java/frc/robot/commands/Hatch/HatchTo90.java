@@ -4,27 +4,24 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-package frc.robot.commands;
+package frc.robot.commands.Hatch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.AntlerByEncoder;
-import frc.robot.commands.ArmByEncoder;
+import frc.robot.commands.Hatch.HatchToPostion;
+import frc.robot.commands.Hatch.AutoExpelSolenoidToggle;
 
-public class ClimbDumb extends CommandGroup {
+public class HatchTo90 extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public ClimbDumb() {
-    requires(Robot.antlerSubsystem);
-    requires(Robot.stageOneArmSubsystem);
-    Robot.stageOneArmSubsystem.resetEncoder();
-    Robot.antlerSubsystem.antlerEncoderReset();
+  public HatchTo90() {
+    requires(Robot.hatchSubsystem);
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
+    Robot.hatchSubsystem.resetEncoder();
 
     // To run multiple commands at the same time,
     // use addParallel()
@@ -37,11 +34,8 @@ public class ClimbDumb extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addParallel(new AntlerByEncoder(.65, 48));
-    addSequential(new ArmByEncoder(.50, 48));
-    addParallel(new AntlerByEncoder(.25, 10));
-    addSequential(new ArmByEncoder(.4, 55));
-    addSequential(new Wait(.5));
-    addSequential(new ArmByEncoder(.75, 25));
+    addSequential(new HatchToPostion(2926));
+    addSequential(new HatchLockSolenoidToggle());
+    //addSequential(new HatchToPostion(2928));
   }
 }

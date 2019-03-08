@@ -15,8 +15,8 @@ public class ControllerMap {
 	public static final int DRIVETRAIN_TURN_ID     = 4;
 
 	//-----Hatch-----
-	public static final int HATCH_TRIGGER_L = 5;
-	public static final int HATCH_TRIGGER_R = 6;
+	public static final int HATCH_TRIGGER_L = 2;
+	public static final int HATCH_TRIGGER_R = 3;
 
 	//-----Cargo-----
 	public static final int CARGO_TRIGGER_R = 2;

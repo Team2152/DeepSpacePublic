@@ -9,7 +9,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.LimeDrive;
+import frc.robot.commands.DriveTrain.LimeDrive;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -29,7 +29,9 @@ public class DriveTrain extends Subsystem {
 	private CANSparkMax left1;
   private CANSparkMax left2;
 
-  private DifferentialDrive drive;
+	private DifferentialDrive drive;
+	
+	private boolean isInverted;
 
   public DriveTrain(){
     right1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -50,7 +52,8 @@ public class DriveTrain extends Subsystem {
 			left2.follow(left1, false);
 		
 
-
+		isInverted = false;
+		
     drive = new DifferentialDrive(left1, right1);
   }
 
@@ -103,7 +106,28 @@ public class DriveTrain extends Subsystem {
 	public void setLeftSpeed(double speed) {
 		left1.set(speed);
 		
-  }
+	}
+	
+	/**
+	 * Getter method for drive inversion status
+	 * @return inversion status
+	 */
+	public boolean isInverted(){
+		return isInverted;
+	}
+
+  /**
+	 * Toggles drive inversion (true <-> false)
+	 */
+	public void toggleInversion(){
+		if(isInverted){
+		isInverted = false;
+		} else {
+			isInverted = true;
+		}
+	}
+
+	
 
   
    @Override

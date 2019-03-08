@@ -5,55 +5,69 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.AutoSequentials;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
-public class AntlerMove extends Command {
+public class AutoStraightByTime extends Command {
+
+  Timer timer;
+  double time;
   double speed;
-  public AntlerMove(double speed) {
+
+
+  /**
+   * 
+   * @param speed
+   * @param time
+   */
+  public AutoStraightByTime(double speed, double time) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.antlerSubsystem);
-    this.speed = speed;
+    requires(Robot.driveTrainSubsystem);
+    timer = new Timer();
+    this.speed = -speed;
+    this.time = time;
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-  
+    timer.reset();
+    timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_Y)){
-        Robot.antlerSubsystem.AntlerSpeed(-speed);
-    }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_B)){
-      Robot.antlerSubsystem.AntlerSpeed(speed);
-  }else{
-    Robot.antlerSubsystem.AntlerSpeed(0);
-  }
+    Robot.driveTrainSubsystem.tankDrive(speed, speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(timer.get() >= time){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.antlerSubsystem.AntlerSpeed(0);
+    timer.stop();
+    Robot.driveTrainSubsystem.tankDrive(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.antlerSubsystem.AntlerSpeed(0);
+    timer.stop();
+    Robot.driveTrainSubsystem.tankDrive(0, 0);
   }
 }

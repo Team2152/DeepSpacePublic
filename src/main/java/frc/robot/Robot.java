@@ -11,7 +11,7 @@ import frc.robot.utilities.Log;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
-import frc.robot.subsystems.StageOneArm;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Cargo;
 import frc.robot.utilities.Gain;
 import frc.robot.Auto.AutoStraight;
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
 
   public static Hatch hatchSubsystem = new Hatch();
 
-  public static StageOneArm stageOneArmSubsystem = new StageOneArm();
+  public static Arm armSubsystem = new Arm();
   public static Cargo cargoSubsystem = new Cargo();
   public static Antler antlerSubsystem = new Antler();
   
@@ -100,7 +100,8 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-  }
+    SmartDashboard.putNumber("ArmEncoder", Robot.armSubsystem.getEncoderValue());
+    }
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -160,6 +161,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    Robot.armSubsystem.resetEncoder();
   }
 
   /**

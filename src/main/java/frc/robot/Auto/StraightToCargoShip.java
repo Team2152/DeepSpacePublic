@@ -9,9 +9,9 @@ package frc.robot.Auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.AutoExpelSolenoidToggle;
-import frc.robot.commands.AutoStraightByTime;
-import frc.robot.commands.HatchByTime;
+import frc.robot.commands.Hatch.AutoExpelSolenoidToggle;
+import frc.robot.commands.AutoSequentials.AutoStraightByTime;
+import frc.robot.commands.Hatch.HatchByTime;
 
 public class StraightToCargoShip extends CommandGroup {
   /**

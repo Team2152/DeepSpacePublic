@@ -14,13 +14,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
-import frc.robot.commands.HatchExpelSolenoidToggle;
-import frc.robot.commands.CompressorToggle;
-import frc.robot.commands.HatchToPostion;
-import frc.robot.commands.ClimbDumb;
-import frc.robot.commands.HatchLockSolenoidToggle;
-import frc.robot.commands.HatchTo90;
-import frc.robot.commands.resetHatchEncoder;
+import frc.robot.commands.CommandUtils.CompressorToggle;
+import frc.robot.commands.DriveTrain.DriveToggleInversion;
+import frc.robot.commands.Hatch.AutoExpelSolenoidToggle;
+import frc.robot.commands.Hatch.ExpellHatch;
+import frc.robot.commands.AutoSequentials.ClimbDumb;
+import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -185,26 +184,34 @@ public class OI {
 
 		try {
 	  // Shared commands here
+
+			//expelSolenoid = new SharedButton(buttonX);
+
+
+
 			setupSharedCommands();
 		} catch (Exception e) {
 			Robot.m_logger.console("OI: Unable to setup shared commands: " + e.toString());
 		}
+		
 	}
 
 	public void setupOperatorButtons() {
 		oButtonBack.whenReleased(new CompressorToggle());
-		oButtonStart.whenReleased(new HatchExpelSolenoidToggle());
+		oButtonX.whenPressed(new ExpellHatch());
 	}
 
 	public void setupDriverXboxButtons() {
-		dButtonStart.whenReleased(new HatchExpelSolenoidToggle());
-		//dButtonA.whenPressed(new ClimbDumb());
-		dButtonBack.whenReleased(new HatchLockSolenoidToggle());
+		dButtonBack.whenReleased(new HatchExpelSolenoidToggle());
+		dButtonStart.whenPressed(new ClimbDumb());
+		dButtonX.whenPressed(new ExpellHatch());
+		dPOV180.whenReleased(new DriveToggleInversion());
 		
 	
   }
 
   public void setupSharedCommands() {
+
   }
   
 }

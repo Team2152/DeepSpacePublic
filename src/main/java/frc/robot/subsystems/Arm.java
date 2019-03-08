@@ -21,11 +21,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.utilities.PIDConstants;
 import frc.robot.utilities.MotorControllerPIDSource;
-import frc.robot.commands.ArmMove;;
+import frc.robot.utilities.NumericConstants;
+import frc.robot.commands.Arm.ArmMove;
+import frc.robot.commands.Arm.ArmRamp;
 /**
  * Add your docs here.
  */
-public class StageOneArm extends Subsystem {
+public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -37,24 +39,10 @@ public class StageOneArm extends Subsystem {
   private CANSparkMax left;
   private CANSparkMax right;
   private CANEncoder  leftEncoder;
-  //private MotorControllerPIDSource motorControllerPIDSource;  
- 
-  private DigitalInput stowedSwitch;
- 
+  
 
-  public StageOneArm(){
+  public Arm(){
 
-
-    // left = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_L);
-    // left.setNeutralMode(NeutralMode.Brake);
-    // left.setSafetyEnabled(false);
-
-
-    // right = new WPI_TalonSRX(RobotMap.STAGE_ONE_CANID_R);
-    // right.setNeutralMode(NeutralMode.Brake);
-    //   right.setSafetyEnabled(false);
-    //   right.follow(left);
-    //   right.setInverted(true);
 
     
     left  = new CANSparkMax(RobotMap.STAGE_ONE_CANID_L, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -66,21 +54,17 @@ public class StageOneArm extends Subsystem {
      right.setIdleMode(IdleMode.kBrake);
      right.follow(left, true);
 
-
-  //  MotorControllerPIDSource = new MotorControllerPIDSource(left, leftEncoder);
-
-   // stowedSwitch = new DigitalInput(RobotMap.STAGE_ONE_SWTICH);
-   
+     resetEncoder();
   }
  
 
-public void stageOneSpeed(double speed){
+public void setSpeed(double speed){
     left.set( speed);
   }
 
-// public void setRampRate(){
-//   left.setRampRate(PIDConstants.SO_SECOUNDS_TO_FULL);
-// }
+public void setRampRate(){
+  left.setClosedLoopRampRate(NumericConstants.ARM_SECOUNDS_TO_FULL);
+}
 
 public double getEncoderValue(){  
   return leftEncoder.getPosition();
@@ -91,23 +75,12 @@ public void resetEncoder(){
 }
 
 
-// public boolean isArmStowed(){
-//   return stowedSwitch.get();
-// }
-
-//add reset to spark in update
-
-// public MotorControllerPIDSource getMotorControllerPIDSource(){
-//   return motorControllerPIDSource;
-// }
-
-
-
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new ArmMove(.50));
+  //  setDefaultCommand(new ArmRamp(1));
   }
 }

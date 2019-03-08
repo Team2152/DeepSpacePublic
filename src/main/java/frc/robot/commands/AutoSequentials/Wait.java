@@ -5,30 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.AutoSequentials;
+
+
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
-public class HatchByTime extends Command {
+public class Wait extends Command {
+  
 
   Timer timer;
-  double speed;
   double time;
 
-  /***
-   * 
-   * @param speed
-   * @param time
-   */
-  public HatchByTime(double speed, double time) {
+  public Wait(double time) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.hatchSubsystem);
-    timer = new Timer();
-    this.speed = speed;
-    this.time = time;
+  timer = new Timer();
+  this.time = time;
+  
   }
 
   // Called just before this Command runs the first time
@@ -41,7 +36,6 @@ public class HatchByTime extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchSubsystem.hatchSpeed(speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -58,14 +52,11 @@ public class HatchByTime extends Command {
   @Override
   protected void end() {
     timer.stop();
-    Robot.hatchSubsystem.hatchSpeed(speed);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    timer.stop();
-    Robot.hatchSubsystem.hatchSpeed(speed);
   }
 }

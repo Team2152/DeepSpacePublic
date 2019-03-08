@@ -5,20 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Hatch;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
-public class ArmMove extends Command {
-
-  double speed;
-  public ArmMove(double speed) {
+public class HatchExpelSolenoidToggle extends Command {
+  public HatchExpelSolenoidToggle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.stageOneArmSubsystem);
-    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -29,31 +24,23 @@ public class ArmMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) <  -.1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
-      Robot.stageOneArmSubsystem.stageOneSpeed(speed);
-    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
-      Robot.stageOneArmSubsystem.stageOneSpeed(-speed);
-    }else{
-      Robot.stageOneArmSubsystem.stageOneSpeed(0);
-    }
+    Robot.hatchSubsystem.expelSolenoidToggle();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.stageOneArmSubsystem.stageOneSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.stageOneArmSubsystem.stageOneSpeed(0);
   }
 }

@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.HatchMove;
+import frc.robot.commands.Hatch.HatchMove;
 import frc.robot.utilities.MotorControllerPIDSource;
 import frc.robot.utilities.PIDConstants;
 
@@ -44,7 +44,7 @@ public Hatch(){
 
   lockSolenoid  = new DoubleSolenoid(2, 3);
   expelSolenoid = new DoubleSolenoid(0, 1);
-  expelSolenoidClose();
+  expelSolenoidOpen();
   
   motorControllerPIDSource = new MotorControllerPIDSource(left);
 
@@ -116,6 +116,6 @@ public void lockSolenoidToggle(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new HatchMove(.45));
+    setDefaultCommand(new HatchMove(1));
   }
 }
