@@ -31,10 +31,10 @@ public class HatchMove extends Command {
   @Override
   protected void execute() {
     if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_L) > .1){
-      Robot.hatchSubsystem.hatchSpeed(speed*.5);
+      Robot.hatchSubsystem.hatchSpeed(speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_L));
     }
     else  if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_R) > .1){
-      Robot.hatchSubsystem.hatchSpeed(-speed*.25);
+      Robot.hatchSubsystem.hatchSpeed(-speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_R));
     }
   else {
       Robot.hatchSubsystem.hatchSpeed(0);

@@ -10,6 +10,7 @@ package frc.robot.commands.Arm;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.ControllerMap;
+import frc.robot.OI;
 
 public class ArmRamp extends Command {
   double speed;
@@ -28,21 +29,21 @@ public class ArmRamp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) <  -.1){// || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
-      if(Robot.armSubsystem.getEncoderValue() >= 20){
-        Robot.armSubsystem.setSpeed(speed*.75);
-      }else{
-        Robot.armSubsystem.setSpeed(speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R));
-      }
-    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) > .1){// || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
-      if(Robot.armSubsystem.getEncoderValue() <= 8){
-        Robot.armSubsystem.setSpeed(-speed*.75);
-      }else{
-        Robot.armSubsystem.setSpeed(-speed* Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R));
-      }
-    }else{
-      Robot.armSubsystem.setSpeed(0);
+    double throttle = -Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) * .50;
+    double multiplier = 1;
+    
+    if(throttle < -.1){
+      multiplier = 1.5;
     }
+
+    if(Robot.armSubsystem.getEncoderValue() >= 21 || Robot.armSubsystem.getEncoderValue() <= 8){
+      multiplier = .25;
+    }
+    if(Robot.armSubsystem.getStowedSwitch() && throttle < -.1 ){
+      multiplier = 0;
+    }
+    Robot.armSubsystem.setSpeed(throttle * multiplier);
+   
   }
 
   // Make this return true when this Command no longer needs to run execute()

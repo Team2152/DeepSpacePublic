@@ -35,12 +35,12 @@ public class RobotMap {
   public static final int DRIVETRAIN_CANID_LEFT2     = 4;
 
   //-----Hatch-----
-  public static final int HATCH_CANID                = 5;
-  public static final int HATCH_SWITCH               = 0;               
+  public static final int HATCH_CANID                = 5;  
+           
   //-----StageOneArm-----
-  public static final int STAGE_ONE_CANID_R          = 6;
-  public static final int STAGE_ONE_CANID_L          = 7;
-  public static final int STAGE_ONE_SWTICH           = 1;
+  public static final int ARM_CANID_R          = 6;
+  public static final int ARM_CANID_L          = 7;
+  public static final int ARM_STOWED_SWTICH           = 1;
 
    //-----Cargo-----
    public static final int CARGO_TOP_ROLLER_CANID     = 20;
@@ -49,5 +49,5 @@ public class RobotMap {
   //-----Antlers-----
   public static final int ANTLER_CANID_RIGHT         = 12;
   public static final int ANTLER_CANID_LEFT          = 13;
-  public static final int ANTLER_SWITCH              = 3;
+  public static final int ANTLER_STOWED_SWITCH       = 0;
 }

@@ -31,7 +31,6 @@ public class Hatch extends Subsystem {
   private Encoder leftEncoder;
   private DoubleSolenoid expelSolenoid;
   private DoubleSolenoid lockSolenoid;
-  private DigitalInput stowedSwtich;
   private MotorControllerPIDSource motorControllerPIDSource;
   
 public Hatch(){
@@ -48,7 +47,7 @@ public Hatch(){
   
   motorControllerPIDSource = new MotorControllerPIDSource(left);
 
-  stowedSwtich = new DigitalInput(RobotMap.HATCH_SWITCH);
+  
 
   resetEncoder();
 
@@ -59,9 +58,6 @@ public  void hatchSpeed(double speed) {
   left.set(ControlMode.PercentOutput, speed);
 }
 
-public boolean isHatchStowed(){
-  return stowedSwtich.get();
-}
 
 
 public int returnEncoderValue(){
@@ -116,6 +112,6 @@ public void lockSolenoidToggle(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new HatchMove(1));
+    setDefaultCommand(new HatchMove(.5));
   }
 }

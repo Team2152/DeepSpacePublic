@@ -20,6 +20,7 @@ import frc.robot.commands.Hatch.AutoExpelSolenoidToggle;
 import frc.robot.commands.Hatch.ExpellHatch;
 import frc.robot.commands.AutoSequentials.ClimbDumb;
 import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
+import frc.robot.commands.CommandUtils.StopAll;;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -128,6 +129,7 @@ public class OI {
 	private POVButton dPOV270;
     private POVButton dPOV315;
 
+	private SharedButton expelHatch;
 
   public OI() {
 		// Setup driver joystick
@@ -185,33 +187,34 @@ public class OI {
 		try {
 	  // Shared commands here
 
-			//expelSolenoid = new SharedButton(buttonX);
+			expelHatch = new SharedButton(new Button[] {dButtonX,oButtonX});
 
 
 
 			setupSharedCommands();
 		} catch (Exception e) {
 			Robot.m_logger.console("OI: Unable to setup shared commands: " + e.toString());
+			
 		}
 		
 	}
 
 	public void setupOperatorButtons() {
 		oButtonBack.whenReleased(new CompressorToggle());
-		oButtonX.whenPressed(new ExpellHatch());
 	}
 
 	public void setupDriverXboxButtons() {
-		dButtonBack.whenReleased(new HatchExpelSolenoidToggle());
+		//dButtonBack.whenReleased(new HatchExpelSolenoidToggle());
 		dButtonStart.whenPressed(new ClimbDumb());
-		dButtonX.whenPressed(new ExpellHatch());
+		dButtonBack.whenPressed(new StopAll());
 		dPOV180.whenReleased(new DriveToggleInversion());
+		
 		
 	
   }
 
   public void setupSharedCommands() {
-
+	expelHatch.whenPressed(new ExpellHatch(1));
   }
   
 }

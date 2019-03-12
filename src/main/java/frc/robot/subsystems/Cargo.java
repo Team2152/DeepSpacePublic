@@ -28,7 +28,6 @@ public class Cargo extends Subsystem {
 
   public Cargo(){
     topRoller = new WPI_TalonSRX(RobotMap.CARGO_TOP_ROLLER_CANID); //topRoller = new WPI_VictorSPX(RobotMap.CARGO_TOP_ROLLER_CANID);
-    
     bottomRoller = new WPI_TalonSRX(RobotMap.CARGO_BOTTOM_ROLLER_CANID); //bottomRoller = new WPI_VictorSPX(RobotMap.CARGO_BOTTOM_ROLLER_CANID);
     bottomRoller.follow(topRoller);
   }

@@ -18,11 +18,12 @@ public class ExpellHatch extends Command {
   double time;
 
 
-  public ExpellHatch() {
+  public ExpellHatch(double time) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.hatchSubsystem);
     timer = new Timer();
+    this.time = time;
   }
 
   // Called just before this Command runs the first time

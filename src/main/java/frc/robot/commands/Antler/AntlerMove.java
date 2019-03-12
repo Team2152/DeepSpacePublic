@@ -30,11 +30,11 @@ public class AntlerMove extends Command {
   @Override
   protected void execute() {
     if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_Y)){
-        Robot.antlerSubsystem.AntlerSpeed(-speed);
+        Robot.antlerSubsystem.setSpeed(-speed);
     }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.ANTLER_BUTTON_B)){
-      Robot.antlerSubsystem.AntlerSpeed(speed);
+      Robot.antlerSubsystem.setSpeed(speed);
   }else{
-    Robot.antlerSubsystem.AntlerSpeed(0);
+    Robot.antlerSubsystem.setSpeed(0);
   }
   }
 
@@ -47,13 +47,13 @@ public class AntlerMove extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.antlerSubsystem.AntlerSpeed(0);
+    Robot.antlerSubsystem.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.antlerSubsystem.AntlerSpeed(0);
+    Robot.antlerSubsystem.setSpeed(0);
   }
 }

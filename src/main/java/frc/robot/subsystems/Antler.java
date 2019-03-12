@@ -29,9 +29,8 @@ public class Antler extends Subsystem {
   private CANSparkMax left;
   private CANSparkMax right;
   private CANEncoder  leftEncoder;
-  private DigitalInput zeroSwitch;
-  private MotorControllerPIDSource MotorControllerPIDSource; 
-
+  private DigitalInput stowedSwitch;
+  
 
   public Antler(){
     
@@ -41,13 +40,12 @@ public class Antler extends Subsystem {
     right = new CANSparkMax(RobotMap.ANTLER_CANID_RIGHT, CANSparkMaxLowLevel.MotorType.kBrushless);
       right.follow(left, true);
     
-    zeroSwitch = new DigitalInput(RobotMap.ANTLER_SWITCH);
-    MotorControllerPIDSource = new MotorControllerPIDSource(left, leftEncoder);
-    
+    stowedSwitch = new DigitalInput(RobotMap.ANTLER_STOWED_SWITCH);
+  
     antlerEncoderReset();
 
   }
-  public void AntlerSpeed(double speed){
+  public void setSpeed(double speed){
     left.set(speed);
   }
 
@@ -63,26 +61,12 @@ public class Antler extends Subsystem {
    leftEncoder.setPosition(0);
  }
 
- public boolean isAntlerStowed(){
-  return zeroSwitch.get();
+ /**
+  * @return the stowedSwitch
+  */
+ public boolean getStowedSwitch() {
+   return !stowedSwitch.get();
  }
-
-public boolean getZeroSwitch(){
-  return zeroSwitch.get();
-}
-
-  public MotorControllerPIDSource getMotorControllerPIDSource(){
-    return MotorControllerPIDSource;
-  }
-
-  
-
-
-
-
-
-
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

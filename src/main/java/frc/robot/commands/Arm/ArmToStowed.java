@@ -5,68 +5,64 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Antler;
+package frc.robot.commands.Arm;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AntlerByEncoder extends Command {
+public class ArmToStowed extends Command {
   double speed;
-  double encoderTicks;
-  boolean moveBackwards;
-  public AntlerByEncoder(double speed, double encoderTicks) {
+ 
+/**
+ * 
+ * @param speed
+ * 
+ */
+  public ArmToStowed(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.antlerSubsystem);
-    this.speed = Math.abs(speed);
-    this.encoderTicks = encoderTicks;
+    requires(Robot.armSubsystem);
+    this.speed = -(Math.abs(speed));
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
-  moveBackwards = true;
-}else {
-  moveBackwards = false;
-}
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(moveBackwards == false){
-    Robot.antlerSubsystem.setSpeed(-speed);
-    }else{
-      Robot.antlerSubsystem.setSpeed(speed);
-    }
+
+if(Robot.armSubsystem.getEncoderValue() <= 10){
+  Robot.armSubsystem.setSpeed(speed*.25);
+}else{
+  Robot.armSubsystem.setSpeed(speed*.75);
+}
+
+  
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if((moveBackwards == true && Robot.antlerSubsystem.getEncoderValue() <= encoderTicks) || 
-    (moveBackwards == false && Robot.antlerSubsystem.getEncoderValue() >= encoderTicks)){
+    if(Robot.armSubsystem.getStowedSwitch()){
       return true;
     }else{
-      return false;
+    return false;
     }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.antlerSubsystem.setSpeed(0);
-   
+    Robot.armSubsystem.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.antlerSubsystem.setSpeed(0);
-  
+    Robot.armSubsystem.setSpeed(0);
   }
 }

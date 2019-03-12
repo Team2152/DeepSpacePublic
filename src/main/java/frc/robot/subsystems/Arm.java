@@ -39,23 +39,30 @@ public class Arm extends Subsystem {
   private CANSparkMax left;
   private CANSparkMax right;
   private CANEncoder  leftEncoder;
+  private DigitalInput stowedSwitch;
   
 
   public Arm(){
 
 
     
-    left  = new CANSparkMax(RobotMap.STAGE_ONE_CANID_L, CANSparkMaxLowLevel.MotorType.kBrushless);
+    left  = new CANSparkMax(RobotMap.ARM_CANID_L, CANSparkMaxLowLevel.MotorType.kBrushless);
     left.setIdleMode(IdleMode.kBrake);
     leftEncoder = new CANEncoder(left);
     leftEncoder.setPosition(0);
      
-    right = new CANSparkMax(RobotMap.STAGE_ONE_CANID_R, CANSparkMaxLowLevel.MotorType.kBrushless);
+    right = new CANSparkMax(RobotMap.ARM_CANID_R, CANSparkMaxLowLevel.MotorType.kBrushless);
      right.setIdleMode(IdleMode.kBrake);
      right.follow(left, true);
 
+     stowedSwitch = new DigitalInput(RobotMap.ARM_STOWED_SWTICH);
      resetEncoder();
   }
+
+
+public boolean getStowedSwitch(){
+  return !stowedSwitch.get();
+}
  
 
 public void setSpeed(double speed){
@@ -79,8 +86,7 @@ public void resetEncoder(){
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new ArmMove(.50));
-  //  setDefaultCommand(new ArmRamp(1));
+    ///setDefaultCommand(new ArmMove(.50));
+    setDefaultCommand(new ArmRamp(1));
   }
 }

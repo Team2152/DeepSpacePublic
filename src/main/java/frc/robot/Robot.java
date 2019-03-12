@@ -101,6 +101,8 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
     SmartDashboard.putNumber("ArmEncoder", Robot.armSubsystem.getEncoderValue());
+    SmartDashboard.putBoolean("Arm Switch", armSubsystem.getStowedSwitch());
+    SmartDashboard.putBoolean("Antler Switch", antlerSubsystem.getStowedSwitch());
     }
 
   /**
@@ -169,6 +171,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putBoolean("Arm Switch", armSubsystem.getStowedSwitch());
+    SmartDashboard.putBoolean("Antler Switch", antlerSubsystem.getStowedSwitch());
     Scheduler.getInstance().run();
   }
 

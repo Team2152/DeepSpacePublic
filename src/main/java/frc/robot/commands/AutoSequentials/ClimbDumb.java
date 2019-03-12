@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.Antler.AntlerByEncoder;
 import frc.robot.commands.Arm.ArmByEncoder;
+import frc.robot.commands.Arm.ArmToStowed;
+import frc.robot.commands.Antler.AntlerToStowed;
 
 public class ClimbDumb extends CommandGroup {
   /**
@@ -37,11 +39,11 @@ public class ClimbDumb extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addParallel(new AntlerByEncoder(.65, 48));
-    addSequential(new ArmByEncoder(.50, 48));
-    addParallel(new AntlerByEncoder(.25, 10));
-    addSequential(new ArmByEncoder(.4, 55));
-    addSequential(new Wait(.5));
-    addSequential(new ArmByEncoder(.75, 25));
+    addParallel(new AntlerByEncoder(.65, 50));
+    addSequential(new ArmByEncoder(.50, 40));
+    addSequential(new Wait(.25));
+    addSequential(new AntlerToStowed(1));
+    addSequential(new ArmToStowed(1));
+    //addSequential(new ArmByEncoder(.75, 25));
   }
 }
