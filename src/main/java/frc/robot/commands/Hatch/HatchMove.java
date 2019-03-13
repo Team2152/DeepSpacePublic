@@ -8,7 +8,6 @@
 package frc.robot.commands.Hatch;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
@@ -30,13 +29,15 @@ public class HatchMove extends Command {
 
   @Override
   protected void execute() {
+    Robot.hatchSubsystem.setRampRate(1);
     if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_L) > .1){
-      Robot.hatchSubsystem.hatchSpeed(speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_L));
+      Robot.hatchSubsystem.hatchSpeed(-Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_L) *.5);
     }
     else  if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_R) > .1){
-      Robot.hatchSubsystem.hatchSpeed(-speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_R));
+      Robot.hatchSubsystem.hatchSpeed(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.HATCH_TRIGGER_R) *.5);
     }
   else {
+    Robot.hatchSubsystem.setRampRate(0);
       Robot.hatchSubsystem.hatchSpeed(0);
   }
     }

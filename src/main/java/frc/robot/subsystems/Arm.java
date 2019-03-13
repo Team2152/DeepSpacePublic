@@ -7,10 +7,6 @@
 
 package frc.robot.subsystems;
 
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
@@ -19,10 +15,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.utilities.PIDConstants;
-import frc.robot.utilities.MotorControllerPIDSource;
-import frc.robot.utilities.NumericConstants;
-import frc.robot.commands.Arm.ArmMove;
 import frc.robot.commands.Arm.ArmRamp;
 /**
  * Add your docs here.
@@ -50,7 +42,6 @@ public class Arm extends Subsystem {
     left.setIdleMode(IdleMode.kBrake);
     leftEncoder = new CANEncoder(left);
     leftEncoder.setPosition(0);
-     
     right = new CANSparkMax(RobotMap.ARM_CANID_R, CANSparkMaxLowLevel.MotorType.kBrushless);
      right.setIdleMode(IdleMode.kBrake);
      right.follow(left, true);
@@ -69,16 +60,16 @@ public void setSpeed(double speed){
     left.set( speed);
   }
 
-public void setRampRate(){
-  left.setClosedLoopRampRate(NumericConstants.ARM_SECOUNDS_TO_FULL);
-}
-
 public double getEncoderValue(){  
   return leftEncoder.getPosition();
 }
 
 public void resetEncoder(){
   leftEncoder.setPosition(0);
+}
+
+public void setRampRate(double seconds){
+  left.setOpenLoopRampRate(seconds);
 }
 
 

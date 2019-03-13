@@ -9,16 +9,17 @@ package frc.robot;
 
 import frc.robot.utilities.SharedButton;
 // import frc.robot.commands.LimeDrive;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.CommandUtils.CompressorToggle;
 import frc.robot.commands.DriveTrain.DriveToggleInversion;
 import frc.robot.commands.Hatch.AutoExpelSolenoidToggle;
 import frc.robot.commands.Hatch.ExpellHatch;
 import frc.robot.commands.AutoSequentials.ClimbDumb;
+import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
 import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
 import frc.robot.commands.CommandUtils.StopAll;;
 
@@ -130,7 +131,7 @@ public class OI {
     private POVButton dPOV315;
 
 	private SharedButton expelHatch;
-
+	//private SharedTriggers expelCargo;
   public OI() {
 		// Setup driver joystick
 		try {
@@ -188,7 +189,7 @@ public class OI {
 	  // Shared commands here
 
 			expelHatch = new SharedButton(new Button[] {dButtonX,oButtonX});
-
+		//	expelCargo = new SharedTriggers(new Trigger[] {X});
 
 
 			setupSharedCommands();
@@ -201,6 +202,7 @@ public class OI {
 
 	public void setupOperatorButtons() {
 		oButtonBack.whenReleased(new CompressorToggle());
+		oButtonA.whenReleased(new HatchExpelSolenoidToggle());
 	}
 
 	public void setupDriverXboxButtons() {

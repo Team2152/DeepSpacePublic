@@ -12,38 +12,41 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
-public class CargoMove extends Command {
-  private double speed;
-  public CargoMove(double speed) {
+public class TheCoolerCargo extends Command {
+  public TheCoolerCargo() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.cargoSubsystem);
-    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1){
 
-      Robot.cargoSubsystem.setSpeed(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L));
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
-
-    }else if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1){
-
-      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) * .5);
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
-
+    if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_L) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_L)){
+      Robot.cargoSubsystem.setRamp(1);
+      Robot.cargoSubsystem.setSpeed(.5);
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
+    }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_R) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_R)){
+      Robot.cargoSubsystem.setRamp(1);
+      Robot.cargoSubsystem.setSpeed(-.75);
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
     }else{
-
+      Robot.cargoSubsystem.setRamp(0);
       Robot.cargoSubsystem.setSpeed(0);
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 0);
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 0);
+
     }
+
+
+
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -61,6 +64,5 @@ public class CargoMove extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
-    }
+  }
 }

@@ -10,7 +10,6 @@ package frc.robot.commands.Arm;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.ControllerMap;
-import frc.robot.OI;
 
 public class ArmRamp extends Command {
   double speed;
@@ -31,20 +30,25 @@ public class ArmRamp extends Command {
   protected void execute() {
     double throttle = -Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) * .50;
     double multiplier = 1;
-    
+    Robot.armSubsystem.setRampRate(1);
+
     if(throttle < -.1){
       multiplier = 1.5;
     }
 
-    if(Robot.armSubsystem.getEncoderValue() >= 21 || Robot.armSubsystem.getEncoderValue() <= 8){
+    if(Robot.armSubsystem.getEncoderValue() >=  22 || Robot.armSubsystem.getEncoderValue() <= 8){
       multiplier = .25;
+      Robot.armSubsystem.setRampRate(0);
     }
     if(Robot.armSubsystem.getStowedSwitch() && throttle < -.1 ){
       multiplier = 0;
     }
+
+    
     Robot.armSubsystem.setSpeed(throttle * multiplier);
    
   }
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

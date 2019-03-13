@@ -9,7 +9,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveTrain.LimeDrive;
+import frc.robot.commands.DriveTrain.ScoopDrive;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -52,6 +52,7 @@ public class DriveTrain extends Subsystem {
 			left2.follow(left1, false);
 		
 
+		setInverted(false);
 		isInverted = false;
 		
     drive = new DifferentialDrive(left1, right1);
@@ -116,6 +117,14 @@ public class DriveTrain extends Subsystem {
 		return isInverted;
 	}
 
+
+
+	public void setInverted(boolean no){
+		isInverted = no;
+	}
+
+
+
   /**
 	 * Toggles drive inversion (true <-> false)
 	 */
@@ -127,6 +136,16 @@ public class DriveTrain extends Subsystem {
 		}
 	}
 
+
+
+	/**
+   * Limits the given input to the given magnitude.
+	 * @return COD
+   */
+  public static double limit(double v, double limit) {
+    return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
+	}
+	
 	
 
   
@@ -134,6 +153,6 @@ public class DriveTrain extends Subsystem {
    public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-     setDefaultCommand(new LimeDrive());
+     setDefaultCommand(new ScoopDrive());
    }
  }

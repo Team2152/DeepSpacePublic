@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Robot;
 import frc.robot.utilities.PIDConstants;
 
 import edu.wpi.first.networktables.NetworkTableEntry;

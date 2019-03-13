@@ -16,10 +16,9 @@ import frc.robot.subsystems.Cargo;
 import frc.robot.utilities.Gain;
 import frc.robot.Auto.AutoStraight;
 import frc.robot.Auto.StraightToCargoShip;
+import frc.robot.commands.DriveTrain.DrivTrainInversion;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
-import frc.robot.Auto.StraightToCargoShip;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -56,6 +55,9 @@ public class Robot extends TimedRobot {
   
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> m_preLoad = new SendableChooser<>();
+
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -73,6 +75,11 @@ public class Robot extends TimedRobot {
     m_chooser.addDefault("No Auto", null);
     m_chooser.addObject("Drive Straight", new AutoStraight());
     m_chooser.addObject("StraightToCargoShip", new StraightToCargoShip());
+
+    SmartDashboard.putData("Pre Load", m_preLoad);
+    m_preLoad.addDefault("Cargo", null);
+    m_preLoad.addObject("Hatch", new DrivTrainInversion());
+  
    
   }
 
@@ -100,9 +107,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("ArmEncoder", Robot.armSubsystem.getEncoderValue());
-    SmartDashboard.putBoolean("Arm Switch", armSubsystem.getStowedSwitch());
-    SmartDashboard.putBoolean("Antler Switch", antlerSubsystem.getStowedSwitch());
+   
     }
 
   /**
@@ -140,7 +145,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.start();
     }
 
-
+  
 
 
   }
@@ -164,6 +169,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     Robot.armSubsystem.resetEncoder();
+    Robot.driveTrainSubsystem.setInverted(false);
   }
 
   /**
@@ -171,8 +177,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putBoolean("Arm Switch", armSubsystem.getStowedSwitch());
-    SmartDashboard.putBoolean("Antler Switch", antlerSubsystem.getStowedSwitch());
     Scheduler.getInstance().run();
   }
 
