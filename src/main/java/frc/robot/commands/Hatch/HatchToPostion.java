@@ -30,7 +30,7 @@ public class HatchToPostion extends Command implements PIDOutput {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.hatchSubsystem.setRampRate();
+    Robot.hatchSubsystem.setRampRate(0);
 
    // if(DriverStation.getInstance().isTest() == true){
    //   hatchPosition = new PIDController(Robot.spaceDash.getHatchPID(0), Robot.spaceDash.getHatchPID(1), Robot.spaceDash.getHatchPID(2), Robot.hatchSubsystem.getMotorControllerPIDSource(), this);

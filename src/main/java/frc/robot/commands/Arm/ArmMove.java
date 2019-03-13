@@ -29,13 +29,13 @@ public class ArmMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) <  -.1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
-      Robot.armSubsystem.setSpeed(speed * Math.abs(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R)));
-    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
-      Robot.armSubsystem.setSpeed(-speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R));
-    }else{
-      Robot.armSubsystem.setSpeed(0);
-    }
+    // if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) <  -.1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_L)){
+    //   Robot.armSubsystem.setSpeed(speed * Math.abs(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R)));
+    // }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) > .1 || Robot.m_oi.driverXbox.getRawButton(ControllerMap.ARM_BUMP_R)){
+    //   Robot.armSubsystem.setSpeed(-speed*Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R));
+    // }else{
+    //   Robot.armSubsystem.setSpeed(0);
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()

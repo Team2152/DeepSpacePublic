@@ -5,51 +5,45 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Arm;
+package frc.robot.commands.Cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.ControllerMap;
-import frc.robot.OI;
+import frc.robot.Robot;
 
-public class ArmRamp extends Command {
-  double speed;
-  public ArmRamp(double speed) {
+public class TheCoolerCargo extends Command {
+  public TheCoolerCargo() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.armSubsystem);
-    this.speed = speed;
+    requires(Robot.cargoSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double throttle = -Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.ARM_JOYSTICK_R) * .50;
-    double multiplier = 1;
-    Robot.armSubsystem.setRampRate(1);
 
-    if(throttle < -.1){
-      multiplier = 1.5;
+    if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_L) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_L)){
+      Robot.cargoSubsystem.setRamp(1);
+      Robot.cargoSubsystem.setSpeed(.5);
+    }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_R) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_R)){
+      Robot.cargoSubsystem.setRamp(1);
+      Robot.cargoSubsystem.setSpeed(-.75);
+    }else{
+      Robot.cargoSubsystem.setRamp(0);
+      Robot.cargoSubsystem.setSpeed(0);
+
     }
 
-    if(Robot.armSubsystem.getEncoderValue() >=  22 || Robot.armSubsystem.getEncoderValue() <= 8){
-      multiplier = .25;
-      Robot.armSubsystem.setRampRate(0);
-    }
-    if(Robot.armSubsystem.getStowedSwitch() && throttle < -.1 ){
-      multiplier = 0;
-    }
 
-    
-    Robot.armSubsystem.setSpeed(throttle * multiplier);
-   
+
+
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

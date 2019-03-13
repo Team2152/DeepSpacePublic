@@ -43,7 +43,7 @@ public class ClimbDumb extends CommandGroup {
     addSequential(new ArmByEncoder(.50, 40));
     addSequential(new Wait(.25));
     addSequential(new AntlerToStowed(1));
-    addSequential(new ArmToStowed(1));
+    addSequential(new ArmToStowed(0.8));
     //addSequential(new ArmByEncoder(.75, 25));
   }
 }

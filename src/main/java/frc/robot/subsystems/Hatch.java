@@ -64,8 +64,8 @@ public int returnEncoderValue(){
   return left.getSelectedSensorPosition();
 }
 
-public void setRampRate(){
-  left.configClosedloopRamp(PIDConstants.H_SECOUNDS_TO_FULL);
+public void setRampRate(double seconds){
+  left.configOpenloopRamp(seconds);
 }
 
 public void resetEncoder(){

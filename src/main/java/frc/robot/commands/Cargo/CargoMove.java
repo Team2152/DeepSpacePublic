@@ -14,6 +14,7 @@ import frc.robot.Robot;
 
 public class CargoMove extends Command {
   private double speed;
+  
   public CargoMove(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -29,20 +30,23 @@ public class CargoMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1){
+   // if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1 ||
+   if(  Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1){
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
+      Robot.cargoSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L)*.5);
+            
 
-      Robot.cargoSubsystem.setSpeed(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L));
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
-
-    }else if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1){
-
-      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) * .5);
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 1);
+    }else //if(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1 || 
+    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1){
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
+      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) * .75);
+      
+      
 
     }else{
 
       Robot.cargoSubsystem.setSpeed(0);
-      Robot.m_oi.driverXbox.setRumble(RumbleType.kLeftRumble, 0);
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 0);
     }
   }
 

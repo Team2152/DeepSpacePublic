@@ -50,7 +50,6 @@ public class Arm extends Subsystem {
     left.setIdleMode(IdleMode.kBrake);
     leftEncoder = new CANEncoder(left);
     leftEncoder.setPosition(0);
-     
     right = new CANSparkMax(RobotMap.ARM_CANID_R, CANSparkMaxLowLevel.MotorType.kBrushless);
      right.setIdleMode(IdleMode.kBrake);
      right.follow(left, true);
@@ -69,16 +68,16 @@ public void setSpeed(double speed){
     left.set( speed);
   }
 
-public void setRampRate(){
-  left.setClosedLoopRampRate(NumericConstants.ARM_SECOUNDS_TO_FULL);
-}
-
 public double getEncoderValue(){  
   return leftEncoder.getPosition();
 }
 
 public void resetEncoder(){
   leftEncoder.setPosition(0);
+}
+
+public void setRampRate(double seconds){
+  left.setOpenLoopRampRate(seconds);
 }
 
 

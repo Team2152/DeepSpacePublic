@@ -11,8 +11,11 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.Cargo.CargoMove;
+import frc.robot.commands.Cargo.TheCoolerCargo;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -28,6 +31,9 @@ public class Cargo extends Subsystem {
 
   public Cargo(){
     topRoller = new WPI_TalonSRX(RobotMap.CARGO_TOP_ROLLER_CANID); //topRoller = new WPI_VictorSPX(RobotMap.CARGO_TOP_ROLLER_CANID);
+    topRoller.configPeakOutputReverse(-1);
+   
+   
     bottomRoller = new WPI_TalonSRX(RobotMap.CARGO_BOTTOM_ROLLER_CANID); //bottomRoller = new WPI_VictorSPX(RobotMap.CARGO_BOTTOM_ROLLER_CANID);
     bottomRoller.follow(topRoller);
   }
@@ -38,14 +44,18 @@ public class Cargo extends Subsystem {
    */
   public void setSpeed(double speed){
     topRoller.set(ControlMode.PercentOutput, speed);
+   
   }
 
-
+  public void setRamp(double time){
+    topRoller.configOpenloopRamp(time);
+  }
   
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new CargoMove(1));
+    //setDefaultCommand(new CargoMove(1));
+    setDefaultCommand(new TheCoolerCargo());
   }
 }

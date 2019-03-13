@@ -12,10 +12,8 @@ package frc.robot.utilities;
  */
 public class NumericConstants {
 
+    public static final double sensitivity = .75;
 
 
-    //-----Arm-----
-    public static final double ARM_SECOUNDS_TO_FULL = 2;
-    
-    
+
 }
