@@ -19,8 +19,6 @@ import frc.robot.Auto.StraightToCargoShip;
 import frc.robot.commands.DriveTrain.DrivTrainInversion;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
-import frc.robot.Auto.StraightToCargoShip;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;

@@ -10,7 +10,6 @@ package frc.robot.commands.Arm;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.ControllerMap;
-import frc.robot.OI;
 
 public class ArmRamp extends Command {
   double speed;

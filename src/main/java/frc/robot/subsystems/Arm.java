@@ -7,10 +7,6 @@
 
 package frc.robot.subsystems;
 
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
@@ -19,10 +15,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.utilities.PIDConstants;
-import frc.robot.utilities.MotorControllerPIDSource;
-import frc.robot.utilities.NumericConstants;
-import frc.robot.commands.Arm.ArmMove;
 import frc.robot.commands.Arm.ArmRamp;
 /**
  * Add your docs here.

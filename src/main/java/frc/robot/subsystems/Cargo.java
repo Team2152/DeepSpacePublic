@@ -10,12 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.Cargo.CargoMove;
 import frc.robot.commands.Cargo.TheCoolerCargo;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**

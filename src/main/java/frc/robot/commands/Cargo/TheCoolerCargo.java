@@ -7,6 +7,7 @@
 
 package frc.robot.commands.Cargo;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.ControllerMap;
 import frc.robot.Robot;
@@ -31,12 +32,15 @@ public class TheCoolerCargo extends Command {
     if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_L) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_L)){
       Robot.cargoSubsystem.setRamp(1);
       Robot.cargoSubsystem.setSpeed(.5);
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
     }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_R) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_R)){
       Robot.cargoSubsystem.setRamp(1);
       Robot.cargoSubsystem.setSpeed(-.75);
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
     }else{
       Robot.cargoSubsystem.setRamp(0);
       Robot.cargoSubsystem.setSpeed(0);
+      Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 0);
 
     }
 

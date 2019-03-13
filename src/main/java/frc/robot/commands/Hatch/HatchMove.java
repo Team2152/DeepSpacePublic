@@ -8,7 +8,6 @@
 package frc.robot.commands.Hatch;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ControllerMap;
 import frc.robot.Robot;
 

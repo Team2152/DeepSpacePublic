@@ -32,7 +32,6 @@ public class DriveTrain extends Subsystem {
 	private DifferentialDrive drive;
 	
 	private boolean isInverted;
-	private boolean isQuickTurn;
 
   public DriveTrain(){
     right1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
