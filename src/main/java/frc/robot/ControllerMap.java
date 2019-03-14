@@ -17,6 +17,9 @@ public class ControllerMap {
 	//-----Hatch-----
 	public static final int HATCH_TRIGGER_L = 2;
 	public static final int HATCH_TRIGGER_R = 3;
+
+	public static final int HATCH_BUMPER_L = 5;
+	public static final int HATCH_BUMPER_R = 6;
 	
 	//-----Cargo-----
 	public static final int CARGO_TRIGGER_L = 2;

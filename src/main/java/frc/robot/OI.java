@@ -131,6 +131,7 @@ public class OI {
     private POVButton dPOV315;
 
 	private SharedButton expelHatch;
+	private SharedButton autoClimb;
 	//private SharedTriggers expelCargo;
   public OI() {
 		// Setup driver joystick
@@ -189,6 +190,7 @@ public class OI {
 	  // Shared commands here
 
 			expelHatch = new SharedButton(new Button[] {dButtonX,oButtonX});
+			autoClimb = new SharedButton(new Button[] {dButtonStart, oButtonStart});
 		//	expelCargo = new SharedTriggers(new Trigger[] {X});
 
 
@@ -207,7 +209,6 @@ public class OI {
 
 	public void setupDriverXboxButtons() {
 		//dButtonBack.whenReleased(new HatchExpelSolenoidToggle());
-		dButtonStart.whenPressed(new ClimbDumb());
 		dButtonBack.whenPressed(new StopAll());
 		dPOV180.whenReleased(new DriveToggleInversion());
 		
@@ -217,6 +218,7 @@ public class OI {
 
   public void setupSharedCommands() {
 	expelHatch.whenPressed(new ExpellHatch(1));
+	autoClimb.whenPressed(new ClimbDumb());
   }
   
 }
