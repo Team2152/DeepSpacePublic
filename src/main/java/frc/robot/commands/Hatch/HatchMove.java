@@ -34,7 +34,7 @@ public class HatchMove extends Command {
       Robot.hatchSubsystem.hatchSpeed(.75);
     }
     else  if(Robot.m_oi.operatorXbox.getRawButton(ControllerMap.HATCH_BUMPER_R)){
-      Robot.hatchSubsystem.hatchSpeed(.5);
+      Robot.hatchSubsystem.hatchSpeed(-.5);
     }
   else {
     Robot.hatchSubsystem.setRampRate(0);
