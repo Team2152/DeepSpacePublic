@@ -40,11 +40,11 @@ public class RobotMap {
   //-----StageOneArm-----
   public static final int ARM_CANID_R          = 6;
   public static final int ARM_CANID_L          = 7;
-  public static final int ARM_STOWED_SWTICH           = 1;
+  public static final int ARM_STOWED_SWTICH           = 9;
 
    //-----Cargo-----
-   public static final int CARGO_TOP_ROLLER_CANID     = 20;
-   public static final int CARGO_BOTTOM_ROLLER_CANID  = 21;
+   public static final int CARGO_TOP_ROLLER_CANID     = 8;
+   public static final int CARGO_BOTTOM_ROLLER_CANID  = 9;
 
   //-----Antlers-----
   public static final int ANTLER_CANID_RIGHT         = 12;

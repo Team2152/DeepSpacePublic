@@ -107,6 +107,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+       SmartDashboard.putBoolean("arm", Robot.armSubsystem.getStowedSwitch());
    
     }
 
@@ -169,7 +170,6 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     Robot.armSubsystem.resetEncoder();
-    Robot.driveTrainSubsystem.setInverted(false);
   }
 
   /**
@@ -178,6 +178,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+   
+
   }
 
   /**

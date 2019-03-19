@@ -131,7 +131,7 @@ public class OI {
     private POVButton dPOV315;
 
 	private SharedButton expelHatch;
-	private SharedButton autoClimb;
+    private SharedButton autoClimb;
 	//private SharedTriggers expelCargo;
   public OI() {
 		// Setup driver joystick

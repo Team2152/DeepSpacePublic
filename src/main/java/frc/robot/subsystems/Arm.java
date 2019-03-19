@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.Arm.ArmRamp;
+import frc.robot.commands.Arm.ArmMove;
 /**
  * Add your docs here.
  */
@@ -77,7 +78,7 @@ public void setRampRate(double seconds){
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    ///setDefaultCommand(new ArmMove(.50));
-    setDefaultCommand(new ArmRamp(1));
+    setDefaultCommand(new ArmMove());
+  //  setDefaultCommand(new ArmRamp(1));
   }
 }

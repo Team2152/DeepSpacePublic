@@ -38,10 +38,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 		double throttle;
 		if(Robot.driveTrainSubsystem.isInverted()){
 			wheel = -handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID)*.6, wheelDeadband);
-			throttle = handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID)*.7, throttleDeadband);
+			throttle = handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID)*.8, throttleDeadband);
 		} else {
 			wheel = -handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID)*.6, wheelDeadband);
-			throttle = -handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID)*.7, throttleDeadband);	
+			throttle = -handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID)*.8, throttleDeadband);	
 		}
 		
 

@@ -22,15 +22,15 @@ public class Cargo extends Subsystem {
   // here. Call these from Commands.
   
 
-  WPI_TalonSRX topRoller; //  WPI_VictorSPX topRoller;
-  WPI_TalonSRX bottomRoller; // WPI_VictorSPX bottomRoller;
+  WPI_VictorSPX topRoller;
+  WPI_VictorSPX bottomRoller;
 
   public Cargo(){
-    topRoller = new WPI_TalonSRX(RobotMap.CARGO_TOP_ROLLER_CANID); //topRoller = new WPI_VictorSPX(RobotMap.CARGO_TOP_ROLLER_CANID);
+    topRoller = new WPI_VictorSPX(RobotMap.CARGO_TOP_ROLLER_CANID);
     topRoller.configPeakOutputReverse(-1);
    
    
-    bottomRoller = new WPI_TalonSRX(RobotMap.CARGO_BOTTOM_ROLLER_CANID); //bottomRoller = new WPI_VictorSPX(RobotMap.CARGO_BOTTOM_ROLLER_CANID);
+    bottomRoller = new WPI_VictorSPX(RobotMap.CARGO_BOTTOM_ROLLER_CANID);
     bottomRoller.follow(topRoller);
   }
 

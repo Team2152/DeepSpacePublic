@@ -5,16 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Hatch;
+package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HatchLockSolenoidToggle extends Command {
-  public HatchLockSolenoidToggle() {
+public class ArmMove extends Command {
+  public ArmMove() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.hatchSubsystem);
+    requires(Robot.armSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -25,13 +25,19 @@ public class HatchLockSolenoidToggle extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchSubsystem.lockSolenoidToggle();
+    if(Robot.m_oi.operatorXbox.getRawAxis(5) < -.1){
+      Robot.armSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(5)*.5);
+    }else if(Robot.m_oi.operatorXbox.getRawAxis(5) > .1){
+      Robot.armSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(5)*.5);
+    }else{
+      Robot.armSubsystem.setSpeed(0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

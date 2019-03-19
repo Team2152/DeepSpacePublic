@@ -29,16 +29,13 @@ public class TheCoolerCargo extends Command {
   @Override
   protected void execute() {
 
-    if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_L) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_L)){
-      Robot.cargoSubsystem.setRamp(1);
-      Robot.cargoSubsystem.setSpeed(.5);
+    if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) > .1){
+      Robot.cargoSubsystem.setSpeed(-Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_L) * 0.65);
       Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
-    }else if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.CARGO_BUMP_R) || Robot.m_oi.operatorXbox.getRawButton(ControllerMap.CARGO_BUMP_R)){
-      Robot.cargoSubsystem.setRamp(1);
-      Robot.cargoSubsystem.setSpeed(-.75);
+    }else if(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) > .1){
+      Robot.cargoSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(ControllerMap.CARGO_TRIGGER_R) * 0.55);
       Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 1);
     }else{
-      Robot.cargoSubsystem.setRamp(0);
       Robot.cargoSubsystem.setSpeed(0);
       Robot.m_oi.operatorXbox.setRumble(RumbleType.kLeftRumble, 0);
 

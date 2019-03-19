@@ -26,7 +26,6 @@ public class Hatch extends Subsystem {
   private WPI_TalonSRX left;  
   
   private DoubleSolenoid expelSolenoid;
-  private DoubleSolenoid lockSolenoid;
 
   
 public Hatch(){
@@ -37,7 +36,7 @@ public Hatch(){
     
     left.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-  lockSolenoid  = new DoubleSolenoid(2, 3);
+  
   expelSolenoid = new DoubleSolenoid(0, 1);
   expelSolenoidOpen();
   resetEncoder();
@@ -63,13 +62,6 @@ public void resetEncoder(){
   left.setSelectedSensorPosition(0);
 }
 
-public void lockSolenoidOpen(){
-  lockSolenoid.set(DoubleSolenoid.Value.kReverse);
-}
-
-public void lockSolenoidClose(){
-  lockSolenoid.set(DoubleSolenoid.Value.kForward);
-}
 
 public void expelSolenoidOpen() {
   expelSolenoid.set(DoubleSolenoid.Value.kReverse);
@@ -87,13 +79,8 @@ public void expelSolenoidToggle(){
   }
 }
 
-public void lockSolenoidToggle(){
-  if(lockSolenoid.get() == DoubleSolenoid.Value.kForward){
-    lockSolenoidOpen();
-  }else{
-    lockSolenoidClose();
-  }
-}
+
+
 
   @Override
   public void initDefaultCommand() {

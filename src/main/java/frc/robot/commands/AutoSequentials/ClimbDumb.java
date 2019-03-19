@@ -39,11 +39,11 @@ public class ClimbDumb extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addParallel(new AntlerByEncoder(.65, 50));
-    addSequential(new ArmByEncoder(.50, 40));
+    addParallel(new AntlerByEncoder(.65, 50));//50
+    addSequential(new ArmByEncoder(.50, 40));//40
     addSequential(new Wait(.25));
-    addSequential(new AntlerToStowed(1));
-    addSequential(new ArmToStowed(0.8));
+    addSequential(new AntlerToStowed(.85));
+    addSequential(new ArmToStowed(1));
     //addSequential(new ArmByEncoder(.75, 25));
   }
 }
