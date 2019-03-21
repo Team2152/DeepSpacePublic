@@ -93,17 +93,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 		  }
 		  linearPower = throttle;
 
-		  //Quick Turn
-		if(Robot.m_oi.driverXbox.getRawButton(ControllerMap.DRIVETRAIN_QUICK_TURN)){
-			if(Math.abs(linearPower) < .2){
-				double alpha = .1;
-				quickStopAccumulator = ((1 - alpha) * quickStopAccumulator + alpha * DriveTrain.limit(wheel, 1) * 5);
-			}
-			overPower = 1;
-			sensitivity  = 1;
-			angularPower = wheel;
-
-		}else{
+		  
 			overPower = 0;
 			if(throttle != 0){
 				angularPower = Math.abs(throttle) * wheel * sensitivity - quickStopAccumulator;
@@ -118,7 +108,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 			  } else {
 				quickStopAccumulator = 0.0;
 			  }
-		}
 
 		right = left = linearPower;
 		left += angularPower;
