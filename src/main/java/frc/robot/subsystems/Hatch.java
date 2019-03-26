@@ -16,51 +16,31 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.Hatch.HatchMove;
+
 
 
 /**
  * Add your docs here.
  */
-public class Hatch extends Subsystem {
-  private WPI_TalonSRX left;  
+public class Hatch extends Subsystem { 
   
   private DoubleSolenoid expelSolenoid;
+  private DoubleSolenoid extendSolenoid;
 
   
 public Hatch(){
   
-  left = new WPI_TalonSRX(RobotMap.HATCH_CANID);
-    left.setNeutralMode(NeutralMode.Brake);
-    left.setSafetyEnabled(false);
-    
-    left.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-
-  
   expelSolenoid = new DoubleSolenoid(0, 1);
+
+  extendSolenoid = new DoubleSolenoid(2, 3); 
+
   expelSolenoidOpen();
-  resetEncoder();
+  retractHatch();
 
-
-}
-
-public  void hatchSpeed(double speed) {
-  left.set(ControlMode.PercentOutput, speed);
 }
 
 
 
-public int returnEncoderValue(){
-  return left.getSelectedSensorPosition();
-}
-
-public void setRampRate(double seconds){
-  left.configOpenloopRamp(seconds);
-}
-
-public void resetEncoder(){
-  left.setSelectedSensorPosition(0);
-}
 
 
 public void expelSolenoidOpen() {
@@ -79,6 +59,23 @@ public void expelSolenoidToggle(){
   }
 }
 
+public void extendHatch(){
+  extendSolenoid.set(DoubleSolenoid.Value.kForward);
+}
+
+public void retractHatch(){
+  extendSolenoid.set(DoubleSolenoid.Value.kReverse);
+
+}
+
+public void extensionSolenoidToggle(){
+  if(extendSolenoid.get() == DoubleSolenoid.Value.kForward){
+    retractHatch();
+  } else {
+    extendHatch();
+  }
+}
+
 
 
 
@@ -86,6 +83,6 @@ public void expelSolenoidToggle(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new HatchMove(.5));
+
   }
 }

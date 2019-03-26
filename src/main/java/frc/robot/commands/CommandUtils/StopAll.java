@@ -31,7 +31,6 @@ public class StopAll extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.hatchSubsystem.hatchSpeed(0);
     Robot.driveTrainSubsystem.tankDrive(0, 0);
     Robot.armSubsystem.setSpeed(0);
     Robot.antlerSubsystem.setSpeed(0);

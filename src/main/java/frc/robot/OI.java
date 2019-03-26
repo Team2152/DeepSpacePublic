@@ -20,7 +20,7 @@ import frc.robot.commands.Hatch.AutoExpelSolenoidToggle;
 import frc.robot.commands.Hatch.ExpellHatch;
 import frc.robot.commands.AutoSequentials.ClimbDumb;
 import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
-import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
+import frc.robot.commands.Hatch.ExtendHatchToggle;
 import frc.robot.commands.CommandUtils.StopAll;;
 
 /**
@@ -211,6 +211,7 @@ public class OI {
 		//dButtonBack.whenReleased(new HatchExpelSolenoidToggle());
 		dButtonBack.whenPressed(new StopAll());
 		dPOV180.whenReleased(new DriveToggleInversion());
+		dButtonB.whenPressed(new ExtendHatchToggle());
 		
 		
 	
