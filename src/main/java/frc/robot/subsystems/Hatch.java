@@ -33,8 +33,8 @@ public Hatch(){
   expelSolenoid = new DoubleSolenoid(0, 1);
 
   extendSolenoid = new DoubleSolenoid(2, 3); 
-
-  expelSolenoidOpen();
+//fix naming convention
+  expelSolenoidClose();
   retractHatch();
 
 }

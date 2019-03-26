@@ -10,42 +10,32 @@ package frc.robot.commands.Hatch;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AutoExpelSolenoidToggle extends Command {
-  boolean isIn;
-
-  public AutoExpelSolenoidToggle(boolean isIn) {
+public class HatchMove extends Command {
+  public HatchMove() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.hatchSubsystem);
-    this.isIn = isIn;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.hatchSubsystem.expelSolenoidClose();
+    Robot.hatchSubsystem.extensionSolenoidToggle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(isIn){
-      Robot.hatchSubsystem.expelSolenoidOpen();
-    }else{
-      Robot.hatchSubsystem.expelSolenoidClose();
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
   }
 
   // Called when another command which requires one or more of the same
