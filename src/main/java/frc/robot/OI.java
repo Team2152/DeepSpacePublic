@@ -16,11 +16,14 @@ import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.CommandUtils.CompressorToggle;
 import frc.robot.commands.DriveTrain.DriveToggleInversion;
-import frc.robot.commands.Hatch.AutoExpelSolenoidToggle;
-import frc.robot.commands.Hatch.ExpellHatch;
 import frc.robot.commands.AutoSequentials.ClimbDumb;
+
+import frc.robot.commands.AutoSequentials.HatchExpel;
+import frc.robot.commands.AutoSequentials.HatchIntake;
 import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
-import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
+import frc.robot.commands.Hatch.HatchExtendToggle;
+import frc.robot.commands.Hatch.HatchMove;
+// import frc.robot.commands.Hatch.HatchMoveToggle;
 import frc.robot.commands.CommandUtils.StopAll;;
 
 /**
@@ -204,20 +207,24 @@ public class OI {
 
 	public void setupOperatorButtons() {
 		oButtonBack.whenReleased(new CompressorToggle());
-		oButtonA.whenReleased(new HatchExpelSolenoidToggle());
+		oButtonA.whenReleased(new HatchIntake());
+		oButtonX.whenReleased(new HatchExpel());
+		oButtonY.whenReleased(new HatchExtendToggle());
+		oButtonB.whenReleased(new HatchMove());
 	}
 
+
 	public void setupDriverXboxButtons() {
-		//dButtonBack.whenReleased(new HatchExpelSolenoidToggle());
+		
 		dButtonBack.whenPressed(new StopAll());
 		dPOV180.whenReleased(new DriveToggleInversion());
+		
 		
 		
 	
   }
 
   public void setupSharedCommands() {
-	expelHatch.whenPressed(new ExpellHatch(1));
 	autoClimb.whenPressed(new ClimbDumb());
   }
   

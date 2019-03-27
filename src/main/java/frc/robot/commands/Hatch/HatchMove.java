@@ -6,56 +6,41 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands.Hatch;
-import edu.wpi.first.wpilibj.Joystick;
+
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class HatchMove extends Command {
- double speed = 0;
- Joystick driverJoystick;
- 
-  public HatchMove(double speed) {
-    requires(Robot.hatchSubsystem);
-    this.speed = speed;
-
+  public HatchMove() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
-  
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
+    Robot.hatchSubsystem.extensionSolenoidToggle();
   }
 
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchSubsystem.setRampRate(1);
-    if(Robot.m_oi.operatorXbox.getRawButton(ControllerMap.HATCH_BUMPER_L)){
-      Robot.hatchSubsystem.hatchSpeed(.75);
-    }
-    else  if(Robot.m_oi.operatorXbox.getRawButton(ControllerMap.HATCH_BUMPER_R)){
-      Robot.hatchSubsystem.hatchSpeed(-.5);
-    }
-  else {
-    Robot.hatchSubsystem.setRampRate(0);
-      Robot.hatchSubsystem.hatchSpeed(0);
   }
-    }
-  
 
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
+  // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
-  
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hatchSubsystem.hatchSpeed(0);
-
   }
 }
