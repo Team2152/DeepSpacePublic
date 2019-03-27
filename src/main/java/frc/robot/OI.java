@@ -21,6 +21,7 @@ import frc.robot.commands.AutoSequentials.ClimbDumb;
 import frc.robot.commands.AutoSequentials.HatchExpel;
 import frc.robot.commands.AutoSequentials.HatchIntake;
 import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
+import frc.robot.commands.Hatch.HatchExtendToggle;
 import frc.robot.commands.Hatch.HatchMove;
 // import frc.robot.commands.Hatch.HatchMoveToggle;
 import frc.robot.commands.CommandUtils.StopAll;;
@@ -206,11 +207,12 @@ public class OI {
 
 	public void setupOperatorButtons() {
 		oButtonBack.whenReleased(new CompressorToggle());
-		 oButtonA.whenReleased(new HatchIntake());
+		oButtonA.whenReleased(new HatchIntake());
 		oButtonX.whenReleased(new HatchExpel());
-		oButtonY.whenReleased(new HatchExpelSolenoidToggle());
+		oButtonY.whenReleased(new HatchExtendToggle());
 		oButtonB.whenReleased(new HatchMove());
 	}
+
 
 	public void setupDriverXboxButtons() {
 		

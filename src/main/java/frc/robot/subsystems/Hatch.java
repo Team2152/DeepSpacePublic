@@ -34,8 +34,11 @@ public Hatch(){
 
   extendSolenoid = new DoubleSolenoid(2, 3); 
 //fix naming convention
-  expelSolenoidClose();
+  extendClose();
   retractHatch();
+
+  expelSolenoid.set(DoubleSolenoid.Value.kOff);
+  extendSolenoid.set(DoubleSolenoid.Value.kOff);
 
 }
 
@@ -43,19 +46,19 @@ public Hatch(){
 
 
 
-public void expelSolenoidOpen() {
+public void extendOpen() {
   expelSolenoid.set(DoubleSolenoid.Value.kReverse);
 }
 
-public void expelSolenoidClose() {
+public void extendClose() {
   expelSolenoid.set(DoubleSolenoid.Value.kForward);
 }
 
-public void expelSolenoidToggle(){
+public void extendToggle(){
   if(expelSolenoid.get() == DoubleSolenoid.Value.kForward){
-    expelSolenoidOpen();
+    extendOpen();
   }else{
-    expelSolenoidClose();
+    extendClose();
   }
 }
 
