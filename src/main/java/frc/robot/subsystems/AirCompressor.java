@@ -8,7 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.hal.sim.mockdata.PCMDataJNI;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.SolenoidBase;
 /**
  * Add your docs here.
  */
@@ -20,7 +22,7 @@ public class AirCompressor extends Subsystem {
   
   public AirCompressor(){
     compressor = new Compressor();
-
+    
   }
 
   public void startCompressor(){

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.CommandUtils.CompressorToggle;
+import frc.robot.commands.CommandUtils.SensorLog;
 import frc.robot.commands.DriveTrain.DriveToggleInversion;
 import frc.robot.commands.AutoSequentials.ClimbDumb;
 
@@ -206,18 +207,19 @@ public class OI {
 	}
 
 	public void setupOperatorButtons() {
-		oButtonBack.whenReleased(new CompressorToggle());
-		oButtonA.whenReleased(new HatchIntake());
-		oButtonX.whenReleased(new HatchExpel());
-		oButtonY.whenReleased(new HatchExtendToggle());
-		oButtonB.whenReleased(new HatchMove());
+		oButtonBack.whenPressed(new CompressorToggle());
+		oButtonA.whenPressed(new HatchIntake());
+		oButtonX.whenPressed(new HatchExpel());
+		oButtonY.whenPressed(new HatchExtendToggle());
+		oButtonB.whenPressed(new HatchMove());
+		oButtonBumpL.whenPressed(new SensorLog());
 	}
 
 
 	public void setupDriverXboxButtons() {
 		
 		dButtonBack.whenPressed(new StopAll());
-		dPOV180.whenReleased(new DriveToggleInversion());
+		dPOV180.whenPressed(new DriveToggleInversion());
 		
 		
 		

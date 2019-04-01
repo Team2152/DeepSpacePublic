@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.CommandUtils.SensorLog;
 
 
 
@@ -79,7 +80,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Pre Load", m_preLoad);
     m_preLoad.addDefault("Cargo", null);
     m_preLoad.addObject("Hatch", new DrivTrainInversion());
-  
+   // Scheduler.getInstance().add(new SensorLog());
+    
    
   }
 
@@ -124,6 +126,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+   
     m_autonomousCommand = m_chooser.getSelected();
 
 
@@ -156,6 +159,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    
     Scheduler.getInstance().run();
     
   }

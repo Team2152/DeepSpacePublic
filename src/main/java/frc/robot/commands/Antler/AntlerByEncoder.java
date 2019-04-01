@@ -8,6 +8,7 @@
 package frc.robot.commands.Antler;
 
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -15,17 +16,23 @@ public class AntlerByEncoder extends Command {
   double speed;
   double encoderTicks;
   boolean moveBackwards;
-  public AntlerByEncoder(double speed, double encoderTicks) {
+  Timer timer;
+  double time;
+  public AntlerByEncoder(double speed, double encoderTicks, double time) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.antlerSubsystem);
+    timer = new Timer();
     this.speed = Math.abs(speed);
     this.encoderTicks = encoderTicks;
+    this.time = time;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    timer.reset();
+    timer.start();
 if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
   moveBackwards = true;
 }else {
@@ -47,7 +54,7 @@ if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
   @Override
   protected boolean isFinished() {
     if((moveBackwards == true && Robot.antlerSubsystem.getEncoderValue() <= encoderTicks) || 
-    (moveBackwards == false && Robot.antlerSubsystem.getEncoderValue() >= encoderTicks)){
+    (moveBackwards == false && Robot.antlerSubsystem.getEncoderValue() >= encoderTicks)){// || timer.get() >= time){
       return true;
     }else{
       return false;
@@ -58,14 +65,15 @@ if(Robot.antlerSubsystem.getEncoderValue() - encoderTicks >= 0){
   @Override
   protected void end() {
     Robot.antlerSubsystem.setSpeed(0);
-   
+    timer.stop();
+    
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.antlerSubsystem.setSpeed(0);
+    end();
   
   }
 }

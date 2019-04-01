@@ -41,7 +41,7 @@ public class Antler extends Subsystem {
     
     stowedSwitch = new DigitalInput(RobotMap.ANTLER_STOWED_SWITCH);
   
-    antlerEncoderReset();
+    resetEncoder();
 
   }
   public void setSpeed(double speed){
@@ -56,7 +56,7 @@ public class Antler extends Subsystem {
    return Math.abs(leftEncoder.getPosition());
   }
   
- public void antlerEncoderReset(){
+ public void resetEncoder(){
    leftEncoder.setPosition(0);
  }
 

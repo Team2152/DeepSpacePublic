@@ -31,8 +31,8 @@ public class Hatch extends Subsystem {
 public Hatch(){
   
   expelSolenoid = new DoubleSolenoid(0, 1);
-
   extendSolenoid = new DoubleSolenoid(2, 3); 
+  
 //fix naming convention
   extendClose();
   retractHatch();
@@ -79,8 +79,14 @@ public void extensionSolenoidToggle(){
   }
 }
 
+public void clearStickyFaults(){
+  expelSolenoid.clearAllPCMStickyFaults();
+  
+}
 
-
+public boolean getStickyFaults(){
+  return expelSolenoid.getPCMSolenoidVoltageStickyFault();
+}
 
   @Override
   public void initDefaultCommand() {

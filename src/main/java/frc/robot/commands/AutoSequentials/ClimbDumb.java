@@ -22,7 +22,7 @@ public class ClimbDumb extends CommandGroup {
     requires(Robot.antlerSubsystem);
     requires(Robot.armSubsystem);
     Robot.armSubsystem.resetEncoder();
-    Robot.antlerSubsystem.antlerEncoderReset();
+    Robot.antlerSubsystem.resetEncoder();
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -39,11 +39,12 @@ public class ClimbDumb extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addParallel(new AntlerByEncoder(.65, 50));//50
-    addSequential(new ArmByEncoder(.50, 40));//40
+  
+    addParallel(new AntlerByEncoder(.65, 50, 2.75));//3
+    addSequential(new ArmByEncoder(.50, 40, 2.27));
     addSequential(new Wait(.25));
     addSequential(new AntlerToStowed(.85));
     addSequential(new ArmToStowed(1));
-    //addSequential(new ArmByEncoder(.75, 25));
+    
   }
 }
