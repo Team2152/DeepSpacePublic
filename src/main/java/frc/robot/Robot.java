@@ -11,6 +11,7 @@ import frc.robot.utilities.Log;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
+import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Cargo;
 import frc.robot.utilities.Gain;
@@ -25,7 +26,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.CommandUtils.SensorLog;
 
 
 
@@ -45,12 +45,11 @@ public class Robot extends TimedRobot {
 
 
   public static Dashboard spaceDash = new Dashboard();
-
   public static Hatch hatchSubsystem = new Hatch();
-
   public static Arm armSubsystem = new Arm();
   public static Cargo cargoSubsystem = new Cargo();
   public static Antler antlerSubsystem = new Antler();
+  public static LimeLight limelightSubsystem = new  LimeLight();
   
   public static AirCompressor compressorSubsystem = new AirCompressor();
   
@@ -80,6 +79,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Pre Load", m_preLoad);
     m_preLoad.addDefault("Cargo", null);
     m_preLoad.addObject("Hatch", new DrivTrainInversion());
+    
    // Scheduler.getInstance().add(new SensorLog());
     
    
@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    limelightSubsystem.log();
   }
 
   /**
@@ -104,6 +105,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    
   }
 
   @Override

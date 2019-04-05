@@ -25,7 +25,8 @@ import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
 import frc.robot.commands.Hatch.HatchExtendToggle;
 import frc.robot.commands.Hatch.HatchMove;
 // import frc.robot.commands.Hatch.HatchMoveToggle;
-import frc.robot.commands.CommandUtils.StopAll;;
+import frc.robot.commands.CommandUtils.StopAll;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -207,19 +208,19 @@ public class OI {
 	}
 
 	public void setupOperatorButtons() {
-		oButtonBack.whenPressed(new CompressorToggle());
-		oButtonA.whenPressed(new HatchIntake());
-		oButtonX.whenPressed(new HatchExpel());
-		oButtonY.whenPressed(new HatchExtendToggle());
-		oButtonB.whenPressed(new HatchMove());
-		oButtonBumpL.whenPressed(new SensorLog());
+		// oButtonBack.whenPressed(new CompressorToggle());
+		// oButtonA.whenPressed(new HatchIntake());
+		// oButtonX.whenPressed(new HatchExpel());
+		// oButtonY.whenPressed(new HatchExtendToggle());
+		// oButtonB.whenPressed(new HatchMove());
+		// oButtonBumpL.whenPressed(new SensorLog());
 	}
 
 
 	public void setupDriverXboxButtons() {
 		
-		dButtonBack.whenPressed(new StopAll());
-		dPOV180.whenPressed(new DriveToggleInversion());
+		// dButtonBack.whenPressed(new StopAll());
+		// dPOV180.whenPressed(new DriveToggleInversion());
 		
 		
 		
@@ -227,7 +228,7 @@ public class OI {
   }
 
   public void setupSharedCommands() {
-	autoClimb.whenPressed(new ClimbDumb());
+//	autoClimb.whenPressed(new ClimbDumb());
   }
   
 }

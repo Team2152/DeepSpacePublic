@@ -81,7 +81,6 @@ public void extensionSolenoidToggle(){
 
 public void clearStickyFaults(){
   expelSolenoid.clearAllPCMStickyFaults();
-  
 }
 
 public boolean getStickyFaults(){
