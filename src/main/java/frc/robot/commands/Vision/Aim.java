@@ -12,8 +12,8 @@ import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class Aim extends Command {
-  private double Kp = -0.1;
-  private double minCommand = .1;
+  private double Kp = 1;
+  private double minCommand = 0;
   private double left;
   private double right;
  
@@ -35,18 +35,18 @@ public class Aim extends Command {
   protected void execute() {
 
 if(Robot.limelightSubsystem.getTv() == 1){
-    if(Robot.m_oi.operatorXbox.getRawButton(ControllerMap.AIM_BUTTON_Y)){
-        double headingError = -Robot.limelightSubsystem.getTx();
+    if(Robot.m_oi.driverXbox.getRawButton(6)){
+        double headingError = Robot.limelightSubsystem.getTx();
         double steeringAdjust = 0;
         if(Robot.limelightSubsystem.getTx() > 1){
           steeringAdjust = Kp* headingError-minCommand;
         }else if(Robot.limelightSubsystem.getTx() < 1){
           steeringAdjust = Kp* headingError+minCommand;
         }
-       left += steeringAdjust / 100;
-       right -= steeringAdjust / 100;
-       System.out.println("qqqqqqqqqqqqqq  " + left + "    " + right );
-        Robot.driveTrainSubsystem.tankDrive(left, right);
+       left = +steeringAdjust / 30;
+       right = -steeringAdjust / 30;
+       System.out.println("Steering adjust: " + steeringAdjust +" Left: " + left + " Right: " + right );
+       Robot.driveTrainSubsystem.tankDrive(-left, -right);
     }
   }
   }
