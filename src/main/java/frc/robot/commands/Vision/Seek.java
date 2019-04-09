@@ -13,11 +13,11 @@ import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class Seek extends Command {
-  private double Turn_Kp = 3;
-  private double Turn_minCommand = 0;
+  private double Turn_Kp = 1;
+  private double Turn_minCommand = .1;
 
-  private double Throttle_Kp = 2;
-  private double Throttle_minCommand = 0;
+  private double Throttle_Kp = .9;
+  private double Throttle_minCommand = .1;
 
   private double throttle;
   private double turn;
@@ -33,6 +33,7 @@ public class Seek extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -40,6 +41,7 @@ public class Seek extends Command {
   protected void execute() {
 
 if(Robot.limelightSubsystem.getTv() == 1){
+  Robot.driveTrainSubsystem.setRampRate(.05);
     if(Robot.m_oi.driverXbox.getRawButton(6)){
         double headingError = Robot.limelightSubsystem.getTx();
         double distanceError = Robot.limelightSubsystem.getTy();
@@ -63,7 +65,11 @@ if(Robot.limelightSubsystem.getTv() == 1){
        SmartDashboard.putNumber("Turn", turn);
        SmartDashboard.putNumber("Throttle", throttle);
        Robot.driveTrainSubsystem.arcadeDrive(-throttle, -turn);
+    }else if(Robot.limelightSubsystem.getTv() == 0){
+      Robot.driveTrainSubsystem.arcadeDrive(0, 0);
     }
+  }else{
+    Robot.driveTrainSubsystem.setRampRate(0);
   }
   }
 
