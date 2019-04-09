@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 		double wheelNonLinearity;
 		double wheel;
 		double throttle;
-		if(Robot.driveTrainSubsystem.isInverted()){
+		if(Robot.driveTrainSubsystem.isInverted() == false){
 			wheel = -handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_TURN_ID)*.6, wheelDeadband);
 			throttle = handleDeadband(Robot.m_oi.driverXbox.getRawAxis(ControllerMap.DRIVETRAIN_THROTTLE_ID)*.8, throttleDeadband);
 		} else {

@@ -12,7 +12,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Vision.Aim;
+import frc.robot.commands.Vision.Seek;
 
 /**
  * Add your docs here.
@@ -154,6 +154,6 @@ public double getTa() {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new Aim());
+    setDefaultCommand(new Seek());
   }
 }
