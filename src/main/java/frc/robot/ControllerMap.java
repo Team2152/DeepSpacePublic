@@ -29,13 +29,14 @@ public class ControllerMap {
 
 	//-----ARMS-----
 	public static final int ARM_JOYSTICK_R = 5;
-	// public static final int ARM_BUMP_R    = 5;
-	// public static final int ARM_BUMP_L    = 6;
+	
 
 	//-----ANTLER-----
 	public static final int ANTLER_BUTTON_Y = 4;
 	public static final int ANTLER_BUTTON_B = 2;
 
+	//-----Limelight-----
+	public static final int AIM_BUTTON_Y    = 4;
 	public static void setControllers(Joystick driver, Joystick operator) {
 		DriveTrain_Drive_Joystick = driver;
 	}

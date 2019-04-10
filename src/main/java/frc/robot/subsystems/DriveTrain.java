@@ -147,6 +147,10 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	
+	public void setRampRate(double secoundsToFull){
+		left1.setOpenLoopRampRate(secoundsToFull);
+		right1.setOpenLoopRampRate(secoundsToFull);
+	}
 
   
    @Override

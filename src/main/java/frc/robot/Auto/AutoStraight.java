@@ -33,6 +33,6 @@ public class AutoStraight extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addSequential(new AutoStraightByTime(.5, 10));
+    addSequential(new AutoStraightByTime(.75, 10));
   }
 }
