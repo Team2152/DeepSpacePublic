@@ -13,15 +13,15 @@ import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
 public class Seek extends Command {
-  private double Turn_Kp = 1;
-  private double Turn_minCommand = .1;
+  private double turnKP = 1;
+  private double turnMinCommand = .1;
 
-  private double Throttle_Kp = .9;
-  private double Throttle_minCommand = .1;
+  private double throttleKP = .9;
+  private double throttleMindCommand = .1;
 
-  private double throttle;
-  private double turn;
- 
+  private double throttle = 0;
+  private double turn = 0;
+
   public Seek() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -48,23 +48,20 @@ if(Robot.limelightSubsystem.getTv() == 1){
 
         double steeringAdjust = 0;
         if(Robot.limelightSubsystem.getTx() > 1){
-          steeringAdjust = Turn_Kp* headingError-Turn_minCommand;
+          steeringAdjust = turnKP* headingError-turnMinCommand;
         }else if(Robot.limelightSubsystem.getTx() < 1){
-          steeringAdjust = Turn_Kp* headingError+Turn_minCommand;
+          steeringAdjust = turnKP* headingError+turnMinCommand;
         }
 
         double distanceAdjust = 0;
         if(Robot.limelightSubsystem.getTy() > 1){
-          distanceAdjust = Throttle_Kp * distanceError - Throttle_minCommand;
+          distanceAdjust = throttleKP * distanceError - throttleMindCommand;
         } else if(Robot.limelightSubsystem.getTy() < 1){
-          distanceAdjust = Throttle_Kp * distanceError + Throttle_minCommand;
+          distanceAdjust = throttleKP * distanceError + throttleMindCommand;
         }
        turn = steeringAdjust / 30;
        throttle = distanceAdjust / 30;
-       System.out.println(throttle + " Throttle " + turn +  " turn" );
-       SmartDashboard.putNumber("Turn", turn);
-       SmartDashboard.putNumber("Throttle", throttle);
-       Robot.driveTrainSubsystem.arcadeDrive(-throttle, -turn);
+        Robot.driveTrainSubsystem.arcadeDrive(throttle, turn);
     }else if(Robot.limelightSubsystem.getTv() == 0){
       Robot.driveTrainSubsystem.arcadeDrive(0, 0);
     }
@@ -76,17 +73,19 @@ if(Robot.limelightSubsystem.getTv() == 1){
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+          return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveTrainSubsystem.setRampRate(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
