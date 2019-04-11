@@ -12,11 +12,10 @@ import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.LimeLight;
+import frc.robot.subsystems.PathFollower;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Cargo;
 import frc.robot.utilities.Gain;
-import frc.robot.Auto.AutoStraight;
-import frc.robot.Auto.StraightToCargoShip;
 import frc.robot.commands.DriveTrain.DrivTrainInversion;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
@@ -50,7 +49,7 @@ public class Robot extends TimedRobot {
   public static Cargo cargoSubsystem = new Cargo();
   public static Antler antlerSubsystem = new Antler();
   public static LimeLight limelightSubsystem = new  LimeLight();
-  
+  public static PathFollower pathFollowerSubsystem = new PathFollower();  
   public static AirCompressor compressorSubsystem = new AirCompressor();
   
   Command m_autonomousCommand;
@@ -79,8 +78,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Pre Load", m_preLoad);
     m_preLoad.addDefault("Cargo", null);
     m_preLoad.addObject("Hatch", new DrivTrainInversion());
-
+    
     limelightSubsystem.setLedMode(1);
+
+   
+
     
    // Scheduler.getInstance().add(new SensorLog());
     
