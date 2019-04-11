@@ -42,10 +42,13 @@ public Hatch(){
 
 }
 
+public void setExtendSolenoid(DoubleSolenoid.Value direction){
+  extendSolenoid.set(direction);
+}
 
-
-
-
+public void setExpelSolenoid(DoubleSolenoid.Value direction){
+  expelSolenoid.set(direction);
+}
 public void extendOpen() {
   expelSolenoid.set(DoubleSolenoid.Value.kReverse);
 }

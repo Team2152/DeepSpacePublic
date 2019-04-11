@@ -12,17 +12,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
-public class Seek extends Command {
+public class SeekAuto extends Command {
   private double turnKP = 1;
   private double turnMinCommand = .1;
+  private double turnTolerance = 1;
 
   private double throttleKP = .9;
   private double throttleMindCommand = .1;
+  private double throttleTolerance = 1;
 
   private double throttle = 0;
   private double turn = 0;
 
-  public Seek() {
+  public SeekAuto() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.limelightSubsystem);
@@ -33,7 +35,7 @@ public class Seek extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
+    Robot.limelightSubsystem.setLedMode(3);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -41,8 +43,9 @@ public class Seek extends Command {
   protected void execute() {
 
 if(Robot.limelightSubsystem.getTv() == 1){
+
   Robot.driveTrainSubsystem.setRampRate(.05);
-    if(Robot.m_oi.driverXbox.getRawButton(6)){
+
         double headingError = Robot.limelightSubsystem.getTx();
         double distanceError = Robot.limelightSubsystem.getTy();
 
@@ -62,24 +65,31 @@ if(Robot.limelightSubsystem.getTv() == 1){
        turn = steeringAdjust / 30;
        throttle = distanceAdjust / 30;
         Robot.driveTrainSubsystem.arcadeDrive(throttle, turn);
-    }else if(Robot.limelightSubsystem.getTv() == 0){
+
+    } else {
+      // I dont remember if putting a arcadeDrive(0,0) here breaks the command
+      // If the robot stutters or whatever this is probably why
       Robot.driveTrainSubsystem.arcadeDrive(0, 0);
     }
-  }else{
-    Robot.driveTrainSubsystem.setRampRate(0);
-  }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    if(Robot.limelightSubsystem.getTx() >= -turnTolerance && Robot.limelightSubsystem.getTx() <= turnTolerance && 
+    Robot.limelightSubsystem.getTy() >= -throttleTolerance && Robot.limelightSubsystem.getTy() <= throttleTolerance){
+      return true;
+    } else {
           return false;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.driveTrainSubsystem.setRampRate(0);
+    Robot.limelightSubsystem.setLedMode(1);
   }
 
   // Called when another command which requires one or more of the same
