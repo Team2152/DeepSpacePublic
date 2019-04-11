@@ -12,6 +12,7 @@ import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.LimeLight;
+import frc.robot.subsystems.PathFollower;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Cargo;
 import frc.robot.utilities.Gain;
@@ -50,7 +51,7 @@ public class Robot extends TimedRobot {
   public static Cargo cargoSubsystem = new Cargo();
   public static Antler antlerSubsystem = new Antler();
   public static LimeLight limelightSubsystem = new  LimeLight();
-  
+  public static PathFollower pathFollowerSubsystem = new PathFollower();  
   public static AirCompressor compressorSubsystem = new AirCompressor();
   
   Command m_autonomousCommand;
