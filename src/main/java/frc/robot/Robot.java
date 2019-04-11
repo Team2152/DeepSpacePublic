@@ -79,6 +79,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Pre Load", m_preLoad);
     m_preLoad.addDefault("Cargo", null);
     m_preLoad.addObject("Hatch", new DrivTrainInversion());
+
+    limelightSubsystem.setLedMode(1);
     
    // Scheduler.getInstance().add(new SensorLog());
     
