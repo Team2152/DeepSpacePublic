@@ -16,8 +16,6 @@ import frc.robot.subsystems.PathFollower;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Cargo;
 import frc.robot.utilities.Gain;
-import frc.robot.Auto.AutoStraight;
-import frc.robot.Auto.StraightToCargoShip;
 import frc.robot.commands.DriveTrain.DrivTrainInversion;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
@@ -74,12 +72,7 @@ public class Robot extends TimedRobot {
     Shuffleboard.stopRecording(); // Please stop the recordings.
     SmartDashboard.putData("Auto Mode", m_chooser);
     m_chooser.addDefault("No Auto", null);
-    m_chooser.addObject("Drive Straight", new AutoStraight());
-    m_chooser.addObject("StraightToCargoShip", new StraightToCargoShip());
-
-    SmartDashboard.putData("Pre Load", m_preLoad);
-    m_preLoad.addDefault("Cargo", null);
-    m_preLoad.addObject("Hatch", new DrivTrainInversion());
+   
     
    // Scheduler.getInstance().add(new SensorLog());
     
