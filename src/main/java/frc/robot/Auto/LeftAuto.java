@@ -7,18 +7,16 @@
 
 package frc.robot.Auto;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Hatch.HatchSetExpelSolenoid;
-import frc.robot.commands.Hatch.HatchSetExtendSolenoid;
-import frc.robot.commands.Vision.SeekAuto;
 import frc.robot.Robot;
+import frc.robot.commands.PathFollowing.FollowPath;
+import frc.robot.utilities.PathNames;
 
-public class SeekAndDestroy extends CommandGroup {
+public class LeftAuto extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public SeekAndDestroy() {
+  public LeftAuto() {
     requires(Robot.driveTrainSubsystem);
     requires(Robot.limelightSubsystem);
     requires(Robot.hatchSubsystem);
@@ -38,9 +36,13 @@ public class SeekAndDestroy extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addSequential(new SeekAuto());
-    // addSequential(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kForward));
-    // addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kForward));
-    // addSequential(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kReverse));
+  Robot.driveTrainSubsystem.resetEncoder();
+ // Robot.driveTrainSubsystem.pigeon.setFusedHeading(0);
+   addSequential(new FollowPath(PathNames.leftT2Right, PathNames.leftT2Left, true));
+  // addSequential(new SeekAndDestroy());
+  // addSequential(new FollowPath(PathNames.leftToPlayerLeft, PathNames.leftToPlayerRight, false)); 
+   //addSequential(new SeekAndDestroy());
+  // addSequential(new FollowPath(PathNames.leftPlayerToRocketLeft, PathNames.leftPlayerToRocketRight, false));
+  // addSequential(new SeekAndDestroy());
   }
 }

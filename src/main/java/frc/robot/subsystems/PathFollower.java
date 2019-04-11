@@ -41,11 +41,12 @@ public class PathFollower extends Subsystem {
 
       leftFollower.configureEncoder(0, ticksPerRev, wheelDiameter);
       //tune later
-      leftFollower.configurePIDVA(1, 0, 0, 1/maxVelocity, 0);
+      leftFollower.configurePIDVA(.75, 0, 0, 1/maxVelocity, 0);
       //leftFollower.configurePIDVA(kp, ki, kd, kv, ka);
       rightFollower.configureEncoder(0, ticksPerRev, wheelDiameter);
       //tune later
-      rightFollower.configurePIDVA(1, 0, 0, 1/maxVelocity, 0);
+      
+      rightFollower.configurePIDVA(.75, 0, 0, 1/maxVelocity, 0);
 
       followerNotifier = new Notifier(this::followPath);
     }
@@ -64,9 +65,15 @@ public class PathFollower extends Subsystem {
         double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
         double turn =  0.8 * (-1.0/80.0) * heading_difference;
         // double turn = 0;
+        // if(reverse){
+        //   //Flip left and right and multiply by negative one.
+        //   setSpeeds(1 * (rightSpeed  - turn) , 1 * (leftSpeed + turn));
+        // } else{ 
+        //   setSpeeds(leftSpeed + turn, rightSpeed - turn);
+        // }
         if(reverse){
           //Flip left and right and multiply by negative one.
-          setSpeeds(-1 * (rightSpeed  - turn) , -1 * (leftSpeed + turn));
+          setSpeeds(1 * (rightSpeed  - turn) , 1 * (leftSpeed + turn));
         } else{ 
           setSpeeds(leftSpeed + turn, rightSpeed - turn);
         }

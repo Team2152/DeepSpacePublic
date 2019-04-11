@@ -171,7 +171,12 @@ public class DriveTrain extends Subsystem {
 		return (left1Encoder.getPosition() + left2Encoder.getPosition())/2;
 	}
 
-
+public void resetEncoder(){
+	right1Encoder.setPosition(0);
+	right2Encoder.setPosition(0);
+	left1Encoder.setPosition(0);
+	left2Encoder.setPosition(0);
+}
 
    @Override
    public void initDefaultCommand() {
