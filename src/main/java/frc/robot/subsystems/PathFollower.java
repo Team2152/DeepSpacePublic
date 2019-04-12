@@ -21,10 +21,10 @@ public class PathFollower extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-    private static final int ticksPerRev = 11;
-    private static final double wheelDiameter  = 6;
-    private static final double maxVelocity = 15;
-    
+    private static final int ticksPerRev = 6;
+    private static final double wheelDiameter  = 0.1524;
+    private static final double maxVelocity = 2;
+       
     private EncoderFollower leftFollower;
     private EncoderFollower rightFollower;
 
@@ -39,14 +39,14 @@ public class PathFollower extends Subsystem {
       
       rightFollower = new EncoderFollower();
 
-      leftFollower.configureEncoder(0, ticksPerRev, wheelDiameter);
+      leftFollower.configureEncoder(getLeftEncoder(), ticksPerRev, wheelDiameter);
       //tune later
-      leftFollower.configurePIDVA(.75, 0, 0, 1/maxVelocity, 0);
+      leftFollower.configurePIDVA(1, 0, 0, 1/maxVelocity, 0);
       //leftFollower.configurePIDVA(kp, ki, kd, kv, ka);
-      rightFollower.configureEncoder(0, ticksPerRev, wheelDiameter);
+      rightFollower.configureEncoder(getRightEncoder(), ticksPerRev, wheelDiameter);
       //tune later
       
-      rightFollower.configurePIDVA(.75, 0, 0, 1/maxVelocity, 0);
+      rightFollower.configurePIDVA(1, 0, 0, 1/maxVelocity, 0);
 
       followerNotifier = new Notifier(this::followPath);
     }
@@ -65,17 +65,11 @@ public class PathFollower extends Subsystem {
         double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
         double turn =  0.8 * (-1.0/80.0) * heading_difference;
         // double turn = 0;
-        // if(reverse){
-        //   //Flip left and right and multiply by negative one.
-        //   setSpeeds(1 * (rightSpeed  - turn) , 1 * (leftSpeed + turn));
-        // } else{ 
-        //   setSpeeds(leftSpeed + turn, rightSpeed - turn);
-        // }
         if(reverse){
           //Flip left and right and multiply by negative one.
-          setSpeeds(1 * (rightSpeed  - turn) , 1 * (leftSpeed + turn));
+          setSpeeds(-1 * (rightSpeed  - turn) , -1 * (leftSpeed + turn));
         } else{ 
-          setSpeeds(leftSpeed + turn, rightSpeed - turn);
+          setSpeeds( -(leftSpeed + turn), rightSpeed - turn);
         }
       }
     }
@@ -95,6 +89,8 @@ public class PathFollower extends Subsystem {
     public void setSpeeds(double left, double right){
       Robot.driveTrainSubsystem.tankDrive(left, right);
     }
+
+  
     
     public boolean isFinished(){
       return leftFollower.isFinished() || rightFollower.isFinished();

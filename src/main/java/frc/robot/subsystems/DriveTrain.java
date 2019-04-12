@@ -64,6 +64,7 @@ public class DriveTrain extends Subsystem {
 
 		pigeon = new PigeonIMU(RobotMap.PIGEONIMU_CANID);
 
+		
 		setInverted(false);
 		isInverted = false;
 		
@@ -164,11 +165,11 @@ public class DriveTrain extends Subsystem {
 
 
 	public double getRightEncoder(){
-		return (right1Encoder.getPosition() + right2Encoder.getPosition())/2;
+		return right1Encoder.getPosition();// + right2Encoder.getPosition())/2;
 	}
 
 	public double getLeftEncoder(){
-		return (left1Encoder.getPosition() + left2Encoder.getPosition())/2;
+		return left1Encoder.getPosition();// + left2Encoder.getPosition())/2);
 	}
 
 public void resetEncoder(){

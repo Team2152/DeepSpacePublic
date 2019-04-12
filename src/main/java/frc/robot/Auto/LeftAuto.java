@@ -37,8 +37,8 @@ public class LeftAuto extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
   Robot.driveTrainSubsystem.resetEncoder();
- // Robot.driveTrainSubsystem.pigeon.setFusedHeading(0);
-   addSequential(new FollowPath(PathNames.leftT2Right, PathNames.leftT2Left, true));
+  Robot.driveTrainSubsystem.pigeon.setFusedHeading(0);
+ addSequential(new FollowPath(PathNames.testR, PathNames.testL, true));
   // addSequential(new SeekAndDestroy());
   // addSequential(new FollowPath(PathNames.leftToPlayerLeft, PathNames.leftToPlayerRight, false)); 
    //addSequential(new SeekAndDestroy());

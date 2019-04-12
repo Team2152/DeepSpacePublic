@@ -12,6 +12,8 @@ package frc.robot.utilities;
  */
 public class PathNames {
 
+    public static final String testL = "test.left";
+    public static final String testR = "test.right";
     public static final String leftT2Left = "t2ToFrontLeft.left";
     public static final String leftT2Right = "t2ToFrontLeft.right";
 

@@ -106,7 +106,9 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-       SmartDashboard.putBoolean("arm", Robot.armSubsystem.getStowedSwitch());
+    SmartDashboard.putNumber("encoder ticks", (driveTrainSubsystem.getLeftEncoder())); 
+    SmartDashboard.putNumber("right",driveTrainSubsystem.getRightEncoder());
+     
    
     }
 
