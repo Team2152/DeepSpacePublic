@@ -35,7 +35,7 @@ public class DriveTrain extends Subsystem {
 	private CANEncoder left1Encoder;
 	private CANEncoder left2Encoder;
 	public PigeonIMU pigeon;
-
+	private double[] ypr = new double[3];
 	private DifferentialDrive drive;
 	
 	private boolean isInverted;
@@ -63,7 +63,7 @@ public class DriveTrain extends Subsystem {
 		left2Encoder = left2.getEncoder();
 
 		pigeon = new PigeonIMU(RobotMap.PIGEONIMU_CANID);
-
+			
 		
 		setInverted(false);
 		isInverted = false;
@@ -83,6 +83,7 @@ public class DriveTrain extends Subsystem {
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		drive.tankDrive(leftSpeed, rightSpeed);
 	}
+
 
 	/**
 	 * Arcade drive implements single stick driving.
@@ -163,15 +164,19 @@ public class DriveTrain extends Subsystem {
 		right1.setOpenLoopRampRate(secoundsToFull);
 	}
 
-
+// encoder problems
 	public double getRightEncoder(){
-		return right1Encoder.getPosition();// + right2Encoder.getPosition())/2;
+		return (right1Encoder.getPosition() + Math.abs(right2Encoder.getPosition()));
 	}
 
 	public double getLeftEncoder(){
-		return left1Encoder.getPosition();// + left2Encoder.getPosition())/2);
+		return left2Encoder.getPosition();
 	}
 
+	public double getYaw(){
+		pigeon.getYawPitchRoll(ypr);
+		return ypr[0];
+	}
 public void resetEncoder(){
 	right1Encoder.setPosition(0);
 	right2Encoder.setPosition(0);

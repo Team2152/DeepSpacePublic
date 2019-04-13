@@ -70,8 +70,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto Mode", m_chooser);
     m_chooser.addDefault("No Auto", null);
     m_chooser.addDefault("Left", new LeftAuto());
-    limelightSubsystem.setLedMode(1);
-
+    //limelightSubsystem.setLedMode(1);
+    
    
 
     
@@ -91,6 +91,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     limelightSubsystem.log();
+    SmartDashboard.putNumber("fused heading", driveTrainSubsystem.pigeon.getFusedHeading());
+    SmartDashboard.putNumber("right", driveTrainSubsystem.getRightEncoder());
+    SmartDashboard.putNumber("left", driveTrainSubsystem.getLeftEncoder());
   }
 
   /**
@@ -182,7 +185,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
    
-
+    SmartDashboard.putNumber("pigeon", driveTrainSubsystem.getYaw());
   }
 
   /**

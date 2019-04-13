@@ -23,7 +23,7 @@ public class PathFollower extends Subsystem {
 
     private static final int ticksPerRev = 6;
     private static final double wheelDiameter  = 0.1524;
-    private static final double maxVelocity = 2;
+    private static final double maxVelocity = 1;
        
     private EncoderFollower leftFollower;
     private EncoderFollower rightFollower;
@@ -49,12 +49,16 @@ public class PathFollower extends Subsystem {
       rightFollower.configurePIDVA(1, 0, 0, 1/maxVelocity, 0);
 
       followerNotifier = new Notifier(this::followPath);
+
+      Robot.driveTrainSubsystem.pigeon.setFusedHeading(0);
     }
 
     private void followPath() {
       if (isFinished()) {
         followerNotifier.stop();
+     
       } else {
+       
         int leftPos = getLeftEncoder();
         int rightPos = getRightEncoder();
       //  print("Right P: " + rightPos + " Left P: " + leftPos);
@@ -67,7 +71,7 @@ public class PathFollower extends Subsystem {
         // double turn = 0;
         if(reverse){
           //Flip left and right and multiply by negative one.
-          setSpeeds(-1 * (rightSpeed  - turn) , -1 * (leftSpeed + turn));
+          setSpeeds(-1 * (rightSpeed  - turn) , 1 * (leftSpeed + turn));
         } else{ 
           setSpeeds( -(leftSpeed + turn), rightSpeed - turn);
         }
@@ -76,6 +80,7 @@ public class PathFollower extends Subsystem {
 
     public double getHeading(){
       return Robot.driveTrainSubsystem.pigeon.getFusedHeading();
+    //  return Robot.driveTrainSubsystem.getYaw();
     }
 
     public int getLeftEncoder(){

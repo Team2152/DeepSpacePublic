@@ -61,7 +61,7 @@ if(Robot.limelightSubsystem.getTv() == 1){
         }
        turn = steeringAdjust / 30;
        throttle = distanceAdjust / 30;
-        Robot.driveTrainSubsystem.arcadeDrive(throttle, turn);
+        Robot.driveTrainSubsystem.arcadeDrive(-throttle, -turn);
     }else if(Robot.limelightSubsystem.getTv() == 0){
       Robot.driveTrainSubsystem.arcadeDrive(0, 0);
     }

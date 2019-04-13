@@ -35,7 +35,7 @@ public class SeekAuto extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.limelightSubsystem.setLedMode(3);
+ //   Robot.limelightSubsystem.setLedMode(3);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -64,7 +64,7 @@ if(Robot.limelightSubsystem.getTv() == 1){
         }
        turn = steeringAdjust / 30;
        throttle = distanceAdjust / 30;
-        Robot.driveTrainSubsystem.arcadeDrive(throttle, turn);
+        Robot.driveTrainSubsystem.arcadeDrive(-throttle, -turn);
 
     } else {
       // I dont remember if putting a arcadeDrive(0,0) here breaks the command
@@ -89,7 +89,7 @@ if(Robot.limelightSubsystem.getTv() == 1){
   @Override
   protected void end() {
     Robot.driveTrainSubsystem.setRampRate(0);
-    Robot.limelightSubsystem.setLedMode(1);
+  //  Robot.limelightSubsystem.setLedMode(1);
   }
 
   // Called when another command which requires one or more of the same

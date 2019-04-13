@@ -22,4 +22,6 @@ public class PathNames {
 
     public static final String leftPlayerToRocketLeft = "leftPlayerToRocket.left";
     public static final String leftPlayerToRocketRight = "leftPlayerToRocket.right";
+    public static final String curveL = "curve.left";
+    public static final String curveR = "curve.right";
 }
