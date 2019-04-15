@@ -21,7 +21,7 @@ public class PathFollower extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-    private static final int ticksPerRev = 6;
+    private static final int ticksPerRev = 11;
     private static final double wheelDiameter  = 0.1524;
     private static final double maxVelocity = 1;
        
@@ -71,7 +71,7 @@ public class PathFollower extends Subsystem {
         // double turn = 0;
         if(reverse){
           //Flip left and right and multiply by negative one.
-          setSpeeds(-1 * (rightSpeed  - turn) , 1 * (leftSpeed + turn));
+          setSpeeds(-1 * (rightSpeed  - turn) , -1 * (leftSpeed + turn));
         } else{ 
           setSpeeds( -(leftSpeed + turn), rightSpeed - turn);
         }
@@ -79,7 +79,7 @@ public class PathFollower extends Subsystem {
     }
 
     public double getHeading(){
-      return Robot.driveTrainSubsystem.pigeon.getFusedHeading();
+      return -1*Robot.driveTrainSubsystem.pigeon.getFusedHeading();
     //  return Robot.driveTrainSubsystem.getYaw();
     }
 

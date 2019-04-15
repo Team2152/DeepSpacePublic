@@ -39,8 +39,9 @@ public class LeftAuto extends CommandGroup {
   Robot.driveTrainSubsystem.resetEncoder();
   Robot.driveTrainSubsystem.pigeon.setFusedHeading(0);
   Robot.driveTrainSubsystem.pigeon.setYaw(0);
- addSequential(new FollowPath(PathNames.testR, PathNames.testL, true));
-  // addSequential(new SeekAndDestroy());
+  
+addSequential(new FollowPath(PathNames.testR, PathNames.testL, true));
+  //addSequential(new SeekAndDestroy());
   // addSequential(new FollowPath(PathNames.leftToPlayerLeft, PathNames.leftToPlayerRight, false)); 
    //addSequential(new SeekAndDestroy());
   // addSequential(new FollowPath(PathNames.leftPlayerToRocketLeft, PathNames.leftPlayerToRocketRight, false));

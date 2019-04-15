@@ -166,11 +166,11 @@ public class DriveTrain extends Subsystem {
 
 // encoder problems
 	public double getRightEncoder(){
-		return (right1Encoder.getPosition() + Math.abs(right2Encoder.getPosition()));
+		return (right1Encoder.getPosition() + (-1*right2Encoder.getPosition()))/2;
 	}
 
 	public double getLeftEncoder(){
-		return left2Encoder.getPosition();
+		return ((-1*left1Encoder.getPosition()) + left2Encoder.getPosition())/2;
 	}
 
 	public double getYaw(){

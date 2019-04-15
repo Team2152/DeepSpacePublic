@@ -16,7 +16,7 @@ public class Seek extends Command {
   private double turnKP = 1;
   private double turnMinCommand = .1;
 
-  private double throttleKP = .9;
+  private double throttleKP = .65;
   private double throttleMindCommand = .1;
 
   private double throttle = 0;

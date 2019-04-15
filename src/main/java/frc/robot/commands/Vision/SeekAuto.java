@@ -17,7 +17,7 @@ public class SeekAuto extends Command {
   private double turnMinCommand = .1;
   private double turnTolerance = 1;
 
-  private double throttleKP = .9;
+  private double throttleKP = .65;
   private double throttleMindCommand = .1;
   private double throttleTolerance = 1;
 

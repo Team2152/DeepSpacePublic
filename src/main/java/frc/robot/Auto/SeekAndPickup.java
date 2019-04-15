@@ -7,19 +7,19 @@
 
 package frc.robot.Auto;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.commands.AutoSequentials.Wait;
 import frc.robot.commands.Hatch.HatchSetExpelSolenoid;
 import frc.robot.commands.Hatch.HatchSetExtendSolenoid;
 import frc.robot.commands.Vision.SeekAuto;
 import frc.robot.Robot;
 
-public class SeekAndDestroy extends CommandGroup {
+public class SeekAndPickup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public SeekAndDestroy() {
+  public SeekAndPickup() {
     requires(Robot.driveTrainSubsystem);
     requires(Robot.limelightSubsystem);
     requires(Robot.hatchSubsystem);
@@ -41,7 +41,7 @@ public class SeekAndDestroy extends CommandGroup {
     // arm.
     addParallel(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kReverse));
     addSequential(new SeekAuto());
-    addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kReverse));
+    addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kForward));
     addSequential(new Wait(.2));
     addSequential(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kForward));
   }

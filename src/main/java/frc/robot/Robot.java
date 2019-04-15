@@ -4,7 +4,23 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+// Lazy bear watches over the code  
+//    _,-""`""-~`)
+// (`~_,=========\
+//  |---,___.-.__,\
+//  |        o     \ ___  _,,,,_     _.--.
+//   \      `^`    /`_.-"~      `~-;`     \
+//    \_      _  .'                 `,     |
+//      |`-                           \'__/ 
+//     /                      ,_       \  `'-. 
+//    /    .-""~~--.            `"-,   ;_    /
+//   |              \               \  | `""`
+//    \__.--'`"-.   /_               |'
+//               `"`  `~~~---..,     |
+//                              \ _.-'`-.
+//                               \       \
+//                                '.     /
+//                                  `"~"`
 package frc.robot;
 
 import frc.robot.utilities.Log;
@@ -76,7 +92,7 @@ public class Robot extends TimedRobot {
 
     
    // Scheduler.getInstance().add(new SensorLog());
-    
+    driveTrainSubsystem.resetEncoder();
    
   }
 
@@ -103,14 +119,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    
+    driveTrainSubsystem.resetEncoder();
+    driveTrainSubsystem.pigeon.setFusedHeading(0);
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("encoder ticks", (driveTrainSubsystem.getLeftEncoder())); 
-    SmartDashboard.putNumber("right",driveTrainSubsystem.getRightEncoder());
+    
      
    
     }
