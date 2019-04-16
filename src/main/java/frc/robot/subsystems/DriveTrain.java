@@ -14,6 +14,8 @@ import frc.robot.commands.DriveTrain.ScoopDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
@@ -27,8 +29,13 @@ public class DriveTrain extends Subsystem {
   private CANSparkMax right1;
 	private CANSparkMax right2;
 	private CANSparkMax left1;
-  private CANSparkMax left2;
-
+	private CANSparkMax left2;
+	private CANEncoder right1Encoder;
+	private CANEncoder right2Encoder;
+	private CANEncoder left1Encoder;
+	private CANEncoder left2Encoder;
+	public PigeonIMU pigeon;
+	private double[] ypr = new double[3];
 	private DifferentialDrive drive;
 	
 	private boolean isInverted;
@@ -36,22 +43,28 @@ public class DriveTrain extends Subsystem {
   public DriveTrain(){
     right1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
       right1.setIdleMode(CANSparkMax.IdleMode.kBrake);
-      right1.setInverted(true);
+			right1.setInverted(true);
+		right1Encoder = right1.getEncoder();
 
     right2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       right2.setIdleMode(CANSparkMax.IdleMode.kBrake); 
 			right2.follow(right1, false);
+		right2Encoder = right2.getEncoder();
 			
     left1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT1, CANSparkMaxLowLevel.MotorType.kBrushless);
       left1.setIdleMode(CANSparkMax.IdleMode.kBrake);
-      left1.setInverted(true);
+			left1.setInverted(true);
+		left1Encoder = left1.getEncoder();
 			
 
     left2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       left2.setIdleMode(CANSparkMax.IdleMode.kBrake);
 			left2.follow(left1, false);
-		
+		left2Encoder = left2.getEncoder();
 
+		pigeon = new PigeonIMU(RobotMap.PIGEONIMU_CANID);
+			
+		
 		setInverted(false);
 		isInverted = false;
 		
@@ -70,6 +83,7 @@ public class DriveTrain extends Subsystem {
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		drive.tankDrive(leftSpeed, rightSpeed);
 	}
+
 
 	/**
 	 * Arcade drive implements single stick driving.
@@ -94,8 +108,6 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void setRightSpeed(double speed) {
 		right1.set(speed);
-		
-	
 	}
 
 	/**
@@ -152,7 +164,26 @@ public class DriveTrain extends Subsystem {
 		right1.setOpenLoopRampRate(secoundsToFull);
 	}
 
-  
+// encoder problems
+	public double getRightEncoder(){
+		return (right1Encoder.getPosition() + (-1*right2Encoder.getPosition()))/2;
+	}
+
+	public double getLeftEncoder(){
+		return ((-1*left1Encoder.getPosition()) + left2Encoder.getPosition())/2;
+	}
+
+	public double getYaw(){
+		pigeon.getYawPitchRoll(ypr);
+		return ypr[0];
+	}
+public void resetEncoder(){
+	right1Encoder.setPosition(0);
+	right2Encoder.setPosition(0);
+	left1Encoder.setPosition(0);
+	left2Encoder.setPosition(0);
+}
+
    @Override
    public void initDefaultCommand() {
     // Set the default command for a subsystem here.

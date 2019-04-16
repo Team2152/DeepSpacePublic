@@ -5,66 +5,67 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Vision;
+package frc.robot.commands.PathFollowing;
+
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControllerMap;
 import frc.robot.Robot;
+import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.Trajectory;
 
-public class Aim extends Command {
-  private double Kp = 1;
-  private double minCommand = 0;
-  private double left;
-  private double right;
- 
-  public Aim() {
+
+public class FollowPath extends Command {
+
+  Trajectory leftTrajectory, rightTrajectory;
+  boolean reverse;
+
+  public FollowPath(String leftTrajectory, String rightTrajectory, boolean reverse) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.limelightSubsystem);
     requires(Robot.driveTrainSubsystem);
-    
+    requires(Robot.pathFollowerSubsystem);
+    try {
+      this.leftTrajectory  = PathfinderFRC.getTrajectory(leftTrajectory);
+      this.rightTrajectory = PathfinderFRC.getTrajectory(rightTrajectory); 
+    } catch (Exception e) {
+      System.out.println("Didn't work");      
+      leftTrajectory = null;
+      rightTrajectory = null;
+      
+    }
+
+    this.reverse = reverse;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.pathFollowerSubsystem.setTrajectory(leftTrajectory, rightTrajectory, reverse);
+    Robot.pathFollowerSubsystem.startPathFollowing();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-if(Robot.limelightSubsystem.getTv() == 1){
-    if(Robot.m_oi.driverXbox.getRawButton(6)){
-        double headingError = Robot.limelightSubsystem.getTx();
-        double steeringAdjust = 0;
-        if(Robot.limelightSubsystem.getTx() > 1){
-          steeringAdjust = Kp* headingError-minCommand;
-        }else if(Robot.limelightSubsystem.getTx() < 1){
-          steeringAdjust = Kp* headingError+minCommand;
-        }
-       left = +steeringAdjust / 30;
-       right = -steeringAdjust / 30;
-       System.out.println("Steering adjust: " + steeringAdjust +" Left: " + left + " Right: " + right );
-       Robot.driveTrainSubsystem.tankDrive(-left, -right);
-    }
-  }
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.pathFollowerSubsystem.isFinished();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.pathFollowerSubsystem.stopPathFollowing();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

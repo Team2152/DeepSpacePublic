@@ -41,7 +41,7 @@ public class SensorLog extends InstantCommand {
     Robot.hatchSubsystem.clearStickyFaults();
     //Robot.m_logger.console("Stick Fault" + Robot.hatchSubsystem.getStickyFaults());
 
-    
+    Robot.driveTrainSubsystem.pigeon.setYaw(0);
   }
 
 }

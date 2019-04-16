@@ -34,6 +34,8 @@ public class RobotMap {
   public static final int DRIVETRAIN_CANID_LEFT1     = 3;
   public static final int DRIVETRAIN_CANID_LEFT2     = 4;
 
+  public static final int PIGEONIMU_CANID            = 0;
+
   //-----Hatch-----
   public static final int HATCH_CANID                = 5;  
            

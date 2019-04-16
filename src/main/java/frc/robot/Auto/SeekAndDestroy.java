@@ -7,16 +7,22 @@
 
 package frc.robot.Auto;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.AutoSequentials.Wait;
+import frc.robot.commands.Hatch.HatchSetExpelSolenoid;
+import frc.robot.commands.Hatch.HatchSetExtendSolenoid;
+import frc.robot.commands.Vision.SeekAuto;
 import frc.robot.Robot;
-import frc.robot.commands.AutoSequentials.AutoStraightByTime;
 
-public class StraightToCargoShip extends CommandGroup {
+public class SeekAndDestroy extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public StraightToCargoShip() {
+  public SeekAndDestroy() {
     requires(Robot.driveTrainSubsystem);
+    requires(Robot.limelightSubsystem);
+    requires(Robot.hatchSubsystem);
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -32,11 +38,11 @@ public class StraightToCargoShip extends CommandGroup {
     // would require.
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
-    // arm
-    addSequential(new AutoStraightByTime(.5 ,3.2));
- //   addSequential(new HatchByTime(-.3, .25));
-   // addSequential(new AutoExpelSolenoidToggle(true));
-    //addSequential(new AutoExpelSolenoidToggle(false));
-
+    // arm.
+    addParallel(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kReverse));
+    addSequential(new SeekAuto());
+    addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kReverse));
+    addSequential(new Wait(.2));
+    addSequential(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kForward));
   }
 }

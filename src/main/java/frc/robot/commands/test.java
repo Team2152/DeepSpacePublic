@@ -5,24 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Vision;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControllerMap;
 import frc.robot.Robot;
 
-public class Aim extends Command {
-  private double Kp = 1;
-  private double minCommand = 0;
-  private double left;
-  private double right;
- 
-  public Aim() {
+public class test extends Command {
+  public test() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.limelightSubsystem);
     requires(Robot.driveTrainSubsystem);
-    
   }
 
   // Called just before this Command runs the first time
@@ -33,27 +25,14 @@ public class Aim extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-if(Robot.limelightSubsystem.getTv() == 1){
-    if(Robot.m_oi.driverXbox.getRawButton(6)){
-        double headingError = Robot.limelightSubsystem.getTx();
-        double steeringAdjust = 0;
-        if(Robot.limelightSubsystem.getTx() > 1){
-          steeringAdjust = Kp* headingError-minCommand;
-        }else if(Robot.limelightSubsystem.getTx() < 1){
-          steeringAdjust = Kp* headingError+minCommand;
-        }
-       left = +steeringAdjust / 30;
-       right = -steeringAdjust / 30;
-       System.out.println("Steering adjust: " + steeringAdjust +" Left: " + left + " Right: " + right );
-       Robot.driveTrainSubsystem.tankDrive(-left, -right);
-    }
-  }
+ //   Robot.driveTrainSubsystem.setRampRate(1);
+    Robot.driveTrainSubsystem.setRightSpeed(.25);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+  //  Robot.driveTrainSubsystem.setRampRate(0);
     return false;
   }
 

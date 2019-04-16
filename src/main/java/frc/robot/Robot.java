@@ -4,7 +4,23 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+// Lazy bear watches over the code  
+//    _,-""`""-~`)
+// (`~_,=========\
+//  |---,___.-.__,\
+//  |        o     \ ___  _,,,,_     _.--.
+//   \      `^`    /`_.-"~      `~-;`     \
+//    \_      _  .'                 `,     |
+//      |`-                           \'__/ 
+//     /                      ,_       \  `'-. 
+//    /    .-""~~--.            `"-,   ;_    /
+//   |              \               \  | `""`
+//    \__.--'`"-.   /_               |'
+//               `"`  `~~~---..,     |
+//                              \ _.-'`-.
+//                               \       \
+//                                '.     /
+//                                  `"~"`
 package frc.robot;
 
 import frc.robot.utilities.Log;
@@ -12,11 +28,10 @@ import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.LimeLight;
+import frc.robot.subsystems.PathFollower;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Cargo;
-import frc.robot.utilities.Gain;
-import frc.robot.Auto.AutoStraight;
-import frc.robot.Auto.StraightToCargoShip;
+import frc.robot.Auto.LeftAuto;
 import frc.robot.commands.DriveTrain.DrivTrainInversion;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.Antler;
@@ -41,16 +56,13 @@ public class Robot extends TimedRobot {
   public static Log m_logger;
 
   public static DriveTrain driveTrainSubsystem = new DriveTrain();
-  public static final Gain driveTrainJoystickGain = new Gain((Gain.PCT_50), Gain.DEFAULT_DEADBAND);
-
-
   public static Dashboard spaceDash = new Dashboard();
   public static Hatch hatchSubsystem = new Hatch();
   public static Arm armSubsystem = new Arm();
   public static Cargo cargoSubsystem = new Cargo();
   public static Antler antlerSubsystem = new Antler();
   public static LimeLight limelightSubsystem = new  LimeLight();
-  
+  public static PathFollower pathFollowerSubsystem = new PathFollower();  
   public static AirCompressor compressorSubsystem = new AirCompressor();
   
   Command m_autonomousCommand;
@@ -73,15 +85,14 @@ public class Robot extends TimedRobot {
     Shuffleboard.stopRecording(); // Please stop the recordings.
     SmartDashboard.putData("Auto Mode", m_chooser);
     m_chooser.addDefault("No Auto", null);
-    m_chooser.addObject("Drive Straight", new AutoStraight());
-    m_chooser.addObject("StraightToCargoShip", new StraightToCargoShip());
+    m_chooser.addDefault("Left", new LeftAuto());
+    //limelightSubsystem.setLedMode(1);
+    
+   
 
-    SmartDashboard.putData("Pre Load", m_preLoad);
-    m_preLoad.addDefault("Cargo", null);
-    m_preLoad.addObject("Hatch", new DrivTrainInversion());
     
    // Scheduler.getInstance().add(new SensorLog());
-    
+    driveTrainSubsystem.resetEncoder();
    
   }
 
@@ -96,6 +107,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     limelightSubsystem.log();
+    SmartDashboard.putNumber("fused heading", driveTrainSubsystem.pigeon.getFusedHeading());
+    SmartDashboard.putNumber("right", driveTrainSubsystem.getRightEncoder());
+    SmartDashboard.putNumber("left", driveTrainSubsystem.getLeftEncoder());
   }
 
   /**
@@ -105,13 +119,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    
+    driveTrainSubsystem.resetEncoder();
+    driveTrainSubsystem.pigeon.setFusedHeading(0);
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-       SmartDashboard.putBoolean("arm", Robot.armSubsystem.getStowedSwitch());
+    
+     
    
     }
 
@@ -185,7 +201,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
    
-
+    SmartDashboard.putNumber("pigeon", driveTrainSubsystem.getYaw());
   }
 
   /**

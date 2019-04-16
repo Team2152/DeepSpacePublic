@@ -8,15 +8,21 @@
 package frc.robot.Auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.commands.AutoSequentials.Wait;
+import frc.robot.commands.Hatch.HatchSetExpelSolenoid;
+import frc.robot.commands.Hatch.HatchSetExtendSolenoid;
+import frc.robot.commands.Vision.SeekAuto;
 import frc.robot.Robot;
-import frc.robot.commands.AutoSequentials.AutoStraightByTime;;
 
-public class AutoStraight extends CommandGroup {
+public class SeekAndPickup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public AutoStraight() {
+  public SeekAndPickup() {
     requires(Robot.driveTrainSubsystem);
+    requires(Robot.limelightSubsystem);
+    requires(Robot.hatchSubsystem);
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -33,6 +39,10 @@ public class AutoStraight extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addSequential(new AutoStraightByTime(.75, 10));
+    addParallel(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kReverse));
+    addSequential(new SeekAuto());
+    addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kForward));
+    addSequential(new Wait(.2));
+    addSequential(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kForward));
   }
 }
