@@ -18,6 +18,7 @@ import frc.robot.commands.CommandUtils.CompressorToggle;
 import frc.robot.commands.CommandUtils.SensorLog;
 import frc.robot.commands.DriveTrain.DriveToggleInversion;
 import frc.robot.Auto.SeekAndDestroy;
+import frc.robot.Auto.SeekAndPickup;
 import frc.robot.commands.test;
 import frc.robot.commands.AutoSequentials.ClimbDumb;
 
@@ -210,21 +211,19 @@ public class OI {
 	}
 
 	public void setupOperatorButtons() {
-		// oButtonBack.whenPressed(new CompressorToggle());
-		 oButtonA.whenPressed(new HatchIntake());
-		// oButtonX.whenPressed(new HatchExpel());
-		 oButtonY.whenPressed(new HatchExtendToggle());
-		 oButtonB.whenPressed(new HatchMove());
-		// oButtonBumpL.whenPressed(new SensorLog());
+		oButtonBack.whenPressed(new CompressorToggle());
+		oButtonY.whenPressed(new HatchExtendToggle());
+		oButtonB.whenPressed(new HatchMove());
+		oButtonX.whenPressed(new SeekAndDestroy());
+		oButtonA.whenPressed(new SeekAndPickup());
+		
 	}
 
 
 	public void setupDriverXboxButtons() {
-	//	dButtonA.whenPressed(new SensorLog());
-		dButtonB.whenPressed(new test());
-		// dButtonBack.whenPressed(new StopAll());
-		// dPOV180.whenPressed(new DriveToggleInversion());
-		dButtonA.whenPressed(new SeekAndDestroy());
+		dButtonBack.whenPressed(new StopAll());
+		dPOV180.whenPressed(new DriveToggleInversion());
+		
 		
 		
 		
