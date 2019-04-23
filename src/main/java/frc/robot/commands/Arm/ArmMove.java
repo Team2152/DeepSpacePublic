@@ -26,9 +26,9 @@ public class ArmMove extends Command {
   @Override
   protected void execute() {
     if(Robot.m_oi.operatorXbox.getRawAxis(5) < -.1){
-      Robot.armSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(5)*.65);
+      Robot.armSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(5)*.5);
     }else if(Robot.m_oi.operatorXbox.getRawAxis(5) > .1){
-      Robot.armSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(5)*.65);
+      Robot.armSubsystem.setSpeed(Robot.m_oi.operatorXbox.getRawAxis(5)*.5);
     }else{
       Robot.armSubsystem.setSpeed(0);
     }

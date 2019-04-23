@@ -20,7 +20,7 @@ public class HatchExtendToggle extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.hatchSubsystem.extendToggle();
+    Robot.hatchSubsystem.extendSolenoidToggle();
   }
 
   // Called repeatedly when this Command is scheduled to run

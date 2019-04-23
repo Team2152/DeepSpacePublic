@@ -39,10 +39,10 @@ public class SeekAndDestroy extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addParallel(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kReverse));
-    addSequential(new SeekAuto());
     addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kReverse));
+    addSequential(new SeekAuto());
+    addSequential(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kReverse));
     addSequential(new Wait(.2));
-    addSequential(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kForward));
+    addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kForward));
   }
 }

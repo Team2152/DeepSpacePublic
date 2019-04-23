@@ -58,10 +58,10 @@ public boolean getStowedSwitch(){
  
 
 public void setSpeed(double speed){
-  if(speed < 0 && stowedSwitch.get()){
+  if(speed < 0 && !stowedSwitch.get()){
     left.set(0);
   } else {
-    left.set( speed);
+    left.set(speed);
   }
     
   }

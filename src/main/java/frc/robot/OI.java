@@ -19,15 +19,14 @@ import frc.robot.commands.CommandUtils.SensorLog;
 import frc.robot.commands.DriveTrain.DriveToggleInversion;
 import frc.robot.Auto.SeekAndDestroy;
 import frc.robot.Auto.SeekAndPickup;
+import frc.robot.Auto.SeekAndPlaceRocket;
 import frc.robot.commands.test;
+import frc.robot.commands.Arm.ArmToStowed;
 import frc.robot.commands.AutoSequentials.ClimbDumb;
-
-import frc.robot.commands.AutoSequentials.HatchExpel;
-import frc.robot.commands.AutoSequentials.HatchIntake;
 import frc.robot.commands.Hatch.HatchExpelSolenoidToggle;
 import frc.robot.commands.Hatch.HatchExtendToggle;
-import frc.robot.commands.Hatch.HatchMove;
-// import frc.robot.commands.Hatch.HatchMoveToggle;
+import frc.robot.commands.Vision.SeekAuto;
+import frc.robot.commands.Vision.SetLEDMode;
 import frc.robot.commands.CommandUtils.StopAll;
 
 
@@ -212,11 +211,13 @@ public class OI {
 
 	public void setupOperatorButtons() {
 		oButtonBack.whenPressed(new CompressorToggle());
-		oButtonY.whenPressed(new HatchExtendToggle());
-		oButtonB.whenPressed(new HatchMove());
+		oButtonBumpL.whenPressed(new HatchExtendToggle());
+		oButtonBumpR.whenPressed(new HatchExpelSolenoidToggle());
 		oButtonX.whenPressed(new SeekAndDestroy());
+		//oButtonX.whenPressed(new SeekAuto());
 		oButtonA.whenPressed(new SeekAndPickup());
-		
+		oButtonB.whenPressed(new SeekAndPlaceRocket());
+		oButtonY.whenPressed(new SetLEDMode());
 	}
 
 
@@ -224,14 +225,14 @@ public class OI {
 		dButtonBack.whenPressed(new StopAll());
 		dPOV180.whenPressed(new DriveToggleInversion());
 		
-		
+	
 		
 		
 	
   }
 
   public void setupSharedCommands() {
-//	autoClimb.whenPressed(new ClimbDumb());
+  autoClimb.whenPressed(new ClimbDumb());
   }
   
 }

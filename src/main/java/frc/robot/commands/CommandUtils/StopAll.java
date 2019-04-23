@@ -26,6 +26,8 @@ public class StopAll extends InstantCommand {
     requires(Robot.armSubsystem);
     requires(Robot.antlerSubsystem);
     requires(Robot.cargoSubsystem);
+    requires(Robot.limelightSubsystem);
+    requires(Robot.pathFollowerSubsystem);
   }
 
   // Called once when the command executes
@@ -35,6 +37,7 @@ public class StopAll extends InstantCommand {
     Robot.armSubsystem.setSpeed(0);
     Robot.antlerSubsystem.setSpeed(0);
     Robot.cargoSubsystem.setSpeed(0);
+    Robot.pathFollowerSubsystem.stopPathFollowing();
   }
 
 }

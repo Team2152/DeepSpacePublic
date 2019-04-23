@@ -9,6 +9,7 @@ package frc.robot.Auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
+import frc.robot.commands.CommandUtils.SensorLog;
 import frc.robot.commands.PathFollowing.FollowPath;
 import frc.robot.utilities.PathNames;
 
@@ -40,11 +41,13 @@ public class LeftAuto extends CommandGroup {
   Robot.driveTrainSubsystem.pigeon.setFusedHeading(0);
   Robot.driveTrainSubsystem.pigeon.setYaw(0);
   
-addSequential(new FollowPath(PathNames.testR, PathNames.testL, true));
-  //addSequential(new SeekAndDestroy());
-  // addSequential(new FollowPath(PathNames.leftToPlayerLeft, PathNames.leftToPlayerRight, false)); 
-   //addSequential(new SeekAndDestroy());
-  // addSequential(new FollowPath(PathNames.leftPlayerToRocketLeft, PathNames.leftPlayerToRocketRight, false));
-  // addSequential(new SeekAndDestroy());
+  addSequential(new FollowPath(PathNames.leftT2Right, PathNames.leftT2Left, true));
+  addSequential(new SeekAndDestroy());
+  addSequential(new SensorLog());
+   addSequential(new FollowPath(PathNames.leftToPlayerLeft, PathNames.leftToPlayerRight, false)); 
+   addSequential(new SeekAndPickup());
+   addSequential(new SensorLog());
+   addSequential(new FollowPath(PathNames.leftPlayerToRocketLeft, PathNames.leftPlayerToRocketRight, false));
+   addSequential(new SeekAndDestroy());
   }
 }

@@ -4,23 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-// Lazy bear watches over the code  
-//    _,-""`""-~`)
-// (`~_,=========\
-//  |---,___.-.__,\
-//  |        o     \ ___  _,,,,_     _.--.
-//   \      `^`    /`_.-"~      `~-;`     \
-//    \_      _  .'                 `,     |
-//      |`-                           \'__/ 
-//     /                      ,_       \  `'-. 
-//    /    .-""~~--.            `"-,   ;_    /
-//   |              \               \  | `""`
-//    \__.--'`"-.   /_               |'
-//               `"`  `~~~---..,     |
-//                              \ _.-'`-.
-//                               \       \
-//                                '.     /
-//                                  `"~"`
+
 package frc.robot;
 
 import frc.robot.utilities.Log;
@@ -85,7 +69,7 @@ public class Robot extends TimedRobot {
     Shuffleboard.stopRecording(); // Please stop the recordings.
     SmartDashboard.putData("Auto Mode", m_chooser);
     m_chooser.addDefault("No Auto", null);
-    m_chooser.addDefault("Left", new LeftAuto());
+    m_chooser.addObject("Left", new LeftAuto());
     //limelightSubsystem.setLedMode(1);
     
    
@@ -108,8 +92,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     limelightSubsystem.log();
     SmartDashboard.putNumber("fused heading", driveTrainSubsystem.pigeon.getFusedHeading());
-    SmartDashboard.putNumber("right", driveTrainSubsystem.getRightEncoder());
-    SmartDashboard.putNumber("left", driveTrainSubsystem.getLeftEncoder());
   }
 
   /**

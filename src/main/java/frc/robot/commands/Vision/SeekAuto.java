@@ -15,9 +15,9 @@ import frc.robot.Robot;
 public class SeekAuto extends Command {
   private double turnKP = 1;
   private double turnMinCommand = .1;
-  private double turnTolerance = 1;
+  private double turnTolerance = .5;
 
-  private double throttleKP = .65;
+  private double throttleKP = .8;
   private double throttleMindCommand = .1;
   private double throttleTolerance = 1;
 
@@ -35,18 +35,18 @@ public class SeekAuto extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
- //   Robot.limelightSubsystem.setLedMode(3);
+    Robot.limelightSubsystem.setLedMode(3);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    System.out.println(Robot.limelightSubsystem.getTv());
 if(Robot.limelightSubsystem.getTv() == 1){
-
   Robot.driveTrainSubsystem.setRampRate(.05);
 
         double headingError = Robot.limelightSubsystem.getTx();
+        
         double distanceError = Robot.limelightSubsystem.getTy();
 
         double steeringAdjust = 0;
@@ -79,6 +79,7 @@ if(Robot.limelightSubsystem.getTv() == 1){
   protected boolean isFinished() {
     if(Robot.limelightSubsystem.getTx() >= -turnTolerance && Robot.limelightSubsystem.getTx() <= turnTolerance && 
     Robot.limelightSubsystem.getTy() >= -throttleTolerance && Robot.limelightSubsystem.getTy() <= throttleTolerance){
+      
       return true;
     } else {
           return false;
@@ -89,7 +90,7 @@ if(Robot.limelightSubsystem.getTv() == 1){
   @Override
   protected void end() {
     Robot.driveTrainSubsystem.setRampRate(0);
-  //  Robot.limelightSubsystem.setLedMode(1);
+    Robot.limelightSubsystem.setLedMode(0);
   }
 
   // Called when another command which requires one or more of the same

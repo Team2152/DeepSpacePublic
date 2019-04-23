@@ -61,6 +61,8 @@ public class LimeLight extends Subsystem {
     snapshot = table.getEntry("snapshot");
     camtran = table.getEntry("camtran");
 
+   
+
     setCamMode(0);
     setLedMode(0);
     setStreamMode(0);
@@ -68,12 +70,7 @@ public class LimeLight extends Subsystem {
   }
 
   public double getTx(){
-    if(tv.getDouble(0.0) == 1){
-    txV = tx.getDouble(txV);
-    }else{
-      txV = 0;
-    }
-    return txV;
+    return tx.getDouble(0);
   }
 
   public double getTy(){
@@ -111,6 +108,13 @@ public double getTa() {
       return 75.315 * Math.pow(getTa(), -.484);
   }
 
+  /*
+  Led Modes
+  0 - Pipeline settings
+  1 - Force off
+  2 - Force blink
+  3 - Force on
+  */
   public void setLedMode(double ledType) {
       ledMode.setNumber(ledType);
   }
@@ -139,21 +143,11 @@ public double getTa() {
       SmartDashboard.putNumber("ta", getTa());
       SmartDashboard.putNumber("tv" , getTv());
       SmartDashboard.putNumber("Distance", getDistance());
-      Double[] array = camtran.getDoubleArray(new Double[] {0.0,0.0,0.0,0.0,0.0,0.0});
-      x = array[0];
-      y = array[1];
-      z = array[2];
-      yaw = array[3];
-      SmartDashboard.putNumber("x", x);
-      SmartDashboard.putNumber("y", y);
-      SmartDashboard.putNumber("z", z);
-      SmartDashboard.putNumber("yawToTarger", yaw);
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    //setDefaultCommand(new Seek());
   }
 }

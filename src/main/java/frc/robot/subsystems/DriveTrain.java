@@ -44,22 +44,26 @@ public class DriveTrain extends Subsystem {
     right1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT1, CANSparkMaxLowLevel.MotorType.kBrushless);
       right1.setIdleMode(CANSparkMax.IdleMode.kBrake);
 			right1.setInverted(true);
+			//right1.setSmartCurrentLimit(0);
 		right1Encoder = right1.getEncoder();
 
     right2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_RIGHT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       right2.setIdleMode(CANSparkMax.IdleMode.kBrake); 
 			right2.follow(right1, false);
+			//right2.setSmartCurrentLimit(0);
 		right2Encoder = right2.getEncoder();
 			
     left1 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT1, CANSparkMaxLowLevel.MotorType.kBrushless);
       left1.setIdleMode(CANSparkMax.IdleMode.kBrake);
 			left1.setInverted(true);
+			//left1.setSmartCurrentLimit(0);
 		left1Encoder = left1.getEncoder();
 			
 
     left2 = new CANSparkMax(RobotMap.DRIVETRAIN_CANID_LEFT2, CANSparkMaxLowLevel.MotorType.kBrushless);
       left2.setIdleMode(CANSparkMax.IdleMode.kBrake);
 			left2.follow(left1, false);
+			//left2.setSmartCurrentLimit(0);
 		left2Encoder = left2.getEncoder();
 
 		pigeon = new PigeonIMU(RobotMap.PIGEONIMU_CANID);

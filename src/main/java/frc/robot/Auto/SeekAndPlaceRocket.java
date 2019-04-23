@@ -5,18 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutoSequentials;
+package frc.robot.Auto;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.AutoSequentials.Wait;
+import frc.robot.commands.Hatch.HatchSetExpelSolenoid;
+import frc.robot.commands.Hatch.HatchSetExtendSolenoid;
+import frc.robot.commands.Vision.SeekAuto;
 import frc.robot.Robot;
-import frc.robot.commands.Hatch.HatchExtendToggle;
-import frc.robot.commands.Hatch.HatchMove;
 
-public class HatchExpel extends CommandGroup {
+public class SeekAndPlaceRocket extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public HatchExpel() {
+  public SeekAndPlaceRocket() {
+    requires(Robot.driveTrainSubsystem);
+    requires(Robot.limelightSubsystem);
     requires(Robot.hatchSubsystem);
     // Add Commands here:
     // e.g. addSequential(new Command1());
@@ -34,8 +39,8 @@ public class HatchExpel extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addParallel(new HatchMove());
-    addSequential(new Wait(.1));
-    addSequential(new HatchExtendToggle());
+    addParallel(new HatchSetExtendSolenoid(DoubleSolenoid.Value.kReverse));
+    addSequential(new SeekAuto());
+    addSequential(new HatchSetExpelSolenoid(DoubleSolenoid.Value.kForward));
   }
 }
